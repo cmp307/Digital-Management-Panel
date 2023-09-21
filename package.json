@@ -1,0 +1,23 @@
+{
+  "name": "project-liamtownsley2",
+  "version": "0.0.1",
+  "description": "This is my Portfolio project for CMP307",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cmp307/project-LiamTownsley2.git"
+  },
+  "scripts": {
+    "start": "tsc --build && cd dist && electron --trace-warnings . "
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cmp307/project-LiamTownsley2/issues"
+  },
+  "homepage": "https://github.com/cmp307/project-LiamTownsley2#readme",
+  "devDependencies": {
+    "electron": "^26.2.2",
+    "typescript": "^5.2.2"
+  }
+}

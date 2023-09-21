@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "strict": true,
+        "module": "NodeNext",
+        "removeComments": true,
+        "outDir": "dist"
+    },
+    "include": ["src/**/*"],
+}
