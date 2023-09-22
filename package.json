@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "tsc --build && cd dist && electron --trace-warnings . ",
-    "deploy": "electron-builder",
+    "deploy": "tsc --build && electron-builder",
     "postinstall": "electron-builder install-app-deps"
   },
   "author": "",
@@ -27,7 +27,8 @@
     "appId": "scottish.glen",
     "productName": "Scottish Glen",
     "files": [
-        "dist/**/*"
+        "dist/**/*",
+        "html/**/*"
     ],
     "directories": {
         "output": "release"

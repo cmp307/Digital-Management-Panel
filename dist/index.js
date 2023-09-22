@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const electron_1 = require("electron");
+const DEVELOPMENT = true;
 function createWindow() {
     const win = new electron_1.BrowserWindow({
         width: 800,
@@ -15,7 +16,12 @@ electron_1.app
     .whenReady()
     .then(() => {
     const window = createWindow();
-    window.loadFile('../html/index.html');
+    if (DEVELOPMENT) {
+        window.loadFile('../html/index.html');
+    }
+    else {
+        window.loadFile('./html/index.html');
+    }
     window.removeMenu();
 });
 electron_1.app

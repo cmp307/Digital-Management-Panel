@@ -1,5 +1,7 @@
 import { app, BrowserWindow } from 'electron';
 
+const DEVELOPMENT = true;
+
 function createWindow() {
     const win = new BrowserWindow({
         width: 800,
@@ -17,7 +19,11 @@ app
     .then(() => {
         const window = createWindow();
 
-        window.loadFile('../html/index.html');
+        if(DEVELOPMENT) {
+            window.loadFile('../html/index.html');
+        } else {
+            window.loadFile('./html/index.html');
+        }
         window.removeMenu();
     });
 
