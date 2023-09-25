@@ -8,8 +8,8 @@
     "url": "git+https://github.com/cmp307/project-LiamTownsley2.git"
   },
   "scripts": {
-    "start": "tsc --build && cd dist && electron --trace-warnings . ",
-    "deploy": "tsc --build && electron-builder",
+    "build:dev": "tsc --build && cd dist && cross-env NODE_ENV=development electron --trace-warnings . ",
+    "build:production": "tsc --build && cross-env NODE_ENV=production electron-builder",
     "postinstall": "electron-builder install-app-deps"
   },
   "author": "",
@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/cmp307/project-LiamTownsley2#readme",
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "dotenv": "^16.3.1",
     "electron": "^26.2.2",
     "electron-builder": "^24.6.4",

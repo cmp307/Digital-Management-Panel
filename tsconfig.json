@@ -5,5 +5,5 @@
         "removeComments": true,
         "outDir": "dist"
     },
-    "include": ["src/**/*", "html/**/*"],
+    "include": ["app/**/*"],
 }

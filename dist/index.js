@@ -1,5 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+require("dotenv/config");
+require('dotenv').config({ debug: true });
 const electron_1 = require("electron");
 function createWindow() {
     const win = new electron_1.BrowserWindow({
@@ -15,11 +17,12 @@ electron_1.app
     .whenReady()
     .then(() => {
     const window = createWindow();
-    if (process.env.DEVELOPMENT_MODE) {
-        window.loadFile('../html/index.html');
+    console.log('devmode', process.env.NODE_ENV);
+    if (process.env.NODE_ENV == "production") {
+        window.loadFile('./html/index.html');
     }
     else {
-        window.loadFile('./html/index.html');
+        window.loadFile('../html/index.html');
     }
     window.removeMenu();
 });

@@ -1,3 +1,6 @@
+import 'dotenv/config'
+require('dotenv').config({ debug: true });
+
 import { app, BrowserWindow } from 'electron';
 
 function createWindow() {
@@ -16,11 +19,12 @@ app
     .whenReady()
     .then(() => {
         const window = createWindow();
+        console.log('devmode', process.env.NODE_ENV);
 
-        if(process.env.DEVELOPMENT_MODE) {
-            window.loadFile('../html/index.html');
-        } else {
+        if(process.env.NODE_ENV == "production") {
             window.loadFile('./html/index.html');
+        } else {
+            window.loadFile('../html/index.html');
         }
         window.removeMenu();
     });
