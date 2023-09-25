@@ -1,5 +1,5 @@
 import 'dotenv/config'
-require('dotenv').config({ debug: true });
+require('dotenv').config();
 
 import { app, BrowserWindow } from 'electron';
 
@@ -19,7 +19,6 @@ app
     .whenReady()
     .then(() => {
         const window = createWindow();
-        console.log('devmode', process.env.NODE_ENV);
 
         if(process.env.NODE_ENV == "production") {
             window.loadFile('./html/index.html');
