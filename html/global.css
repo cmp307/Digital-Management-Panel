@@ -1,3 +1,8 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
 .logo {
     scale: 0.5;
 }
@@ -9,9 +14,20 @@
 
 .header-2 {
     padding-top: 5px;
-    padding-bottom: 5px;
+    padding-bottom: 15px;
+    margin-bottom: 0px;
 }
 
 .quit-group {
     padding-top: 100px;
 }
+
+.breadcrumbs {
+    background-color: #2980b9;
+    padding-left: 10px;
+    color: white;
+}
+/* 
+.breadcrumbs a {
+    colour: #1161d8
+} */
