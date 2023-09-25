@@ -1,0 +1,17 @@
+.logo {
+    scale: 0.5;
+}
+
+.header {
+    background-color: #3498db;
+    color: white;
+}
+
+.header-2 {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.quit-group {
+    padding-top: 100px;
+}

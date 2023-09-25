@@ -2,13 +2,15 @@
   "name": "project-liamtownsley2",
   "version": "0.0.1",
   "description": "This is my Portfolio project for CMP307",
-  "main": "index.js",
+  "main": "dist/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cmp307/project-LiamTownsley2.git"
   },
   "scripts": {
-    "start": "tsc --build && cd dist && electron --trace-warnings . "
+    "build:dev": "tsc --build && cd dist && cross-env NODE_ENV=development electron --trace-warnings . ",
+    "build:production": "tsc --build && cross-env NODE_ENV=production electron-builder",
+    "postinstall": "electron-builder install-app-deps"
   },
   "author": "",
   "license": "ISC",
@@ -17,7 +19,21 @@
   },
   "homepage": "https://github.com/cmp307/project-LiamTownsley2#readme",
   "devDependencies": {
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.3.1",
     "electron": "^26.2.2",
+    "electron-builder": "^24.6.4",
     "typescript": "^5.2.2"
+  },
+  "build": {
+    "appId": "scottish.glen",
+    "productName": "Scottish Glen",
+    "files": [
+      "dist/**/*",
+      "html/**/*"
+    ],
+    "directories": {
+      "output": "release"
+    }
   }
 }

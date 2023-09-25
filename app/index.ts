@@ -1,3 +1,6 @@
+import 'dotenv/config'
+require('dotenv').config();
+
 import { app, BrowserWindow } from 'electron';
 
 function createWindow() {
@@ -17,7 +20,11 @@ app
     .then(() => {
         const window = createWindow();
 
-        window.loadFile('../html/index.html');
+        if(process.env.NODE_ENV == "production") {
+            window.loadFile('./html/index.html');
+        } else {
+            window.loadFile('../html/index.html');
+        }
         window.removeMenu();
     });
 
