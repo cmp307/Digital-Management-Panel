@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/cmp307/project-LiamTownsley2#readme",
   "devDependencies": {
+    "dotenv": "^16.3.1",
     "electron": "^26.2.2",
     "electron-builder": "^24.6.4",
     "typescript": "^5.2.2"
@@ -27,11 +28,11 @@
     "appId": "scottish.glen",
     "productName": "Scottish Glen",
     "files": [
-        "dist/**/*",
-        "html/**/*"
+      "dist/**/*",
+      "html/**/*"
     ],
     "directories": {
-        "output": "release"
+      "output": "release"
     }
-}
+  }
 }

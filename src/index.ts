@@ -1,7 +1,5 @@
 import { app, BrowserWindow } from 'electron';
 
-const DEVELOPMENT = true;
-
 function createWindow() {
     const win = new BrowserWindow({
         width: 800,
@@ -19,7 +17,7 @@ app
     .then(() => {
         const window = createWindow();
 
-        if(DEVELOPMENT) {
+        if(process.env.DEVELOPMENT_MODE) {
             window.loadFile('../html/index.html');
         } else {
             window.loadFile('./html/index.html');
