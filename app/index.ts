@@ -25,7 +25,7 @@ app
         } else {
             window.loadFile('../html/index.html');
         }
-        window.removeMenu();
+        // window.removeMenu();
     });
 
 app
