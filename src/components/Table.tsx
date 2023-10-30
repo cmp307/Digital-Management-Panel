@@ -10,7 +10,7 @@ const YourComponent = ({ data }) => {
             <table className="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col">ID</th>
+                        <th scope="col">Asset ID</th>
                         <th scope="col">System Name</th>
                         <th scope="col">System Type</th>
                         <th scope="col">Managed By</th>
@@ -20,7 +20,7 @@ const YourComponent = ({ data }) => {
                 <tbody>
                     {data.map((item:any) => (
                         <tr key={item.id}>
-                            <td>{item.id}</td>
+                            <td><code>{item.id}</code></td>
                             <td>{item.systemName}</td>
                             <td>{item.systemType}</td>
                             <td>{item.managedBy}</td>

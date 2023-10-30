@@ -27,15 +27,25 @@ function Assets() {
             <h2 className="text-centre">Action Buttons</h2>
             <div id="action-buttons">
                 <button id="create-asset" className="btn"><i className="fa fa-plus" /> Create an Asset</button>
-                <button id="delete-all-assets" className="btn danger"><i className="fa fa-trash" /> Delete <strong>All</strong> Assets</button>
+                <button onClick={refreshPage} id="create-asset" className="btn"><i className="fa fa-refresh" /> Refresh List</button>
+                <button onClick={deleteAllAssets} className="btn danger"><i className="fa fa-trash" /> Delete <strong>All</strong> Assets</button>
             </div>
             <hr />
             <h2 className="text-centre">Asset List</h2>
             <p className="text-centre">There {(data.length > 1) ? 'are' : 'is'} currently <strong>{data.length} {(data.length > 1 || data.length == 0) ? 'assets' : 'asset'}</strong> stored within the Database.</p>
             <Table data={data} />
-
         </>
     )
+}
+
+function deleteAllAssets() {
+    fetch('http://127.0.0.1:3001/api/delete-all-assets').then(() => {
+        refreshPage();
+    })
+}
+
+function refreshPage() {
+    window.location.reload();
 }
 
 export default Assets;

@@ -9,7 +9,7 @@ const server = express();
 server.use(cors());
 
 const uri = 'mongodb+srv://uni-project:9rT5qBAsDfGQgGOg@cluster0.vz4azvs.mongodb.net/?retryWrites=true&w=majority'; // Replace with your MongoDB connection string
-const client = new mongo.MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+const client = new mongo.MongoClient(uri);
 
 let database;
 
@@ -19,7 +19,7 @@ export async function connectToMongoDB() {
       await client.connect();
       console.log('Connected to MongoDB');
       const _db = client.db('uni-project');
-      
+
       database = _db;
       return _db;
     } catch (err) {
@@ -38,6 +38,14 @@ server.get('/api/assets', async (req: any, res: any) => {
   const data = await collection.find().toArray();
   res.json(data);
 });
+
+server.get('/api/delete-all-assets', async (req: any, res: any) => {
+  const db = await connectToMongoDB();
+  const collection = db.collection('assets');
+
+  const resp = await collection.deleteMany({});
+  res.json({ "status": true });
+})
 
 // The built directory structure
 //
