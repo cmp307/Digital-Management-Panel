@@ -6,6 +6,7 @@ import ReactPlaceholder from 'react-placeholder';
 import "react-placeholder/lib/reactPlaceholder.css";
 import Table from '../components/Table';
 import { useEffect, useState } from "react";
+import { getAssetsFromDatabase } from "../Database";
 
 const tablePlaceholder = (
     <div className='table-placeholder'>
@@ -15,26 +16,14 @@ const tablePlaceholder = (
 const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
 
 function Assets() {
-    const [data, setData] = useState([]);
+    const [data, setData] = useState([] as any[]);
 
-    useEffect(() => {
-        delay(3000).then(() => {
-            setData([
-                {
-                    id: 'test',
-                    systemName: 'test1',
-                    systemType: 'test2',
-                    managedBy: 'test3'
-                },
-                {
-                    id: 'test1',
-                    systemName: 'test11',
-                    systemType: 'test21',
-                    managedBy: 'test31'
-                }
-            ] as any)
-        });
-    });
+    // useEffect(() => {
+    //     getAssetsFromDatabase().then((data) => {
+    //         console.log(data);
+    //         setData(data as any[]);
+    //     });
+    // });
 
     return (
         <>

@@ -1,6 +1,32 @@
 import { app, BrowserWindow } from 'electron'
 import path from 'node:path'
 
+const mongo = require('mongodb');
+const express = require('express');
+const server = express();
+
+const uri = 'mongodb+srv://uni-project:9rT5qBAsDfGQgGOg@cluster0.vz4azvs.mongodb.net/?retryWrites=true&w=majority'; // Replace with your MongoDB connection string
+const client = new mongo.MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
+export async function connectToMongoDB() {
+  try {
+    await client.connect();
+    console.log('Connected to MongoDB');
+    return client.db('uni-project');
+  } catch (err) {
+    console.error('Error connecting to MongoDB:', err);
+  }
+}
+
+server.get('/api/assets', async (req:any, res:any) => {
+  const db = await connectToMongoDB();
+  const collection = db.collection('assets');
+
+  const data = await collection.find().toArray();
+  console.log(data);
+  res.json(data);
+});
+
 // The built directory structure
 //
 // ├─┬─┬ dist
@@ -26,7 +52,7 @@ function createWindow() {
     },
   })
 
-  win.removeMenu();
+  // win.removeMenu();
 
   // Test active push message to Renderer-process.
   win.webContents.on('did-finish-load', () => {
@@ -57,6 +83,12 @@ app.on('activate', () => {
   if (BrowserWindow.getAllWindows().length === 0) {
     createWindow()
   }
+})
+
+app.on('ready', () => {
+  server.listen(3001, () => {
+    console.log('Server is running on port 3001');
+  });
 })
 
 app.whenReady().then(createWindow)
