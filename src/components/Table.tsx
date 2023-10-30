@@ -1,4 +1,10 @@
+import { TextBlock } from "react-placeholder/lib/placeholders";
+
 const YourComponent = ({ data }) => {
+    if(data.length == 0) {
+        return <TextBlock rows={3} color='#CDCDCD' />
+    }
+
     return (
         <div>
             <table className="table table-striped">
@@ -12,7 +18,7 @@ const YourComponent = ({ data }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {data.map((item) => (
+                    {data.map((item:any) => (
                         <tr key={item.id}>
                             <td>{item.id}</td>
                             <td>{item.systemName}</td>
