@@ -1,13 +1,13 @@
 import Breadcrumbs from "../components/Breadcrumbs";
 import TopBar from "../components/TopBar";
 
-function Assets() {
+function Employees() {
     return (
         <>
             <TopBar />
-            <Breadcrumbs path="Assets" />
+            <Breadcrumbs path="Employees" />
         </>
     )
 }
 
-export default Assets;
+export default Employees;
