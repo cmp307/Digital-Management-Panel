@@ -1,0 +1,19 @@
+#action-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    button {
+        background-color: #3498db;
+        color: white;
+        margin: 0px 5px 0px;
+    }
+
+    button.danger {
+        background-color: #e74c3c;
+    }
+}
+
+table button {
+    margin: 0px 5px 0px;
+}
