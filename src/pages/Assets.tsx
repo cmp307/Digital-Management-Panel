@@ -47,7 +47,7 @@ function Assets() {
             </div>
             <hr />
             <h2 className="text-centre">Asset List</h2>
-            <p className="text-centre">There is currently <strong>{data.length} {(data.length > 1) ? 'assets' : 'asset'}</strong> stored within the Database.</p>
+            <p className="text-centre">There {(data.length > 1) ? 'are' : 'is'} currently <strong>{data.length} {(data.length > 1 || data.length == 0) ? 'assets' : 'asset'}</strong> stored within the Database.</p>
             <Table data={data} />
 
         </>
