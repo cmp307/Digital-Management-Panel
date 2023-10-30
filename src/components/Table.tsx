@@ -1,4 +1,5 @@
 import { TextBlock } from "react-placeholder/lib/placeholders";
+import PillButton from "./PillButton";
 
 const YourComponent = ({ data }) => {
     if(data.length == 0) {
@@ -22,7 +23,7 @@ const YourComponent = ({ data }) => {
                         <tr key={item.id}>
                             <td><code>{item.id}</code></td>
                             <td>{item.systemName}</td>
-                            <td>{item.systemType}</td>
+                            <td><PillButton data={item.systemType} /></td>
                             <td>{item.managedBy}</td>
                             <td>
                                 <button type="button" className="btn btn-primary">Edit Asset</button>
