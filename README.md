@@ -1,0 +1,1 @@
+https://i.imgur.com/Fd7ZUv5.png is a screenshot of me using electorn-vite for scaffolding the project.
