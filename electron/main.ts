@@ -3,27 +3,39 @@ import path from 'node:path'
 
 const mongo = require('mongodb');
 const express = require('express');
+const cors = require('cors');
+
 const server = express();
+server.use(cors());
 
 const uri = 'mongodb+srv://uni-project:9rT5qBAsDfGQgGOg@cluster0.vz4azvs.mongodb.net/?retryWrites=true&w=majority'; // Replace with your MongoDB connection string
 const client = new mongo.MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
+let database;
+
 export async function connectToMongoDB() {
-  try {
-    await client.connect();
-    console.log('Connected to MongoDB');
-    return client.db('uni-project');
-  } catch (err) {
-    console.error('Error connecting to MongoDB:', err);
+  if (!database) {
+    try {
+      await client.connect();
+      console.log('Connected to MongoDB');
+      const _db = client.db('uni-project');
+      
+      database = _db;
+      return _db;
+    } catch (err) {
+      console.error('Error connecting to MongoDB:', err);
+    }
+  } else {
+    console.log('Connected to running MongoDB conn')
+    return database;
   }
 }
 
-server.get('/api/assets', async (req:any, res:any) => {
+server.get('/api/assets', async (req: any, res: any) => {
   const db = await connectToMongoDB();
   const collection = db.collection('assets');
 
   const data = await collection.find().toArray();
-  console.log(data);
   res.json(data);
 });
 

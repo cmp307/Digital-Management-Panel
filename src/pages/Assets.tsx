@@ -8,22 +8,17 @@ import Table from '../components/Table';
 import { useEffect, useState } from "react";
 import { getAssetsFromDatabase } from "../Database";
 
-const tablePlaceholder = (
-    <div className='table-placeholder'>
-        <TextBlock rows={3} color='#CDCDCD' />
-    </div>
-);
 const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
 
 function Assets() {
     const [data, setData] = useState([] as any[]);
 
-    // useEffect(() => {
-    //     getAssetsFromDatabase().then((data) => {
-    //         console.log(data);
-    //         setData(data as any[]);
-    //     });
-    // });
+    useEffect(() => {
+        fetch('http://127.0.0.1:3001/api/assets')
+            .then((res) => res.json())
+            .then((res) => setData(res))
+            .catch((err) => console.error(err))
+    }, []);
 
     return (
         <>
