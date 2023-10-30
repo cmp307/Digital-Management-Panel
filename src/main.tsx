@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './components/App.tsx'
+import App from './App.tsx'
 import './styles/index.scss'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
@@ -8,6 +8,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <App />
   </React.StrictMode>,
 )
+
 
 // Remove Preload scripts loading
 postMessage({ payload: 'removeLoading' }, '*')
