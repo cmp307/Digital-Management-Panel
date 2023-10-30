@@ -1,6 +1,16 @@
 import Breadcrumbs from "../components/Breadcrumbs";
 import TopBar from "../components/TopBar";
 import '../styles/Assets.scss';
+import {TextBlock, MediaBlock, TextRow, RectShape, RoundShape} from 'react-placeholder/lib/placeholders';
+import ReactPlaceholder from 'react-placeholder';
+import "react-placeholder/lib/reactPlaceholder.css";
+import Table from '../components/Table';
+
+const tablePlaceholder = (
+    <div className='table-placeholder'>
+      <TextBlock rows={3} color='#CDCDCD'/>
+    </div>
+  );
 
 function Assets() {
     return (
@@ -15,7 +25,9 @@ function Assets() {
             <hr />
             <h2 className="text-centre">Asset List</h2>
             <p className="text-centre">There is a total of <strong>{0} assets</strong>.</p>
-            <table className="table table-striped">
+        <Table isLoading={true} data={[]} />
+            {/* <ReactPlaceholder ready={this.state.ready} customPlaceholder={<tablePlaceholder />}  */}
+            {/* <table className="table table-striped">
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
@@ -26,38 +38,9 @@ function Assets() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">jbXi3X</th>
-                        <td>Front Door</td>
-                        <td>Door Monitor</td>
-                        <td><a href="#">Liam T.</a></td>
-                        <td>
-                            <button type="button" className="btn btn-primary">Edit Asset</button>
-                            <button type="button" className="btn btn-danger">Delete Asset</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">jbXi3X</th>
-                        <td>Front Door</td>
-                        <td>Door Monitor</td>
-                        <td><a href="#">Liam T.</a></td>
-                        <td>
-                            <button type="button" className="btn btn-primary">Edit Asset</button>
-                            <button type="button" className="btn btn-danger">Delete Asset</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">jbXi3X</th>
-                        <td>Front Door</td>
-                        <td>Door Monitor</td>
-                        <td><a href="#">Liam T.</a></td>
-                        <td>
-                            <button type="button" className="btn btn-primary">Edit Asset</button>
-                            <button type="button" className="btn btn-danger">Delete Asset</button>
-                        </td>
-                    </tr>
+
                 </tbody>
-            </table>
+            </table> */}
         </>
     )
 }
