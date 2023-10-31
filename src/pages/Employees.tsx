@@ -5,8 +5,10 @@ function Employees() {
     return (
         <>
             <TopBar />
-            <Breadcrumbs path="Employees" />
-        </>
+            <Breadcrumbs data={[
+                { name: 'Home', path: '/' },
+                { name: 'Employees', path: '/employees' },
+            ]} />        </>
     )
 }
 

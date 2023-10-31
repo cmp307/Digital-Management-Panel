@@ -1,9 +1,19 @@
 import { Link } from "react-router-dom";
 import '../styles/Breadcrumbs.scss'
-function Breadcrumbs(props:any) {
+function Breadcrumbs({ data }: any) {
+    const _data = data.map((x: any, key: number) => {
+        if (key + 1 == data.length) return (<span key={key}>
+            {x.name}
+        </span>)
+
+        return <>
+            <Link to={x.path}>{x.name}</Link><a> / </a>
+        </>
+    });
+
     return (
         <div id="breadcrumbs">
-            <p><strong>Breadcrumbs »</strong> <Link to="/">Home</Link> / {props.path}</p>
+            <p><strong>Breadcrumbs »</strong> {_data}</p>
         </div>
     )
 }
