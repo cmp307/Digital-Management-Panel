@@ -1,14 +1,10 @@
 import Breadcrumbs from "../components/Breadcrumbs";
 import TopBar from "../components/TopBar";
 import '../styles/Assets.scss';
-import { TextBlock, MediaBlock, TextRow, RectShape, RoundShape } from 'react-placeholder/lib/placeholders';
-import ReactPlaceholder from 'react-placeholder';
 import "react-placeholder/lib/reactPlaceholder.css";
 import Table from '../components/Table';
 import { useEffect, useState } from "react";
-import { getAssetsFromDatabase } from "../Database";
-
-const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
+import { Link } from "react-router-dom";
 
 function Assets() {
     const [data, setData] = useState([] as any[]);
@@ -23,11 +19,14 @@ function Assets() {
     return (
         <>
             <TopBar subtext="Asset Management Panel" />
-            <Breadcrumbs path="Assets" />
+            <Breadcrumbs data={[
+                { name: 'Home', path: '/' },
+                { name: 'Assets', path: '/assets' },
+            ]} />
             <h2 className="text-centre">Action Buttons</h2>
             <div id="action-buttons">
-                <button id="create-asset" className="btn"><i className="fa fa-plus" /> Create an Asset</button>
-                <button onClick={refreshPage} id="create-asset" className="btn"><i className="fa fa-refresh" /> Refresh List</button>
+                <Link to={'/assets/create'} className="btn"><i className="fa fa-plus" /> Create an Asset</Link>
+                <button onClick={refreshPage} className="btn"><i className="fa fa-refresh" /> Refresh List</button>
                 <button onClick={deleteAllAssets} className="btn danger"><i className="fa fa-trash" /> Delete <strong>All</strong> Assets</button>
             </div>
             <hr />
@@ -39,7 +38,7 @@ function Assets() {
 }
 
 function deleteAllAssets() {
-    fetch('http://127.0.0.1:3001/api/delete-all-assets').then(() => {
+    fetch('http://127.0.0.1:3001/api/delete-all-assets', { method: 'DELETE' }).then(() => {
         refreshPage();
     })
 }

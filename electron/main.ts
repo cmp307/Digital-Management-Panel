@@ -4,14 +4,17 @@ import path from 'node:path'
 const mongo = require('mongodb');
 const express = require('express');
 const cors = require('cors');
+const bodyParser = require('body-parser')
 
 const server = express();
 server.use(cors());
+server.use(bodyParser.json())
+server.use(bodyParser.urlencoded({ extended: false }))
 
 const uri = 'mongodb+srv://uni-project:9rT5qBAsDfGQgGOg@cluster0.vz4azvs.mongodb.net/?retryWrites=true&w=majority'; // Replace with your MongoDB connection string
 const client = new mongo.MongoClient(uri);
 
-let database;
+let database: any;
 
 export async function connectToMongoDB() {
   if (!database) {
@@ -31,7 +34,7 @@ export async function connectToMongoDB() {
   }
 }
 
-server.get('/api/assets', async (req: any, res: any) => {
+server.get('/api/assets', async (_: any, res: any) => {
   const db = await connectToMongoDB();
   const collection = db.collection('assets');
 
@@ -39,12 +42,20 @@ server.get('/api/assets', async (req: any, res: any) => {
   res.json(data);
 });
 
-server.get('/api/delete-all-assets', async (req: any, res: any) => {
+server.delete('/api/delete-all-assets', async (_: any, res: any) => {
   const db = await connectToMongoDB();
   const collection = db.collection('assets');
 
-  const resp = await collection.deleteMany({});
+  await collection.deleteMany({});
   res.json({ "status": true });
+})
+
+server.post('/api/assets', async (req: any, res: any) => {
+  let _data = req.body;
+  const db = await connectToMongoDB();
+  const collection = db.collection('assets');
+
+  const data = collection.insertOne(_data)
 })
 
 // The built directory structure

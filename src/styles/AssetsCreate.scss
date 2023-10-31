@@ -1,0 +1,31 @@
+#create-asset {
+    display: flex;
+    margin: 0 auto;
+    // align-items: center;
+    // justify-content: center;
+    flex-direction: column;
+    width: 90%;
+    margin-bottom: 50px;
+}
+
+#create-asset input[type=text] {
+    padding: 12px 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    border: none;
+    align-self: center;
+    background-color: #3498db;
+    color: white;
+    border-radius: 10px;
+}
+
+#create-asset input[type=submit] {
+    padding: 12px 20px;
+    border: none;
+    background-color: #2ecc71;
+    color: white;
+}
+
+#create-asset input[type=text]::placeholder {
+    color: white;
+}
