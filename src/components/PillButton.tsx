@@ -1,4 +1,4 @@
-const PillButton = ({ data }) => {
+const PillButton = ({ data }: any) => {
     let style;
 
     switch (data) {
