@@ -42,6 +42,16 @@ server.get('/api/assets', async (_: any, res: any) => {
   res.json(data);
 });
 
+server.get('/api/asset/:id', async (req: any, res: any) => {
+  const db = await connectToMongoDB();
+  const collection = db.collection('assets');
+  const id = req.params.id;
+  console.log('api/assets/id -> ', id);
+  const data = await collection.findOne({ _id: new mongo.ObjectId(id) });
+  console.log(data);
+  res.json(data);
+});
+
 server.delete('/api/delete-all-assets', async (_: any, res: any) => {
   const db = await connectToMongoDB();
   const collection = db.collection('assets');
@@ -50,12 +60,31 @@ server.delete('/api/delete-all-assets', async (_: any, res: any) => {
   res.json({ "status": true });
 })
 
-server.post('/api/assets', async (req: any, res: any) => {
-  let _data = req.body;
+server.delete('/api/assets/:id/delete', async (req: any, res: any) => {
   const db = await connectToMongoDB();
   const collection = db.collection('assets');
+  const id = req.params.id;
+  console.log(id)
+  await collection.deleteOne({ _id: new mongo.ObjectId(id) });
+  res.json({ "status": true });
+})
 
-  const data = collection.insertOne(_data)
+
+server.get('/api/assets/create', async (req: any, _: any) => {
+  console.log(req.query);
+  const db = await connectToMongoDB();
+  const collection = db.collection('assets');
+  const { name, type, model, manufacturer, ip, date, note, employee } = req.query;
+  collection.insertOne({
+    name,
+    type,
+    model,
+    manufacturer,
+    ip,
+    date,
+    note,
+    employee
+  })
 })
 
 // The built directory structure
@@ -81,6 +110,8 @@ function createWindow() {
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
     },
+    width: 1500,
+    height: 1000
   })
 
   // win.removeMenu();
