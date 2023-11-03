@@ -2,7 +2,7 @@ import Breadcrumbs from "../components/Breadcrumbs";
 import TopBar from "../components/TopBar";
 import '../styles/Assets.scss';
 import "react-placeholder/lib/reactPlaceholder.css";
-import Table from '../components/Table';
+import Table from '../components/AssetTable.tsx';
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -25,9 +25,9 @@ function Assets() {
             ]} />
             <h2 className="text-centre">Action Buttons</h2>
             <div id="action-buttons">
-                <Link to={'/assets/create'} className="btn"><i className="fa fa-plus" /> Create an Asset</Link>
-                <button onClick={refreshPage} className="btn"><i className="fa fa-refresh" /> Refresh List</button>
-                <button onClick={deleteAllAssets} className="btn danger"><i className="fa fa-trash" /> Delete <strong>All</strong> Assets</button>
+                <Link to={'/assets/create'} className="btn btn-outline-primary"><i className="fa fa-plus" /> Create an Asset</Link>
+                <button onClick={refreshPage} className="btn btn-outline-primary"><i className="fa fa-refresh" /> Refresh List</button>
+                <button onClick={deleteAllAssets} className="btn btn-outline-danger"><i className="fa fa-trash" /> Delete <strong>All</strong> Assets</button>
             </div>
             <hr />
             <h2 className="text-centre">Asset List</h2>
