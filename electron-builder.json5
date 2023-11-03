@@ -3,9 +3,9 @@
  */
 {
   "$schema": "https://raw.githubusercontent.com/electron-userland/electron-builder/master/packages/app-builder-lib/scheme.json",
-  "appId": "YourAppID",
+  "appId": "0",
   "asar": true,
-  "productName": "YourAppName",
+  "productName": "ScottishGlen Administration Panel",
   "directories": {
     "output": "release/${version}"
   },

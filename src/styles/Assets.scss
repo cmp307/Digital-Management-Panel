@@ -1,0 +1,52 @@
+#action-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    button,
+    a {
+        margin: 0px 2.5px 0px;
+    }
+
+    // button.danger, a.danger {
+    //     background-color: #e74c3c;
+    // }
+}
+
+a[role="button"], button {
+    margin: 0px 2.5px 0px
+}
+
+// #blue-button {
+//     background-color: #3498db;
+//     color: white;
+// }
+
+// #blue-button:hover {
+//     background-color: #2f84bd !important;
+// }
+
+table button {
+    margin: 0px 5px 0px;
+}
+
+#centred-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#single-asset-table {
+    font-size: large;
+    width: 50%;
+
+    th {
+        width: 40%;
+        text-align: left;
+    }
+
+    td a {
+        padding: 0px;
+    }
+}
