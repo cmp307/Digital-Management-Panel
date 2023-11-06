@@ -31,7 +31,7 @@ function Asset() {
             ]} />
             <h2 className="text-centre">Action Buttons</h2>
             <div id="action-buttons">
-                <Link to={'/assets/create'} className="btn btn-outline-primary"><i className="fa fa-edit" /> Edit Asset</Link>
+                <Link to={'/assets/create'} className="btn btn-outline-primary disabled"><i className="fa fa-edit" /> Edit Asset</Link>
                 <button onClick={refreshPage} className="btn btn-outline-primary"><i className="fa fa-refresh" /> Refresh Asset</button>
                 <button onClick={deleteAllAssets} className="btn btn-outline-danger"><i className="fa fa-trash" /> Delete Asset</button>
             </div>
