@@ -2,28 +2,11 @@ import Breadcrumbs from "../components/Breadcrumbs";
 import TopBar from "../components/TopBar";
 import '../styles/Assets.scss';
 import "react-placeholder/lib/reactPlaceholder.css";
-// import Table from '../components/AssetTable.tsx';
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import AssetInfoTable from "../components/AssetInfoTable";
-
-/*
-import { useParams } from "react-router-dom";
-
-function Asset() {
-    const { id } = useParams();
-    
-    return (
-        <div>
-            <p>{id}</p>
-        </div>
-    )
-}
-
-export default Asset;
-*/
 
 function Asset() {
     const { id } = useParams();
