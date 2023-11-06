@@ -56,7 +56,7 @@ function Asset() {
             <h2 className="text-centre">Full Asset Information</h2>
             <hr />
             <div id="centred-div">
-                <AssetInfoTable data={data} />
+                {data ? <AssetInfoTable asset={data} /> : 'Loading...'}
                 <button className="btn btn-outline-primary" onClick={() => navigate(-1)}>Return to previous page!</button>
                 <br /><br />
             </div>
