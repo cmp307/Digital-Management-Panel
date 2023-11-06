@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { Asset } from "../interfaces/Asset";
+import PillButton from "./PillButton";
 
 class AssetInfoTable extends Component<{ asset: Asset }> {
     constructor(props: any) {
@@ -27,7 +28,7 @@ class AssetInfoTable extends Component<{ asset: Asset }> {
                 </tr>
                 <tr>
                     <th><i className="fa fa-exchange" /> Asset Type</th>
-                    <td>{this.props.asset.type ?? '-'}</td>
+                    <td><PillButton label={this.props.asset.type ?? '-'} /></td>
                 </tr>
                 <tr>
                     <th><i className="fa fa-wifi" /> IP Address</th>
