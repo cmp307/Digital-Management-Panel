@@ -34,7 +34,7 @@ class PillButton extends Component<{ label: string }> {
                 break;
         }
         return (
-            <span className={'badge rounded-pill'} style={{ backgroundColor: style }}>{this.props.label}</span>
+            <span className={'badge rounded-pill'} style={{ backgroundColor: style, color: 'white' }}>{this.props.label}</span>
         )
     }
 }
