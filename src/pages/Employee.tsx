@@ -45,7 +45,7 @@ function Employee() {
 
     return (
         <>
-            <TopBar subtext="Employee Management Panel" />
+            <TopBar heading="Employee Management Panel" />
             <Breadcrumbs history={[
                 { name: 'Home', path: '/' },
                 { name: 'Employees', path: '/employees' },

@@ -40,7 +40,7 @@ function Asset() {
 
     return (
         <>
-            <TopBar subtext="Asset Management Panel" />
+            <TopBar heading="Asset Management Panel" />
             <Breadcrumbs history={[
                 { name: 'Home', path: '/' },
                 { name: 'Assets', path: '/assets' },
