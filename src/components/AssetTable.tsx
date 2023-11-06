@@ -30,7 +30,7 @@ class AssetTable extends Component<{ assets: Asset[] }> {
                             <tr key={item._id}>
                                 <td><code>{item._id}</code></td>
                                 <td>{item.name}</td>
-                                <td><PillButton data={item.type} /></td>
+                                <td><PillButton label={item.type} /></td>
                                 <td>
                                     <Link to={`/assets/${item._id}`} role="button" id="blue-button" className="btn btn-outline-primary"><i className="fa fa-eye" /> View Asset</Link>
                                     <Link to={`/edit/assets/${item._id}`} role="button" id="blue-button" className="btn btn-outline-primary"><i className="fa fa-edit" /> Edit Asset</Link>
