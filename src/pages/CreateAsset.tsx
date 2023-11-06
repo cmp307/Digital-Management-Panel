@@ -34,11 +34,24 @@ function CreateAssets() {
             <form id="create-asset" method="get" action="http://localhost:3001/api/assets/create" onSubmit={async () => { await delay(1000); navigate('/assets') }}>
                 <div id="question">
                     <label htmlFor="name"><i className="fa fa-pencil-square-o" /> Asset Name</label><br />
-                    <input type="text" id="name" name="name" placeholder="Please enter the name for your Asset."></input>
+                    <input type="text" id="name" name="name" placeholder="Please enter the name for your Asset." required></input>
                 </div>
                 <div id="question">
                     <label htmlFor="type"><i className="fa fa-exchange" /> Asset Type</label><br />
-                    <input type="text" id="type" name="type" placeholder="Please enter the type of the Asset."></input>
+                    <select name="type" id="type" required>
+                        <option disabled selected value=''> = Please select a type for your Asset. = </option>
+                        {[
+                            'CCTV Camera',
+                            'Workstation',
+                            'Laptop',
+                            'Mobile Phone',
+                            'Server',
+                            'Firewall',
+                            'Router',
+                            'Switch'
+                        ]
+                            .map(x => { return <option value={x}>{x}</option> })}
+                    </select>
                 </div>
 
                 <div id="question">
@@ -54,21 +67,22 @@ function CreateAssets() {
 
                 <div id="question">
                     <label htmlFor="type"><i className="fa fa-wifi" /> IP Address</label><br />
-                    <input type="text" id="type" name="ip" placeholder="Please enter the IP Address of the Asset."></input>
+                    <input type="text" id="type" name="ip" placeholder="Please enter the IP Address of the Asset." required></input>
                 </div>
 
                 <div id="question">
                     <label htmlFor="type"><i className="fa fa-calendar" /> Purchase Date</label><br />
-                    <input type="text" id="type" name="date" placeholder="Please enter the Purchase Date of the Asset."></input>
+                    <input type="date" id="type" name="date" placeholder="Please enter the Purchase Date of the Asset."></input>
                 </div>
 
                 <div id="question">
                     <label htmlFor="type"><i className="fa fa-sticky-note-o" /> Note</label><br />
-                    <input type="text" id="type" name="note" placeholder="Would you like to leave a note on this asset?"></input>
+                    <textarea id="type" name="note" placeholder="Would you like to leave a note on this asset?"></textarea>
                 </div>
 
                 <label><i className="fa fa-user" /> What employee do you want to assign this asset to?</label>
-                <select name="employee" id="employee">
+                <select name="employee" id="employee" required>
+                    <option disabled selected value=''> = Please select an employee to assign this asset to. = </option>
                     <option value="1">(1) John S.</option>
                     <option value="2">(2) Steve E.</option>
                     <option value="3">(3) Mick B.</option>

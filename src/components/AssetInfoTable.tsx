@@ -36,11 +36,13 @@ class AssetInfoTable extends Component<{ asset: Asset }> {
                 </tr>
                 <tr>
                     <th><i className="fa fa-user" /> Supervising Employee</th>
-                    <td><a href="#">Liam T.</a><code>(ID: {this.props.asset.employee})</code></td>
+                    <td><a href="#" target="_blank">Employee X</a><code>(ID: {this.props.asset.employee})</code></td>
                 </tr>
                 <tr>
                     <th><i className="fa fa-calendar" /> Purchase Date</th>
-                    <td>{this.props.asset.date} <code>(15 days ago)</code></td>
+                    <td>{this.props.asset.date}
+                    {/* <code>(15 days ago)</code> */}
+                    </td>
                 </tr>
                 <tr>
                     <th><i className="fa fa-sticky-note-o" /> Note</th>
