@@ -19,7 +19,7 @@ function Assets() {
     return (
         <>
             <TopBar subtext="Asset Management Panel" />
-            <Breadcrumbs data={[
+            <Breadcrumbs history={[
                 { name: 'Home', path: '/' },
                 { name: 'Assets', path: '/assets' },
             ]} />

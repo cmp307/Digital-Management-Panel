@@ -41,10 +41,10 @@ function Asset() {
     return (
         <>
             <TopBar subtext="Asset Management Panel" />
-            <Breadcrumbs data={[
+            <Breadcrumbs history={[
                 { name: 'Home', path: '/' },
                 { name: 'Assets', path: '/assets' },
-                { name: id, path: `/assets/${id}` },
+                { name: id ?? '-', path: `/assets/${id}` },
             ]} />
             <h2 className="text-centre">Action Buttons</h2>
             <div id="action-buttons">

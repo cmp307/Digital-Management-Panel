@@ -46,10 +46,10 @@ function Employee() {
     return (
         <>
             <TopBar subtext="Employee Management Panel" />
-            <Breadcrumbs data={[
+            <Breadcrumbs history={[
                 { name: 'Home', path: '/' },
                 { name: 'Employees', path: '/employees' },
-                { name: id, path: `/employees/${id}` },
+                { name: id ?? '-', path: `/employees/${id}` },
             ]} />
             <h2 className="text-centre">Action Buttons</h2>
             <div id="action-buttons">
@@ -68,7 +68,7 @@ function Employee() {
             <hr />
             <h2 className="text-centre">Asset List</h2>
             {/* <p className="text-centre">This employee currently has <strong>{data.length} {(data.length > 1 || data.length == 0) ? 'assets' : 'asset'}</strong> assigned to them.</p> */}
-            <Table data={data} />
+            <Table assets={data} />
         </>
     )
 }
