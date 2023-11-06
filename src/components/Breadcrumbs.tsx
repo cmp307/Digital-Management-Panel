@@ -4,7 +4,6 @@ import { Component } from 'react';
 import { BreadcrumbHistory } from "../interfaces/Breadcrumbs";
 
 class Breadcrumbs extends Component<{ history: BreadcrumbHistory[] }> {
-
     render() {
         const formattedData = this.props.history.map((x: any, key: number) => {
             if (key + 1 == this.props.history.length) {
@@ -24,7 +23,6 @@ class Breadcrumbs extends Component<{ history: BreadcrumbHistory[] }> {
             </div>
         )
     }
-
 }
 
 export default Breadcrumbs;
