@@ -11,7 +11,7 @@ server.use(cors());
 server.use(bodyParser.json())
 server.use(bodyParser.urlencoded({ extended: false }))
 
-const uri = 'mongodb+srv://uni-project:9rT5qBAsDfGQgGOg@cluster0.vz4azvs.mongodb.net/?retryWrites=true&w=majority'; // Replace with your MongoDB connection string
+const uri = 'mongodb+srv://uni-project:9rT5qBAsDfGQgGOg@cluster0.vz4azvs.mongodb.net/?retryWrites=true&w=majority';
 const client = new mongo.MongoClient(uri);
 
 let database: any;
@@ -106,7 +106,7 @@ const VITE_DEV_SERVER_URL = process.env['VITE_DEV_SERVER_URL']
 
 function createWindow() {
   win = new BrowserWindow({
-    icon: path.join(process.env.VITE_PUBLIC, 'electron-vite.svg'),
+    icon: path.join(__dirname, 'public', 'vite.svg'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
     },
@@ -114,7 +114,7 @@ function createWindow() {
     height: 1000
   })
 
-  // win.removeMenu();
+  win.removeMenu();
 
   // Test active push message to Renderer-process.
   win.webContents.on('did-finish-load', () => {
