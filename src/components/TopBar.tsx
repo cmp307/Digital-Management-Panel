@@ -9,7 +9,7 @@ class TopBar extends Component<{ heading?: string }> {
                 <Link to={'/'}>
                     <img src="https://i.imgur.com/ZIL6Yos.png" />
                     <h1>Scottish Glen</h1>
-                    <h3 className="header-2">{(this.props.heading) ? this.props.heading : 'Asset & Employee Management Panel'}</h3>
+                    <h3 className="header-2" data-testid="page-title">{(this.props.heading) ? this.props.heading : 'Asset & Employee Management Panel'}</h3>
                 </Link>
             </div>
         )

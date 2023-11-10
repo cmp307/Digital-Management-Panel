@@ -18,8 +18,16 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
   },
+  
   "include": ["src", "electron"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "exclude": ["./testing/**.spec.ts"],
+  "references": [{ "path": "./tsconfig.node.json" }],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "ESNext",
+      "moduleResolution": "Node"
+    }
+  }
 }
