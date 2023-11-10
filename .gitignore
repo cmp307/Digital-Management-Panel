@@ -26,3 +26,6 @@ release
 *.sw?
 
 .VSCodeCounter/
+
+# Playwright
+screenshots/

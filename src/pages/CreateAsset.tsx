@@ -2,24 +2,24 @@ import Breadcrumbs from "../components/Breadcrumbs";
 import TopBar from "../components/TopBar";
 import '../styles/AssetsCreate.scss';
 import "react-placeholder/lib/reactPlaceholder.css";
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 // https://stackoverflow.com/questions/14226803/wait-5-seconds-before-executing-next-line
 const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
 
 function CreateAssets() {
-    const [data, setData] = useState([] as any[]);
+    // const [data, setData] = useState([] as any[]);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        fetch('http://127.0.0.1:3001/api/employees')
-            .then((res) => res.json())
-            .then((res) => setData(res))
-            .catch((err) => console.error(err))
-    }, []);
+    // useEffect(() => {
+    //     fetch('http://127.0.0.1:3001/api/employees')
+    //         .then((res) => res.json())
+    //         .then((res) => setData(res))
+    //         .catch((err) => console.error(err))
+    // }, []);
 
-    console.log(data);
+    // console.log(data);
 
     return (
         <>
@@ -55,29 +55,29 @@ function CreateAssets() {
                 </div>
 
                 <div id="question">
-                    <label htmlFor="type"><i className="fa fa-list-alt" /> Asset Model</label><br />
-                    <input type="text" id="type" name="model" placeholder="Please enter the Model of the Asset."></input>
+                    <label htmlFor="model"><i className="fa fa-list-alt" /> Asset Model</label><br />
+                    <input type="text" id="model" name="model" placeholder="Please enter the Model of the Asset."></input>
                 </div>
 
                 <div id="question">
-                    <label htmlFor="type"><i className="fa fa-cogs" /> Asset Manufacturer</label><br />
-                    <input type="text" id="type" name="manufacturer" placeholder="Please enter the Manufacturer of the Asset."></input>
+                    <label htmlFor="manufacturer"><i className="fa fa-cogs" /> Asset Manufacturer</label><br />
+                    <input type="text" id="manufacturer" name="manufacturer" placeholder="Please enter the Manufacturer of the Asset."></input>
                 </div>
 
 
                 <div id="question">
-                    <label htmlFor="type"><i className="fa fa-wifi" /> IP Address</label><br />
-                    <input type="text" id="type" name="ip" placeholder="Please enter the IP Address of the Asset." required></input>
+                    <label htmlFor="ip"><i className="fa fa-wifi" /> IP Address</label><br />
+                    <input type="text" id="ip" name="ip" placeholder="Please enter the IP Address of the Asset." required></input>
                 </div>
 
                 <div id="question">
-                    <label htmlFor="type"><i className="fa fa-calendar" /> Purchase Date</label><br />
-                    <input type="date" id="type" name="date" placeholder="Please enter the Purchase Date of the Asset."></input>
+                    <label htmlFor="date"><i className="fa fa-calendar" /> Purchase Date</label><br />
+                    <input type="date" id="date" name="date" placeholder="Please enter the Purchase Date of the Asset."></input>
                 </div>
 
                 <div id="question">
-                    <label htmlFor="type"><i className="fa fa-sticky-note-o" /> Note</label><br />
-                    <textarea id="type" name="note" placeholder="Would you like to leave a note on this asset?"></textarea>
+                    <label htmlFor="note"><i className="fa fa-sticky-note-o" /> Note</label><br />
+                    <textarea id="note" name="note" placeholder="Would you like to leave a note on this asset?"></textarea>
                 </div>
 
                 <label><i className="fa fa-user" /> What employee do you want to assign this asset to?</label>
