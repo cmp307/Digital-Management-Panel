@@ -8,6 +8,6 @@ export interface Asset {
     ip: string;
     date: string;
     note: string;
-    employee: number;
+    employee: ObjectId;
     _id: ObjectId;
 }
