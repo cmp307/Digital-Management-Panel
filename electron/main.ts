@@ -25,7 +25,7 @@ export async function connectToMongoDB() {
     try {
       await client.connect();
       console.log('Connected to MongoDB');
-      const _db = client.db('uni-project');
+      const _db = client.db('uni-project-dev');
 
       database = _db;
       return _db;
@@ -56,6 +56,34 @@ server.get('/api/asset/:id', async (req: any, res: any) => {
   res.json(data);
 });
 
+server.get('/api/employees', async (_: any, res: any) => {
+  const db = await connectToMongoDB();
+  const collection = db.collection('employees');
+
+  const data = await collection.find().toArray();
+  res.json(data);
+});
+
+server.get('/api/employee/:id', async (req: any, res: any) => {
+  const db = await connectToMongoDB();
+  const collection = db.collection('employees');
+  const id = req.params.id;
+  console.log('api/employee/id -> ', id);
+  const data = await collection.findOne({ _id: new mongo.ObjectId(id) });
+  console.log(data);
+  res.json(data);
+});
+
+server.get('/api/employee/:id/assets', async (req: any, res: any) => {
+  const db = await connectToMongoDB();
+  const collection = db.collection('assets');
+  const id = req.params.id;
+  console.log('api/employee/id -> ', id);
+  const data = await collection.find({ employee: new mongo.ObjectId(id) }).toArray();
+  console.log(data);
+  res.json(data);
+});
+
 server.delete('/api/delete-all-assets', async (_: any, res: any) => {
   const db = await connectToMongoDB();
   const collection = db.collection('assets');
@@ -79,6 +107,8 @@ server.get('/api/assets/create', async (req: any, _: any) => {
   const db = await connectToMongoDB();
   const collection = db.collection('assets');
   const { name, type, model, manufacturer, ip, date, note, employee } = req.query;
+  const _employee = new mongo.ObjectId(employee);
+
   collection.insertOne({
     name,
     type,
@@ -87,7 +117,7 @@ server.get('/api/assets/create', async (req: any, _: any) => {
     ip,
     date,
     note,
-    employee
+    employee: _employee
   })
 })
 // ===============================================================
@@ -115,15 +145,20 @@ function createWindow() {
       preload: path.join(__dirname, 'preload.js'),
     },
     width: 1500,
-    height: 1000
+    height: 1000,
+    show: false
   })
 
-  win.removeMenu();
+  // win.removeMenu();
 
   // Test active push message to Renderer-process.
   win.webContents.on('did-finish-load', () => {
     win?.webContents.send('main-process-message', (new Date).toLocaleString())
   })
+
+  win.once('ready-to-show', () => {
+    win?.show();
+  });
 
   if (VITE_DEV_SERVER_URL) {
     win.loadURL(VITE_DEV_SERVER_URL)
