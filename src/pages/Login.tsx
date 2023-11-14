@@ -1,8 +1,9 @@
 import { Component } from "react";
 import TopBar from "../components/TopBar";
 import '../styles/Login.scss';
+import { Employee } from "../interfaces/Employee";
 
-class Login extends Component {
+class Login extends Component<{ setUser: Function, user:Employee}> {
     private _setUser: any;
     constructor(props: any) {
         super(props);
@@ -38,8 +39,11 @@ class Login extends Component {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
         }).then((res) => {
-            console.log(`Form submitted & recieved ${res.status}`)
-            if (res.status == 200) this._setUser(_state);
+            console.log(`Form submitted & recieved ${res.status}`);
+            // fetch(`http://localhost:3001/api/employee/${}`)
+            if (res.status == 200) {
+                this._setUser(_state);
+            }
         });
     }
 

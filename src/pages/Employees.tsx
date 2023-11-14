@@ -3,49 +3,67 @@ import Breadcrumbs from "../components/Breadcrumbs";
 import TopBar from "../components/TopBar";
 import { Link } from "react-router-dom";
 import EmployeeTable from "../components/EmployeeTable";
+import { Component } from 'react';
+import { Employee } from "../interfaces/Employee";
 
-function Employees() {
-    const [data, setData] = useState([] as any[]);
+class Employees extends Component<{ setUser: Function, user: Employee }> {
+    constructor(props: any) {
+        super(props);
+        this.state = {
+            data: [],
+            user: props.user,
+            setUser: props.setUser
+        }
+        this.updateEmployees = this.updateEmployees.bind(this);
+        this.deleteAllEmployees = this.deleteAllEmployees.bind(this);
+        this.refreshPage = this.refreshPage.bind(this);
+    }
 
-    useEffect(() => {
+    componentDidMount() { this.updateEmployees() }
+
+    updateEmployees() {
         fetch('http://127.0.0.1:3001/api/employees')
             .then((res) => res.json())
-            .then((res) => setData(res))
+            .then((res) => {
+                const _state = this.state as any;
+                _state.data = [...res];
+                this.setState(_state);
+            })
             .catch((err) => console.error(err))
-    }, []);
+    }
 
-    console.log(data);
+    deleteAllEmployees() {
+        fetch('http://127.0.0.1:3001/api/delete-all-employees', { method: 'DELETE' }).then(() => {
+            this.refreshPage();
+        })
+    }
 
-    return (
-        <>
-            <TopBar heading="Employee Management Panel" />
-            <Breadcrumbs history={[
-                { name: 'Home', path: '/' },
-                { name: 'Employees', path: '/employees' },
-            ]} />
+    refreshPage() {
+        window.location.reload();
+    }
 
-            <h2 className="text-centre">Action Buttons</h2>
-            <div id="action-buttons">
-                <Link to={'/employee/create'} className="btn btn-outline-primary"><i className="fa fa-plus" /> Create Employee</Link>
-                <button onClick={refreshPage} className="btn btn-outline-primary"><i className="fa fa-refresh" /> Refresh Employees</button>
-                <button onClick={deleteAllEmployees} className="btn btn-outline-danger"><i className="fa fa-trash" /> Delete <strong>All</strong> Employees</button>
-            </div>
-            <hr />
-            <h2 className="text-centre">Employee List</h2>
-            <p className="text-centre">There {(data.length > 1) ? 'are' : 'is'} currently <strong>{data.length} {(data.length > 1 || data.length == 0) ? 'employees' : 'employee'}</strong> stored within the Database.</p>
-            <EmployeeTable assets={data} />
-        </>
-    )
-}
+    render() {
+        return (
+            <>
+                <TopBar heading="Employee Management Panel" />
+                <Breadcrumbs history={[
+                    { name: 'Home', path: '/' },
+                    { name: 'Employees', path: '/employees' },
+                ]} setUser={this.props.setUser} username={this.props.user.email} />
 
-function deleteAllEmployees() {
-    fetch('http://127.0.0.1:3001/api/delete-all-employees', { method: 'DELETE' }).then(() => {
-        refreshPage();
-    })
-}
-
-function refreshPage() {
-    window.location.reload();
+                <h2 className="text-centre">Action Buttons</h2>
+                <div id="action-buttons">
+                    <Link to={'/employee/create'} className="btn btn-outline-primary"><i className="fa fa-plus" /> Create Employee</Link>
+                    <button onClick={this.refreshPage} className="btn btn-outline-primary"><i className="fa fa-refresh" /> Refresh Employees</button>
+                    <button onClick={this.deleteAllEmployees} className="btn btn-outline-danger"><i className="fa fa-trash" /> Delete <strong>All</strong> Employees</button>
+                </div>
+                <hr />
+                <h2 className="text-centre">Employee List</h2>
+                <p className="text-centre">There is currently <strong>{this.state.data.length}</strong> {(this.state.data.length > 1 || this.state.data.length == 0) ? 'employees' : 'employee'} stored within the Database.</p>
+                <EmployeeTable assets={this.state.data} />
+            </>
+        )
+    }
 }
 
 export default Employees;

@@ -56,7 +56,13 @@ server.post('/api/login', async (req: any, res: any) => {
     const db = await connectToMongoDB();
     const collection = db.collection('employees');
 
-    const body = JSON.parse(Object.keys(req.body)[0]);
+    let body = undefined;
+    if (req.body.email) {
+      body = req.body;
+    } else {
+      body = JSON.parse(Object.keys(req.body)[0]);
+    }
+
     const email = body.email;
     const password = body.password;
     if (!email || !password) throw new Error("Required fields not provided.");
@@ -72,7 +78,7 @@ server.post('/api/login', async (req: any, res: any) => {
       res.status(400)
       return res.json({ status: false })
     }
-    return res.json({ status: true })
+    return res.json({ status: true, data })
   } catch (error) {
     console.log(error);
     res.status(400);
