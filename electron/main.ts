@@ -9,6 +9,7 @@ const mongo = require('mongodb');
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser')
+const bcrypt = require('bcrypt');
 
 const server = express();
 server.use(cors());
@@ -38,6 +39,47 @@ export async function connectToMongoDB() {
   }
 }
 
+server.get('/api/signup', async (req: any, res: any) => {
+  const db = await connectToMongoDB();
+  const collection = db.collection('employees');
+  const { first_name, last_name, email, password, department } = req.query;
+
+  bcrypt.hash(password, 10, (err: any, hash: any) => {
+    res.send(JSON.stringify(data));
+    console.log('password hashed');
+    console.log(`${password} -> ${hash}`);
+  });
+});
+
+server.post('/api/login', async (req: any, res: any) => {
+  try {
+    const db = await connectToMongoDB();
+    const collection = db.collection('employees');
+
+    const body = JSON.parse(Object.keys(req.body)[0]);
+    const email = body.email;
+    const password = body.password;
+    if (!email || !password) throw new Error("Required fields not provided.");
+    console.log(`
+    Email: ${email}
+    Password: ${password}`)
+    const data = await collection.findOne({ email });
+    console.log(data);
+    if (!data) throw new Error("User not found in database.");
+
+    const crypt = await bcrypt.compare(password, data.password);
+    if (!crypt) {
+      res.status(400)
+      return res.json({ status: false })
+    }
+    return res.json({ status: true })
+  } catch (error) {
+    console.log(error);
+    res.status(400);
+    return res.json({ status: false })
+  }
+});
+
 server.get('/api/assets', async (_: any, res: any) => {
   const db = await connectToMongoDB();
   const collection = db.collection('assets');
@@ -45,6 +87,8 @@ server.get('/api/assets', async (_: any, res: any) => {
   const data = await collection.find().toArray();
   res.json(data);
 });
+
+
 
 server.get('/api/asset/:id', async (req: any, res: any) => {
   const db = await connectToMongoDB();

@@ -5,4 +5,5 @@ export interface Employee {
     name: string;
     department: string;
     email: string;
+    password: string;
 }
