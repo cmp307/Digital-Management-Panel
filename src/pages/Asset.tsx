@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import AssetInfoTable from "../components/AssetInfoTable";
+import { Asset as CAsset } from "../components/Asset";
 
 function Asset() {
     const { id } = useParams();
@@ -16,6 +17,7 @@ function Asset() {
     useEffect(() => {
         fetch(`http://127.0.0.1:3001/api/asset/${id}`)
             .then((res) => res.json())
+            .then((res) => new CAsset(res))
             .then((res) => setData(res))
             .catch((err) => console.error(err))
     }, []);
