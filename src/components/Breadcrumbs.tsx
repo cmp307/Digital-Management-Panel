@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import '../styles/Breadcrumbs.scss';
 import { Component } from 'react';
 import { BreadcrumbHistory } from "../interfaces/Breadcrumbs";
@@ -19,7 +19,9 @@ class Breadcrumbs extends Component<{ history: BreadcrumbHistory[] }> {
 
         return (
             <div id="breadcrumbs">
-                <p><strong>Breadcrumbs »</strong> {formattedData}</p>
+                <p className="left-aligned"><strong>Breadcrumbs »</strong> {formattedData}</p>
+                <Link to={'/'} className="right-aligned">&lt;Return to Home Page&gt;</Link>
+                <div className="clear"></div>
             </div>
         )
     }

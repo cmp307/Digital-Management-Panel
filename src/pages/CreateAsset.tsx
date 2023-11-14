@@ -2,22 +2,23 @@ import Breadcrumbs from "../components/Breadcrumbs";
 import TopBar from "../components/TopBar";
 import '../styles/AssetsCreate.scss';
 import "react-placeholder/lib/reactPlaceholder.css";
-// import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 // https://stackoverflow.com/questions/14226803/wait-5-seconds-before-executing-next-line
 const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
 
 function CreateAssets() {
-    // const [data, setData] = useState([] as any[]);
+    const [data, setData] = useState([] as any[]);
     const navigate = useNavigate();
 
-    // useEffect(() => {
-    //     fetch('http://127.0.0.1:3001/api/employees')
-    //         .then((res) => res.json())
-    //         .then((res) => setData(res))
-    //         .catch((err) => console.error(err))
-    // }, []);
+    useEffect(() => {
+        fetch('http://127.0.0.1:3001/api/employees')
+            .then((res) => res.json())
+            .then((res) => setData(res))
+            .then((res) => console.log(res))
+            .catch((err) => console.error(err))
+    }, []);
 
     // console.log(data);
 
@@ -83,10 +84,9 @@ function CreateAssets() {
                 <label><i className="fa fa-user" /> What employee do you want to assign this asset to?</label>
                 <select name="employee" id="employee" required>
                     <option disabled selected value=''> = Please select an employee to assign this asset to. = </option>
-                    <option value="1">(1) John S.</option>
-                    <option value="2">(2) Steve E.</option>
-                    <option value="3">(3) Mick B.</option>
-                    <option value="4">(4) Leon F.</option>
+                    {data ? data.map((x) => {
+                        return <option value={x._id.toString()}>{x.name}</option>
+                    }) : 'Loading...'}
                 </select>
 
                 {/* <div id="question">

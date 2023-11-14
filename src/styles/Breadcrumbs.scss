@@ -1,9 +1,22 @@
 #breadcrumbs {
     background-color: #2980b9;
     color: white;
-    padding-left: 5px;
 
     a {
         color: white;
+    }
+    
+    .left-aligned {
+        float: left;
+        padding-left: 5px;
+        margin: 0px;
+    }
+    .right-aligned {
+        float: right;
+        padding-right: 5px;
+        margin: 0px;
+    }
+    .clear {
+        clear: both;
     }
 }
