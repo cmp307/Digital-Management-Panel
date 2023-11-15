@@ -11,3 +11,16 @@
 .btn-danger {
     background-color: #e74c3c;
 }
+
+.button-list-container {
+    width: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-list-child {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}

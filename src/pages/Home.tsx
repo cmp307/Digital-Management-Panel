@@ -24,8 +24,8 @@ class Home extends Component<{ setUser: Function, user:Employee}> {
                     <div className="text-center">
                         <br /><br />
                         <Link to="/assets" className="btn btn-outline-primary" role="button"><i className="fa fa-server" /> View &amp; Manage Assets</Link>
-                        <br /><br />
                         <Link to="/employees" className="btn btn-outline-primary" role="button"><i className="fa fa-sitemap" /> View &amp; Manage Employees</Link>
+                        <Link to="/versions" className="btn btn-outline-primary" role="button"><i className="fa fa-info" /> View Software Information</Link>
                     </div>
                 </div>
             </>

@@ -2,7 +2,7 @@
 // The automatically generated code will be surrounded by EQUAL signs.
 // Generated code starts from line 93 and continues until line 153.
 
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, ipcMain } from 'electron'
 import path from 'node:path'
 
 const mongo = require('mongodb');
@@ -10,8 +10,8 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser')
 const bcrypt = require('bcrypt');
-
 const server = express();
+
 server.use(cors());
 server.use(bodyParser.json())
 server.use(bodyParser.urlencoded({ extended: false }))
@@ -236,7 +236,17 @@ app.on('activate', () => {
   }
 })
 
-app.whenReady().then(createWindow)
+app.whenReady().then(() => {
+  const os = require('os');
+  ipcMain.handle('get-data', () => {
+    const data = {
+      cpu: os.cpus()[0].model
+    };
+    console.log('ipc data ->',data)
+    return data;
+  })
+  createWindow();
+})
 // ===============================================================
 
 app.on('ready', () => {
@@ -244,4 +254,3 @@ app.on('ready', () => {
     console.log('Server is running on port 3001');
   });
 })
-
