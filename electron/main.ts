@@ -39,17 +39,17 @@ export async function connectToMongoDB() {
   }
 }
 
-server.get('/api/signup', async (req: any, res: any) => {
-  const db = await connectToMongoDB();
-  const collection = db.collection('employees');
-  const { first_name, last_name, email, password, department } = req.query;
+// server.get('/api/signup', async (req: any, res: any) => {
+//   const db = await connectToMongoDB();
+//   const collection = db.collection('employees');
+//   const { first_name, last_name, email, password, department } = req.query;
 
-  bcrypt.hash(password, 10, (err: any, hash: any) => {
-    res.send(JSON.stringify(data));
-    console.log('password hashed');
-    console.log(`${password} -> ${hash}`);
-  });
-});
+//   bcrypt.hash(password, 10, (err: any, hash: any) => {
+//     res.send(JSON.stringify(data));
+//     console.log('password hashed');
+//     console.log(`${password} -> ${hash}`);
+//   });
+// });
 
 server.post('/api/login', async (req: any, res: any) => {
   try {
@@ -214,7 +214,7 @@ function createWindow() {
     win.loadURL(VITE_DEV_SERVER_URL)
   } else {
     // win.loadFile('dist/index.html')
-    win.loadFile(path.join(process.env.DIST, 'index.html'))
+    win.loadFile(path.join(process.env.DIST!, 'index.html'))
   }
 }
 
