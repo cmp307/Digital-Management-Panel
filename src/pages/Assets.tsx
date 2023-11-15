@@ -5,38 +5,55 @@ import "react-placeholder/lib/reactPlaceholder.css";
 import Table from '../components/AssetTable.tsx';
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Component } from 'react';
+import { Employee } from "../interfaces/Employee.ts";
 
-function Assets() {
-    const [data, setData] = useState([] as any[]);
+class Assets extends Component<{ setUser: Function, user: Employee }> {
+    constructor(props: any) {
+        super(props);
+        this.state = {
+            data: [],
+            user: props.user,
+            setUser: props.setUser
+        }
+        this.updateAssets = this.updateAssets.bind(this);
+    }
 
-    useEffect(() => {
+    componentDidMount() { this.updateAssets() }
+    // componentDidUpdate() { this.updateAssets() }
+
+    updateAssets() {
         fetch('http://127.0.0.1:3001/api/assets')
             .then((res) => res.json())
-            .then((res) => setData(res))
+            .then((res) => {
+                const _state: any = this.state;
+                _state.data = [...res];
+                this.setState(_state)
+            })
             .catch((err) => console.error(err))
-    }, []);
-
-    return (
-        <>
-            <TopBar heading="Asset Management Panel" />
-            <Breadcrumbs history={[
-                { name: 'Home', path: '/' },
-                { name: 'Assets', path: '/assets' },
-            ]} />
-            <h2 className="text-centre">Action Buttons</h2>
-            <div id="action-buttons">
-                <Link to={'/assets/create'} className="btn btn-outline-primary"><i className="fa fa-plus" /> Create an Asset</Link>
-                <button onClick={refreshPage} className="btn btn-outline-primary"><i className="fa fa-refresh" /> Refresh List</button>
-                <button onClick={deleteAllAssets} className="btn btn-outline-danger"><i className="fa fa-trash" /> Delete <strong>All</strong> Assets</button>
-            </div>
-            <hr />
-            <h2 className="text-centre">Asset List</h2>
-            <p className="text-centre">There {(data.length > 1) ? 'are' : 'is'} currently <strong>{data.length} {(data.length > 1 || data.length == 0) ? 'assets' : 'asset'}</strong> stored within the Database.</p>
-            <Table assets={data} />
-        </>
-    )
+    }
+    render() {
+        return (
+            <>
+                <TopBar heading="Asset Management Panel" />
+                <Breadcrumbs history={[
+                    { name: 'Home', path: '/' },
+                    { name: 'Assets', path: '/assets' },
+                ]} setUser={this.props.setUser} username={this.props.user.email} />
+                <h2 className="text-centre">Action Buttons</h2>
+                <div id="action-buttons">
+                    <Link to={'/assets/create'} className="btn btn-outline-primary"><i className="fa fa-plus" /> Create an Asset</Link>
+                    <button onClick={refreshPage} className="btn btn-outline-primary"><i className="fa fa-refresh" /> Refresh List</button>
+                    <button onClick={deleteAllAssets} className="btn btn-outline-danger"><i className="fa fa-trash" /> Delete <strong>All</strong> Assets</button>
+                </div>
+                <hr />
+                <h2 className="text-centre">Asset List</h2>
+                <p className="text-centre">There is currently <strong>{this.state.data.length}</strong> {(this.state.data.length > 1 || this.state.data.length == 0) ? 'assets' : 'asset'} stored within the Database.</p>
+                <Table assets={this.state.data} />
+            </>
+        )
+    }
 }
-
 function deleteAllAssets() {
     fetch('http://127.0.0.1:3001/api/delete-all-assets', { method: 'DELETE' }).then(() => {
         refreshPage();

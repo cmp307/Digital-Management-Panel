@@ -19,12 +19,12 @@ function App() {
       <HashRouter>
         <Routes>
           <Route index element={<Home setUser={setUser} user={user} />} />
-          <Route path="/assets" element={<Assets />} />
-          <Route path="/assets/:id" element={<Asset />} />
-          <Route path="/assets/create" element={<CreateAssets />} />
-          <Route path="/employees" element={<Employees />} />
-          <Route path="/employees/:id" element={<Employee />} />
-          <Route path='*' element={<Error404 />} />
+          <Route path="/assets" element={<Assets setUser={setUser} user={user} />} />
+          <Route path="/assets/:id" element={<Asset setUser={setUser} user={user} />} />
+          <Route path="/assets/create" element={<CreateAssets setUser={setUser} user={user} />} />
+          <Route path="/employees" element={<Employees setUser={setUser} user={user} />} />
+          <Route path="/employees/:id" element={<Employee setUser={setUser} user={user} />} />
+          <Route path='*' element={<Error404 setUser={setUser} user={user} />} />
         </Routes>
       </HashRouter>
     </>

@@ -1,21 +1,41 @@
 #breadcrumbs {
     background-color: #2980b9;
     color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 5px;
+    padding-top: 5px;
 
     a {
         color: white;
     }
     
+    p {
+        margin: 0px;
+    }
+
     .left-aligned {
         float: left;
         padding-left: 5px;
         margin: 0px;
     }
+    
     .right-aligned {
+        display: flex;
+        align-items: center;
+        margin-left: auto;
+        order: 2;
         float: right;
         padding-right: 5px;
         margin: 0px;
+
+        button {
+            border: none;
+            margin-left: 10px;
+        }
     }
+    
     .clear {
         clear: both;
     }
