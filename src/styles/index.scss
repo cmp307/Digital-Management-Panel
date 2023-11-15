@@ -24,3 +24,12 @@
     flex-direction: column;
     gap: 16px;
 }
+
+#info-parent {
+    display: flex;
+    justify-content: center;
+}
+
+#info-child {
+    width: 40%;
+}

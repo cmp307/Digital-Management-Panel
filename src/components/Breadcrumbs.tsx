@@ -17,7 +17,7 @@ class Breadcrumbs extends Component<{ username: string, history?: BreadcrumbHist
         if (this.props.history && this.props.history.length > 0) {
             const formattedData = this.props.history.map((x: any, key: number) => {
                 if (key + 1 == (this.props.history?.length ?? 0)) {
-                    return (<span key={key}>
+                    return (<span key={x.name}>
                         {x.name}
                     </span>)
                 } else {
