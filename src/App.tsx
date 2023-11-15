@@ -39,6 +39,7 @@ function App() {
           <Route path="/edit/assets/:id" element={<EditAsset setUser={setUser} user={user} />} />
           <Route path="/employees" element={<Employees setUser={setUser} user={user} />} />
           <Route path="/employees/:id" element={<Employee setUser={setUser} user={user} />} />
+          {/* <Route path="/edit/employees/:id" element={<EditEmployee setUser={setUser} user={user} />} /> */}
           <Route path='*' element={<Error404 setUser={setUser} user={user} />} />
         </Routes>
       </HashRouter>

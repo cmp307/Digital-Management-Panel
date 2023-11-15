@@ -41,11 +41,11 @@ class CreateAssets extends Component<{ setUser: Function, user: Employee, naviga
 
                 <form id="asset-form" method="get" action="http://localhost:3001/api/assets/create" onSubmit={async () => { await delay(1000); this.props.navigate('/assets') }}>
                     <div id="question">
-                        <label htmlFor="name"><i className="fa fa-pencil-square-o" /> Asset Name</label><br />
+                        <label htmlFor="name"><i className="fa fa-pencil-square-o" /> Asset Name<span className="red-star">*</span></label><br />
                         <input type="text" id="name" name="name" placeholder="Please enter the name for your Asset." required></input>
                     </div>
                     <div id="question">
-                        <label htmlFor="type"><i className="fa fa-exchange" /> Asset Type</label><br />
+                        <label htmlFor="type"><i className="fa fa-exchange" /> Asset Type<span className="red-star">*</span></label><br />
                         <select name="type" id="type" required>
                             <option disabled selected value=''>[Please select a type for your Asset]</option>
                             {[
@@ -74,7 +74,7 @@ class CreateAssets extends Component<{ setUser: Function, user: Employee, naviga
 
 
                     <div id="question">
-                        <label htmlFor="ip"><i className="fa fa-wifi" /> IP Address (<code>IPv4/IPv6</code>)</label><br />
+                        <label htmlFor="ip"><i className="fa fa-wifi" /> IP Address (<code>IPv4/IPv6</code>)<span className="red-star">*</span></label><br />
                         <input
                             type="text"
                             id="ip"
@@ -95,7 +95,7 @@ class CreateAssets extends Component<{ setUser: Function, user: Employee, naviga
                         <textarea id="note" name="note" placeholder="Would you like to leave a note on this asset?"></textarea>
                     </div>
 
-                    <label><i className="fa fa-user" /> What employee do you want to assign this asset to?</label>
+                    <label><i className="fa fa-user" /> What employee do you want to assign this asset to? <span className="red-star">*</span></label>
                     <select name="employee" id="employee" required>
                         <option disabled selected value=''>[Please select an employee to assign this asset to]</option>
                         {this.state.data ? this.state.data.map((x) => {

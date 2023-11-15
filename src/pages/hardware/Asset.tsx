@@ -60,7 +60,7 @@ class Asset extends Component<{ setUser: Function, user: Employee, id: string, n
                 <h2 className="text-centre">Full Asset Information</h2>
                 <hr />
                 <div id="centred-div">
-                    {this.state.data ? <AssetInfoTable asset={this.state.data} /> : 'Loading...'}
+                    {this.state.data ? <AssetInfoTable asset={this.state.data} id={this._id} /> : 'Loading...'}
                     <button className="btn btn-outline-primary" onClick={() => this.props.navigate('/assets')}>Return to assets page!</button>
                     <br /><br />
                 </div>

@@ -51,7 +51,7 @@ class Employees extends Component<{ setUser: Function, user: Employee }, { data:
 
                 <h2 className="text-centre">Action Buttons</h2>
                 <div id="action-buttons">
-                    <Link to={'/employee/create'} className="btn btn-outline-primary"><i className="fa fa-plus" /> Create Employee</Link>
+                    <Link to={'/employees/create'} className="btn btn-outline-primary"><i className="fa fa-plus" /> Create Employee</Link>
                     <button onClick={this.refreshPage} className="btn btn-outline-primary"><i className="fa fa-refresh" /> Refresh Employees</button>
                     <button onClick={this.deleteAllEmployees} className="btn btn-outline-danger"><i className="fa fa-trash" /> Delete <strong>All</strong> Employees</button>
                 </div>

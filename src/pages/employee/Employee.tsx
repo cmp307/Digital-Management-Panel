@@ -60,7 +60,7 @@ class Employee extends Component<{ setUser: Function, user: IEmployee, id: strin
                 ]} setUser={this.props.setUser} username={this.props.user.email} />
                 <h2 className="text-centre">Action Buttons</h2>
                 <div id="action-buttons">
-                    <Link to={'/assets/create'} className="btn btn-outline-primary"><i className="fa fa-edit" /> Edit Employee</Link>
+                    <Link to={`/employees/${this._id}/edit`} className="btn btn-outline-primary"><i className="fa fa-edit" /> Edit Employee</Link>
                     <button onClick={this.refreshPage} className="btn btn-outline-primary"><i className="fa fa-refresh" /> Refresh Employee</button>
                     <button onClick={this.deleteAllAssets} className="btn btn-outline-danger"><i className="fa fa-trash" /> Delete <strong>All</strong> Employee Assets</button>
                 </div>
