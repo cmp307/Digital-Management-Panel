@@ -12,15 +12,28 @@ import Login from './pages/Login'
 
 function App() {
   const [user, setUser] = useState(undefined as any);
-  if(!user) return <Login setUser={setUser} user={user} />
+  if (!user) {
+    try {
+      const storage_user = JSON.parse(localStorage.getItem('user')!);
+      if(storage_user && storage_user !== '[object Object]')
+      setUser(storage_user);
+    } catch (error) {
+      console.log('Could not retrieve previous session.')
+    }
 
+    if (!user || user.status == false) {
+      return <Login setUser={setUser} user={user} />
+    }
+  }
   return (
     <>
       <HashRouter>
         <Routes>
           <Route index element={<Home setUser={setUser} user={user} />} />
           <Route path="/assets" element={<Assets setUser={setUser} user={user} />} />
-          <Route path="/assets/:id" element={<Asset setUser={setUser} user={user} />} />
+          <Route path="/assets/:id" element={<Asset
+          // setUser={setUser} user={user}
+          />} />
           <Route path="/assets/create" element={<CreateAssets setUser={setUser} user={user} />} />
           <Route path="/employees" element={<Employees setUser={setUser} user={user} />} />
           <Route path="/employees/:id" element={<Employee setUser={setUser} user={user} />} />
