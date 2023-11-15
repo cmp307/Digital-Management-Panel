@@ -1,4 +1,4 @@
-#create-asset {
+#asset-form,  {
     display: flex;
     margin: 0 auto;
     // align-items: center;
@@ -8,9 +8,9 @@
     margin-bottom: 50px;
 }
 
-#create-asset input,
-#create-asset textarea,
-#create-asset select {
+#asset-form input,
+#asset-form textarea,
+#asset-form select {
     padding: 12px 20px;
     margin-bottom: 20px;
     width: 100%;
@@ -21,13 +21,21 @@
     border-radius: 10px;
 }
 
-#create-asset input[type=submit] {
+#asset-form button {
+    padding: 12px 20px;
+    border: none;
+    background-color: #e74c3c;
+    color: white;
+    border-radius: 10px;
+}
+
+#asset-form input[type=submit] {
     padding: 12px 20px;
     border: none;
     background-color: #2ecc71;
     color: white;
 }
 
-#create-asset input[type=text]::placeholder {
+#asset-form input[type=text]::placeholder {
     color: white;
 }

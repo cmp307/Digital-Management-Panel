@@ -1,12 +1,12 @@
-import Breadcrumbs from "../components/Breadcrumbs";
-import TopBar from "../components/TopBar";
-import '../styles/Assets.scss';
+import Breadcrumbs from "../../components/Breadcrumbs.tsx";
+import TopBar from "../../components/TopBar.tsx";
+import '../../styles/Assets.scss';
 import "react-placeholder/lib/reactPlaceholder.css";
-import Table from '../components/AssetTable.tsx';
+import Table from '../../components/tables/AssetTable.tsx';
 import { Link } from "react-router-dom";
 import { Component } from 'react';
-import { Employee } from "../interfaces/Employee.ts";
-import { Asset } from "../interfaces/Asset.ts";
+import { Employee } from "../../interfaces/Employee.ts";
+import { Asset } from "../../interfaces/Asset.ts";
 
 class Assets extends Component<{ setUser: Function, user: Employee }, { data: Asset[], user: Employee, setUser: Function }> {
     constructor(props: any) {
@@ -46,7 +46,7 @@ class Assets extends Component<{ setUser: Function, user: Employee }, { data: As
     render() {
         return (
             <>
-                <TopBar heading="Asset Management Panel" />
+                <TopBar />
                 <Breadcrumbs history={[
                     { name: 'Home', path: '/' },
                     { name: 'Assets', path: '/assets' },

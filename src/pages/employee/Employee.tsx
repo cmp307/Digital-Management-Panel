@@ -1,13 +1,13 @@
-import TopBar from "../components/TopBar";
-import '../styles/Assets.scss';
+import TopBar from "../../components/TopBar.tsx";
+import '../../styles/Assets.scss';
 import "react-placeholder/lib/reactPlaceholder.css";
-import Table from '../components/AssetTable.tsx';
+import Table from '../../components/tables/AssetTable.tsx';
 import { Component } from "react";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { Asset } from "../interfaces/Asset.ts";
-import { Employee as IEmployee } from '../interfaces/Employee.ts';
-import Breadcrumbs from "../components/Breadcrumbs.tsx";
+import { Asset } from "../../interfaces/Asset.ts";
+import { Employee as IEmployee } from '../../interfaces/Employee.ts';
+import Breadcrumbs from "../../components/Breadcrumbs.tsx";
 
 class Employee extends Component<{ setUser: Function, user: IEmployee, id: string }, { employee_data?: IEmployee, asset_data?: Asset[], setUser: Function, user: IEmployee }> {
     private _id: string;
@@ -52,7 +52,7 @@ class Employee extends Component<{ setUser: Function, user: IEmployee, id: strin
         console.log('employee state->', this.state)
         return (
             <>
-                <TopBar heading="Employee Management Panel" />
+                <TopBar />
                 <Breadcrumbs history={[
                     { name: 'Home', path: '/' },
                     { name: 'Employees', path: '/employees' },

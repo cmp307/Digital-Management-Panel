@@ -1,7 +1,7 @@
 import { Component } from "react";
-import { Asset as Asset } from "./Asset";
-import PillButton from "./PillButton";
-import { Employee } from "../interfaces/Employee";
+import { Asset as Asset } from "../Asset";
+import PillButton from "../PillButton";
+import { Employee } from "../../interfaces/Employee";
 import { Link } from "react-router-dom";
 
 class AssetInfoTable extends Component<{ asset: Asset }, { isLoaded: boolean, data?: Employee }> {

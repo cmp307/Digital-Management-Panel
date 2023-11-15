@@ -1,10 +1,10 @@
 import { TextBlock } from "react-placeholder/lib/placeholders";
-import PillButton from "./PillButton";
+import PillButton from "../PillButton";
 import { Link } from "react-router-dom";
 import { Component } from 'react';
-import { Asset } from "../interfaces/Asset";
+import { Employee } from "../../interfaces/Employee";
 
-class AssetTable extends Component<{ assets: Asset[] }> {
+class EmployeeTable extends Component<{ assets: Employee[] }> {
     constructor(props: any) {
         super(props);
     }
@@ -19,9 +19,10 @@ class AssetTable extends Component<{ assets: Asset[] }> {
                 <table className="table table-striped">
                     <thead>
                         <tr>
-                            <th scope="col">Asset ID</th>
-                            <th scope="col">System Name</th>
-                            <th scope="col">System Type</th>
+                            <th scope="col">Employee ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Department</th>
+                            <th scope="col">E-Mail</th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
@@ -30,15 +31,16 @@ class AssetTable extends Component<{ assets: Asset[] }> {
                             <tr key={item._id}>
                                 <td><code>{item._id}</code></td>
                                 <td>{item.name}</td>
-                                <td><PillButton label={item.type} /></td>
+                                <td><PillButton label={item.department} /></td>
+                                <td>{item.email}</td>
                                 <td>
-                                    <Link to={`/assets/${item._id}`} role="button" id="blue-button" className="btn btn-outline-primary"><i className="fa fa-eye" /> View Asset</Link>
-                                    <Link to={`/edit/assets/${item._id}`} role="button" id="blue-button" className="btn btn-outline-primary disabled"><i className="fa fa-edit" /> Edit Asset</Link>
+                                    <Link to={`/employees/${item._id}`} role="button" id="blue-button" className="btn btn-outline-primary"><i className="fa fa-eye" /> View Employee</Link>
+                                    <Link to={`/edit/employees/${item._id}`} role="button" id="blue-button" className="btn btn-outline-primary disabled"><i className="fa fa-edit" /> Edit Employee</Link>
                                     <button onClick={() => {
-                                        fetch(`http://127.0.0.1:3001/api/assets/${item._id}/delete`, { method: 'DELETE' }).then(() => {
+                                        fetch(`http://127.0.0.1:3001/api/employees/${item._id}/delete`, { method: 'DELETE' }).then(() => {
                                             refreshPage();
                                         })
-                                    }} className="btn btn-outline-danger"><i className="fa fa-trash" /> Delete Asset</button>
+                                    }} className="btn btn-outline-danger"><i className="fa fa-trash" /> Delete Employee</button>
                                 </td>
                             </tr>
                         ))}
@@ -55,4 +57,4 @@ function refreshPage() {
     window.location.reload();
 }
 
-export default AssetTable;
+export default EmployeeTable;
