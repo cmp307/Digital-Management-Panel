@@ -1,0 +1,28 @@
+input,
+textarea,
+select {
+    padding: 12px 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    border: none;
+    align-self: center;
+    border: 1px solid #a7a7a7;
+    // background-color: #b3b3b3;
+    border-radius: 10px;
+}
+
+input[type=submit] {
+    padding: 12px 20px;
+    border: none;
+    background-color: #2ecc71;
+    color: white;
+}
+
+input[type=text]::placeholder {
+    color: white;
+}
+
+.alert {
+    margin: auto;
+    width: 50%;
+}

@@ -1,10 +1,30 @@
 import { Component } from "react";
-import { Asset } from "../interfaces/Asset";
+import { Asset as Asset } from "./Asset";
 import PillButton from "./PillButton";
+import { Employee } from "../interfaces/Employee";
+import { Link } from "react-router-dom";
 
 class AssetInfoTable extends Component<{ asset: Asset }> {
     constructor(props: any) {
         super(props);
+        this.state = {
+            isLoaded: false,
+            data: null
+        };
+    }
+
+    componentDidMount() {
+        console.log(`http://127.0.0.1:3001/api/employee/${this.props.asset.employee.toString()}`);
+        fetch(`http://127.0.0.1:3001/api/employee/${this.props.asset.employee.toString()}`)
+            .then((res) => res.json())
+            .then((res: any) => {
+                console.log('===')
+                console.log(res);
+                if (res) {
+                    const employee = res as Employee;
+                    this.setState({ isLoaded: true, data: employee });
+                }
+            });
     }
 
     render() {
@@ -36,12 +56,12 @@ class AssetInfoTable extends Component<{ asset: Asset }> {
                 </tr>
                 <tr>
                     <th><i className="fa fa-user" /> Supervising Employee</th>
-                    <td><a href="#" target="_blank">Employee X</a><code>(ID: {this.props.asset.employee})</code></td>
+                    {(this.state.isLoaded == false) ? 'Fetching from Database...' : <td><Link to={`/employees/${this.props.asset.employee}`}>{this.state.data.name}</Link><code>(ID: {this.props.asset.employee})</code></td>}
                 </tr>
                 <tr>
                     <th><i className="fa fa-calendar" /> Purchase Date</th>
                     <td>{this.props.asset.date}
-                    {/* <code>(15 days ago)</code> */}
+                        {/* <code>(15 days ago)</code> */}
                     </td>
                 </tr>
                 <tr>

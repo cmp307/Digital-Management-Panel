@@ -57,14 +57,13 @@ class Login extends Component<{ setUser: Function, user: Employee }> {
             this.setState({ data: data });
         })
     }
-
     render() {
         return (
             <>
                 <TopBar linkToHomepage={false} />
                 <br></br>
                 <div className="alert alert-info" role="alert">
-                    <h4 className="alert-heading">Demonstration Login for chrome (v${window.api.chrome()})!</h4>
+                    <h4 className="alert-heading">Demonstration Login!</h4>
                     <p>As this is a demonstration you may login using the credentials listed below. You can then create new Employee Accounts and login with them.</p>
                     <hr />
                     <p className="mb-0"><strong>E-Mail Address</strong>: demo@example.com</p>
