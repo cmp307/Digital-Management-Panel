@@ -31,9 +31,10 @@ class Home extends Component<{ setUser: Function, user: Employee }, { user: Empl
                 </div>
                 <div className="container py-4 px-3 mx-auto button-list-container">
                     <div className="text-center button-list-child">
-                        <Link to="/assets" className="btn btn-outline-primary" role="button"><i className="fa fa-server" /> View &amp; Manage Assets</Link>
+                        <Link to="/assets" className="btn btn-outline-primary" role="button"><i className="fa fa-server" /> View &amp; Manage Hardware Assets</Link>
+                        <Link to="/assets" className="btn btn-outline-primary" role="button"><i className="fa fa-cloud-download" /> View &amp; Manage Software Assets</Link>
                         <Link to="/employees" className="btn btn-outline-primary" role="button"><i className="fa fa-sitemap" /> View &amp; Manage Employees</Link>
-                        <Link to="/versions" className="btn btn-outline-primary" role="button"><i className="fa fa-info" /> View Software Information</Link>
+                        <Link to="/versions" className="btn btn-outline-secondary" role="button"><i className="fa fa-info" /> View Software Information</Link>
                     </div>
                 </div>
             </>

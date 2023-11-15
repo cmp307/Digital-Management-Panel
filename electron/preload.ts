@@ -14,6 +14,7 @@ contextBridge.exposeInMainWorld('api', withPrototype({
   node: () => process.versions.node,
   chrome: () => process.versions.chrome,
   electron: () => process.versions.electron,
+  version: () => ipcRenderer.invoke('get-version'),
 }))
 // ------------------
 // `exposeInMainWorld` can't detect attributes and methods of `prototype`, manually patching it.

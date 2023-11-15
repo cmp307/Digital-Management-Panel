@@ -6,6 +6,12 @@
 export interface IElectronAPI {
   getData: () => Promise<void>;
 }
+
+export interface IAPI {
+  chrome: () => string;
+  node: () => string;
+  electron: () => string;
+}
 // -----
 
 declare namespace NodeJS {
@@ -32,4 +38,5 @@ declare namespace NodeJS {
 // Used in Renderer process, expose in `preload.ts`
 interface Window {
   electron: IElectronAPI,
+  api: IAPI
 }

@@ -1,11 +1,11 @@
 // import Breadcrumbs from "../components/Breadcrumbs";
-import TopBar from "../components/TopBar";
-import '../styles/AssetsCreate.scss';
+import TopBar from "../../components/TopBar";
+import '../../styles/AssetsCreate.scss';
 import "react-placeholder/lib/reactPlaceholder.css";
 import { Component } from "react";
 import { NavigateFunction, useNavigate } from "react-router-dom";
-import { Employee } from "../interfaces/Employee";
-import Breadcrumbs from "../components/Breadcrumbs";
+import { Employee } from "../../interfaces/Employee";
+import Breadcrumbs from "../../components/Breadcrumbs";
 
 // https://stackoverflow.com/questions/14226803/wait-5-seconds-before-executing-next-line
 const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
@@ -31,7 +31,7 @@ class CreateAssets extends Component<{ setUser: Function, user: Employee, naviga
     render() {
         return (
             <>
-                <TopBar heading="Asset Management Panel" />
+                <TopBar />
                 <Breadcrumbs history={[
                     { name: 'Home', path: '/' },
                     { name: 'Assets', path: '/assets' },
@@ -39,7 +39,7 @@ class CreateAssets extends Component<{ setUser: Function, user: Employee, naviga
                 ]} setUser={this.state.setUser} username={this.state.user.email} />
                 <h2 className="text-centre">Create an Asset</h2>
 
-                <form id="create-asset" method="get" action="http://localhost:3001/api/assets/create" onSubmit={async () => { await delay(1000); this.props.navigate('/assets') }}>
+                <form id="asset-form" method="get" action="http://localhost:3001/api/assets/create" onSubmit={async () => { await delay(1000); this.props.navigate('/assets') }}>
                     <div id="question">
                         <label htmlFor="name"><i className="fa fa-pencil-square-o" /> Asset Name</label><br />
                         <input type="text" id="name" name="name" placeholder="Please enter the name for your Asset." required></input>

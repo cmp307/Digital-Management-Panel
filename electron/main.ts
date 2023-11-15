@@ -170,6 +170,27 @@ server.get('/api/assets/create', async (req: any, _: any) => {
     employee: _employee
   })
 })
+server.get('/api/assets/:id/edit', async (req: any, _: any) => {
+  console.log(req.query);
+  const db = await connectToMongoDB();
+  const collection = db.collection('assets');
+  const id = req.params.id;
+  const { name, type, model, manufacturer, ip, date, note, employee } = req.query;
+  console.log('api/asset/edit',req.query)
+  const _employee = new mongo.ObjectId(employee);
+
+  const res = await collection.replaceOne({ _id: new mongo.ObjectId(id) }, {
+    name,
+    type,
+    model,
+    manufacturer,
+    ip,
+    date,
+    note,
+    employee: _employee
+  }, { upsert: true });
+  console.log(res);
+})
 // ===============================================================
 // The built directory structure
 //
@@ -242,9 +263,10 @@ app.whenReady().then(() => {
     const data = {
       cpu: os.cpus()[0].model
     };
-    console.log('ipc data ->',data)
+    console.log('ipc data ->', data)
     return data;
   })
+
   createWindow();
 })
 // ===============================================================

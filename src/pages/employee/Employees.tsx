@@ -1,9 +1,9 @@
-import Breadcrumbs from "../components/Breadcrumbs";
-import TopBar from "../components/TopBar";
+import Breadcrumbs from "../../components/Breadcrumbs";
+import TopBar from "../../components/TopBar";
 import { Link } from "react-router-dom";
-import EmployeeTable from "../components/EmployeeTable";
+import EmployeeTable from "../../components/tables/EmployeeTable";
 import { Component } from 'react';
-import { Employee } from "../interfaces/Employee";
+import { Employee } from "../../interfaces/Employee";
 class Employees extends Component<{ setUser: Function, user: Employee }, { data: Employee[], user: Employee, setUser: Function }> {
     constructor(props: any) {
         super(props);
@@ -43,7 +43,7 @@ class Employees extends Component<{ setUser: Function, user: Employee }, { data:
     render() {
         return (
             <>
-                <TopBar heading="Employee Management Panel" />
+                <TopBar />
                 <Breadcrumbs history={[
                     { name: 'Home', path: '/' },
                     { name: 'Employees', path: '/employees' },

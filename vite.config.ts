@@ -10,7 +10,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   resolve: {
     alias: {
-      '~bootstrap': path.resolve(__dirname, 'node_modules/bootstrap'),
+      '~bootstrap': path.resolve(__dirname, 'node_modules/bootstrap')
     }
   },
   base: './',

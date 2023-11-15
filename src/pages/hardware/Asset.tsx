@@ -1,15 +1,15 @@
 // import Breadcrumbs from "../components/Breadcrumbs";
-import TopBar from "../components/TopBar";
-import '../styles/Assets.scss';
+import TopBar from "../../components/TopBar";
+import '../../styles/Assets.scss';
 import "react-placeholder/lib/reactPlaceholder.css";
 import { Component } from "react";
 import { Link, NavigateFunction } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
-import AssetInfoTable from "../components/AssetInfoTable";
-import { Asset as CAsset } from "../components/Asset";
-import { Employee } from "../interfaces/Employee";
-import Breadcrumbs from "../components/Breadcrumbs";
+import AssetInfoTable from "../../components/tables/AssetInfoTable";
+import { Asset as CAsset } from "../../components/Asset";
+import { Employee } from "../../interfaces/Employee";
+import Breadcrumbs from "../../components/Breadcrumbs";
 class Asset extends Component<{ setUser: Function, user: Employee, id: string, navigate:NavigateFunction }, { setUser: Function, user: Employee, data?: CAsset }> {
     private _id: string;
     constructor(props: any) {
@@ -43,7 +43,7 @@ class Asset extends Component<{ setUser: Function, user: Employee, id: string, n
     render() {
         return (
             <>
-                <TopBar heading="Asset Management Panel" />
+                <TopBar />
                 <Breadcrumbs history={[
                     { name: 'Home', path: '/' },
                     { name: 'Assets', path: '/assets' },
@@ -52,7 +52,7 @@ class Asset extends Component<{ setUser: Function, user: Employee, id: string, n
 
                 <h2 className="text-centre">Action Buttons</h2>
                 <div id="action-buttons">
-                    <Link to={'/assets/create'} className="btn btn-outline-primary disabled"><i className="fa fa-edit" /> Edit Asset</Link>
+                    <Link to={`/edit/assets/${this._id}`} className="btn btn-outline-primary"><i className="fa fa-edit" /> Edit Asset</Link>
                     <button onClick={this.refreshPage} className="btn btn-outline-primary"><i className="fa fa-refresh" /> Refresh Asset</button>
                     <button onClick={this.deleteAllAssets} className="btn btn-outline-danger"><i className="fa fa-trash" /> Delete Asset</button>
                 </div>
@@ -61,7 +61,7 @@ class Asset extends Component<{ setUser: Function, user: Employee, id: string, n
                 <hr />
                 <div id="centred-div">
                     {this.state.data ? <AssetInfoTable asset={this.state.data} /> : 'Loading...'}
-                    <button className="btn btn-outline-primary" onClick={() => this.props.navigate(-1)}>Return to previous page!</button>
+                    <button className="btn btn-outline-primary" onClick={() => this.props.navigate('/assets')}>Return to assets page!</button>
                     <br /><br />
                 </div>
 
