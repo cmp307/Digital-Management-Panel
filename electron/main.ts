@@ -94,8 +94,6 @@ server.get('/api/assets', async (_: any, res: any) => {
   res.json(data);
 });
 
-
-
 server.get('/api/asset/:id', async (req: any, res: any) => {
   const db = await connectToMongoDB();
   const collection = db.collection('assets');
@@ -159,7 +157,7 @@ server.get('/api/assets/create', async (req: any, _: any) => {
   const { name, type, model, manufacturer, ip, date, note, employee } = req.query;
   const _employee = new mongo.ObjectId(employee);
 
-  collection.insertOne({
+  collection.updateOne({ ip }, {
     name,
     type,
     model,
@@ -168,7 +166,7 @@ server.get('/api/assets/create', async (req: any, _: any) => {
     date,
     note,
     employee: _employee
-  })
+  }, { upsert: true })
 })
 // ===============================================================
 // The built directory structure
@@ -242,7 +240,7 @@ app.whenReady().then(() => {
     const data = {
       cpu: os.cpus()[0].model
     };
-    console.log('ipc data ->',data)
+    console.log('ipc data ->', data)
     return data;
   })
   createWindow();
