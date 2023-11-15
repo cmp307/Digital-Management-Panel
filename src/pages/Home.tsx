@@ -4,7 +4,7 @@ import TopBar from "../components/TopBar";
 import Breadcrumbs from '../components/Breadcrumbs';
 import { Employee } from '../interfaces/Employee';
 
-class Home extends Component<{ setUser: Function, user: Employee }> {
+class Home extends Component<{ setUser: Function, user: Employee }, { user: Employee, setUser: Function }> {
     constructor(props: any) {
         super(props);
         this.state = {
@@ -42,8 +42,8 @@ class Home extends Component<{ setUser: Function, user: Employee }> {
 
 
     logout() {
-        const _state = this.state as any;
         this.state.setUser(undefined);
+        localStorage.clear();
     }
 }
 

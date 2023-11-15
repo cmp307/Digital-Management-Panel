@@ -1,10 +1,9 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import '../styles/Breadcrumbs.scss';
 import { Component } from 'react';
 import { BreadcrumbHistory } from "../interfaces/Breadcrumbs";
-import { Employee } from "../interfaces/Employee";
 
-class Breadcrumbs extends Component<{ username: string, history?: BreadcrumbHistory[], setUser: Function }> {
+class Breadcrumbs extends Component<{ username: string, history?: BreadcrumbHistory[], setUser: Function }, { setUser: Function }> {
     constructor(props: any) {
         super(props);
         this.state = {
@@ -53,8 +52,8 @@ class Breadcrumbs extends Component<{ username: string, history?: BreadcrumbHist
     }
 
     logout() {
-        const _state = this.state as any;
         this.state.setUser(undefined);
+        localStorage.clear();
     }
 
 }
