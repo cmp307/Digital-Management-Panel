@@ -2,6 +2,12 @@
 
 /// <reference types="vite-plugin-electron/electron-env" />
 
+// made whilst looking at https://www.electronjs.org/docs/latest/tutorial/context-isolation#security-considerations
+export interface IElectronAPI {
+  getData: () => Promise<void>;
+}
+// -----
+
 declare namespace NodeJS {
   interface ProcessEnv {
     /**
@@ -25,5 +31,5 @@ declare namespace NodeJS {
 
 // Used in Renderer process, expose in `preload.ts`
 interface Window {
-  ipcRenderer: import('electron').IpcRenderer,
+  electron: IElectronAPI,
 }

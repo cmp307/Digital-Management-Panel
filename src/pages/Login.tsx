@@ -1,18 +1,23 @@
 import { Component } from "react";
 import TopBar from "../components/TopBar";
 import '../styles/Login.scss';
+import { Employee } from "../interfaces/Employee";
+import { IPCSystemData } from "../interfaces/IPC";
+import { Link } from "react-router-dom";
 
-class Login extends Component {
+class Login extends Component<{ setUser: Function, user: Employee }> {
     private _setUser: any;
     constructor(props: any) {
         super(props);
         this.state = {
             email: undefined,
-            password: undefined
+            password: undefined,
+            data: undefined
         }
         this._setUser = props.setUser;
         this.handleFormSubmission = this.handleFormSubmission.bind(this);
         this.handleFormUpdate = this.handleFormUpdate.bind(this);
+        this.componentDidMount = this.componentDidMount.bind(this);
     }
 
     handleFormUpdate(e: any) {
@@ -38,11 +43,20 @@ class Login extends Component {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
         }).then((res) => {
-            console.log(`Form submitted & recieved ${res.status}`)
-            if (res.status == 200) this._setUser(_state);
+            console.log(`Form submitted & recieved ${res.status}`);
+            if (res.status == 200) {
+                this._setUser(_state);
+            }
         });
     }
 
+    componentDidMount() {
+        // @ts-ignore: Unreachable code error
+        window.electron.getData().then((data: IPCSystemData) => {
+            console.log('mountdata->',data);
+            this.setState({ data: data });
+        })
+    }
     render() {
         return (
             <>

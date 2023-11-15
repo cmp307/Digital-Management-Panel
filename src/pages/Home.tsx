@@ -10,6 +10,8 @@ class Home extends Component {
             user: props.user,
             setUser: props.setUser
         }
+
+        console.log(this.props.user);
         this.logout = this.logout.bind(this);
     }
 
@@ -17,19 +19,12 @@ class Home extends Component {
         return (
             <>
                 <TopBar linkToHomepage={false} />
-                <div className="container py-4 px-3 mx-auto">
-                    <div className="text-center">
-                        <br /><br />
+                <Breadcrumbs history={[]} username={this.props.user.email} setUser={this.props.setUser} />
+                <div className="container py-4 px-3 mx-auto button-list-container">
+                    <div className="text-center button-list-child">
                         <Link to="/assets" className="btn btn-outline-primary" role="button"><i className="fa fa-server" /> View &amp; Manage Assets</Link>
-                        <br /><br />
                         <Link to="/employees" className="btn btn-outline-primary" role="button"><i className="fa fa-sitemap" /> View &amp; Manage Employees</Link>
-                    </div>
-                </div>
-                <div className="footer">
-                    <div className="footer-child text-centre">
-                        <h2><i className="fa fa-user" /></h2>
-                        <p>Your are logged in as <code>{this.state.user.email}</code></p>
-                        <button className="btn btn-outline-danger" onClick={this.logout}><i className="fa fa-sign-out" /> Logout</button>
+                        <Link to="/versions" className="btn btn-outline-primary" role="button"><i className="fa fa-info" /> View Software Information</Link>
                     </div>
                 </div>
             </>
