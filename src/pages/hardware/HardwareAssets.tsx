@@ -58,7 +58,7 @@ class Assets extends Component<{ setUser: Function, user: Employee }, { data: As
                     <button onClick={this.deleteAllAssets} className="btn btn-outline-danger"><i className="fa fa-trash" /> Delete <strong>All</strong> Assets</button>
                 </div>
                 <hr />
-                <h2 className="text-centre">Asset List</h2>
+                <h2 className="text-centre">Hardware Asset List</h2>
                 <p className="text-centre">There is currently <strong>{this.state.data.length}</strong> {(this.state.data.length > 1 || this.state.data.length == 0) ? 'assets' : 'asset'} stored within the Database.</p>
                 <Table assets={this.state.data} />
             </>

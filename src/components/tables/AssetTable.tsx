@@ -22,6 +22,7 @@ class AssetTable extends Component<{ assets: Asset[] }> {
                             <th scope="col">Asset ID</th>
                             <th scope="col">System Name</th>
                             <th scope="col">System Type</th>
+                            <th scope="col">System IP</th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
@@ -31,6 +32,7 @@ class AssetTable extends Component<{ assets: Asset[] }> {
                                 <td><code>{item._id}</code></td>
                                 <td>{item.name}</td>
                                 <td><PillButton label={item.type} /></td>
+                                <td>{item.ip}</td>
                                 <td>
                                     <Link to={`/assets/${item._id}`} role="button" id="blue-button" className="btn btn-outline-primary"><i className="fa fa-eye" /> View Asset</Link>
                                     <Link to={`/edit/assets/${item._id}`} role="button" id="blue-button" className="btn btn-outline-primary"><i className="fa fa-edit" /> Edit Asset</Link>

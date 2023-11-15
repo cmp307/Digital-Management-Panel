@@ -25,7 +25,7 @@ class Versions extends Component<{ user: Employee, setUser: Function, navigate: 
             <div className="text-centre software">
                 <h1>Software Information</h1>
                 <p>If software is noticed to be out of date or subject to a Vulnerability report. Advise Development team ASAP so that the issue can be triaged and resolved.</p>
-                <p>Created by: <a href="https://github.com/LiamTownsley2">Liam Townsley</a> (<code>ID: 2301060</code>)</p>
+                <p>Created by: <a href="https://github.com/LiamTownsley2" target="_blank">Liam Townsley</a> (<code>ID: 2301060</code>)</p>
                 <p><img src={'https://i.imgur.com/UDbWcZO.png'} /><strong>Node.js</strong><br />v{(window as any).api.node()}</p>
                 <p><img src={'https://i.imgur.com/FTsep9l.png'} /><strong>Electron</strong><br />v{(window as any).api.electron()}</p>
                 <p><img src={'https://i.imgur.com/ZZWDXbF.png'} /><strong>Google Chrome</strong><br />v{(window as any).api.chrome()}</p>

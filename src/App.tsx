@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Routes, Route, HashRouter } from 'react-router-dom'
 import Home from './pages/Home'
-import Assets from './pages/hardware/Assets'
+import Assets from './pages/hardware/HardwareAssets'
 import './styles/index.scss'
 import Employees from './pages/employee/Employees'
 import CreateAssets from './pages/hardware/CreateAsset'
 import Error404 from './pages/Error404'
-import Asset from './pages/hardware/Asset'
+import Asset from './pages/hardware/HardwareAssets'
 import Employee from './pages/employee/Employee'
 import Login from './pages/Login'
 import Versions from './pages/Versions';
