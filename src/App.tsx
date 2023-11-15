@@ -31,9 +31,7 @@ function App() {
         <Routes>
           <Route index element={<Home setUser={setUser} user={user} />} />
           <Route path="/assets" element={<Assets setUser={setUser} user={user} />} />
-          <Route path="/assets/:id" element={<Asset
-          // setUser={setUser} user={user}
-          />} />
+          <Route path="/assets/:id" element={<Asset setUser={setUser} user={user} />} />
           <Route path="/assets/create" element={<CreateAssets setUser={setUser} user={user} />} />
           <Route path="/employees" element={<Employees setUser={setUser} user={user} />} />
           <Route path="/employees/:id" element={<Employee setUser={setUser} user={user} />} />

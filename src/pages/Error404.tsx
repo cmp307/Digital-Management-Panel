@@ -1,20 +1,42 @@
 import TopBar from "../components/TopBar";
-import { useNavigate } from 'react-router-dom';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
+import { Component } from 'react';
+import { Employee } from "../interfaces/Employee";
+import Breadcrumbs from "../components/Breadcrumbs";
 
-function Error404() {
-    const navigate = useNavigate();
+class Error404 extends Component<{ user: Employee, setUser: Function, navigate:NavigateFunction }, { user: Employee, setUser: Function }> {
+    
+    constructor(props: any) {
+        super(props);
+        this.state = {
+            user: props.user,
+            setUser: props.setUser
+        }
+    }
 
-    return (
-        <div>
+    go_back() {
+
+    }
+
+    render() {
+        return (<div>
             <TopBar />
+            <Breadcrumbs history={[
+                { name: 'Home', path: '/' },
+                { name: 'Error 404', path: '/' },
+
+            ]} setUser={this.props.setUser} username={this.props.user.email} />
             <br />
             <div className="text-centre">
                 <h1>Error 404 😔</h1>
                 <p>You have navigated to an unreachable link! This resource is not available.</p>
-                <button className="btn btn-outline-primary" onClick={() => navigate(-1)}>Return to previous page!</button>
+                    <button className="btn btn-outline-primary" onClick={() => this.props.navigate(-1)}>Return to previous page!</button>
             </div>
-        </div>
-    )
+        </div>)
+    }
 }
 
-export default Error404;
+export default (props:any) => {
+    const navigation = useNavigate();
+    return <Error404 {...props} navigate={navigation} />
+};

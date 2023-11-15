@@ -1,12 +1,10 @@
-import { useEffect, useState } from "react";
 import Breadcrumbs from "../components/Breadcrumbs";
 import TopBar from "../components/TopBar";
 import { Link } from "react-router-dom";
 import EmployeeTable from "../components/EmployeeTable";
 import { Component } from 'react';
 import { Employee } from "../interfaces/Employee";
-
-class Employees extends Component<{ setUser: Function, user: Employee }> {
+class Employees extends Component<{ setUser: Function, user: Employee }, { data: Employee[], user: Employee, setUser: Function }> {
     constructor(props: any) {
         super(props);
         this.state = {
