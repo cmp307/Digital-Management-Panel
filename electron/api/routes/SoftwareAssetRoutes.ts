@@ -5,7 +5,7 @@ const express = require('express');
 const mongo = require('mongodb');
 const router = express.Router();
 
-const DATABASE = "hardware";
+const DATABASE = "software";
 
 // @ROUTE: GET api/assets/hardware/view-all
 // @DESCRIPTION: Used for viewing all Software Assets.
@@ -68,23 +68,23 @@ router.delete('/:id', async (req: Request, res: Response) => {
 
 // @ROUTE: POST api/assets/hardware
 // @DESCRIPTION: Used for creating a Software Asset.
-router.post('/', async (req: Request, _: Response) => {
+router.post('/', async (req: Request, res: Response) => {
     await wrapper(async (db: any) => {
         console.log(req.body);
         const collection = db.collection(DATABASE);
-        const { name, type, model, manufacturer, ip, date, note, parent_employee } = req.body;
-        const _employee = new mongo.ObjectId(parent_employee);
+        const { name, manufacturer, version, parent_id } = req.body;
 
         collection.insertOne({
             name,
-            type,
-            model,
             manufacturer,
-            ip,
-            date,
-            note,
-            parent_employee: _employee
+            version,
+            parent_hardware: {
+                id: new mongo.ObjectId(parent_id),
+                date: new Date().toISOString()
+            }
         })
+
+        res.send({ status: true })
     })
 })
 
@@ -92,20 +92,19 @@ router.post('/', async (req: Request, _: Response) => {
 // @DESCRIPTION: Used for editing a Software Asset.
 router.patch('/:id', async (req: Request, res: Response) => {
     await wrapper(async (db: any) => {
+        console.log(req.body);
         const collection = db.collection(DATABASE);
         const id = req.params.id;
-        const { name, type, model, manufacturer, ip, date, note, parent_employee } = req.body;
-        const _employee = new mongo.ObjectId(parent_employee);
+        const { name, manufacturer, version, parent_id } = req.body;
 
         await collection.replaceOne({ _id: new mongo.ObjectId(id) }, {
             name,
-            type,
-            model,
             manufacturer,
-            ip,
-            date,
-            note,
-            parent_employee: _employee
+            version,
+            parent_hardware: {
+                id: new mongo.ObjectId(parent_id),
+                date: new Date().toISOString()
+            }
         }, { upsert: true });
 
         res.send({ status: true })
