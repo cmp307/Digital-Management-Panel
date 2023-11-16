@@ -1,10 +1,10 @@
 import TopBar from "../components/TopBar";
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { Component } from 'react';
-import { Employee } from "../interfaces/Employee";
+import { IEmployee } from "../interfaces/Employee";
 import Breadcrumbs from "../components/Breadcrumbs";
 
-class Error404 extends Component<{ user: Employee, setUser: Function, navigate:NavigateFunction }, { user: Employee, setUser: Function }> {
+class Error404 extends Component<{ user: IEmployee, setUser: Function, navigate:NavigateFunction }, { user: IEmployee, setUser: Function }> {
     
     constructor(props: any) {
         super(props);

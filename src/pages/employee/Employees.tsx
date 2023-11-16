@@ -1,7 +1,7 @@
 import Breadcrumbs from "../../components/Breadcrumbs";
 import TopBar from "../../components/TopBar";
 import { Link } from "react-router-dom";
-import EmployeeTable from "../../components/tables/EmployeeTable";
+import EmployeeTable from "../../components/employee/EmployeeTable";
 import { Component } from 'react';
 import { IEmployee } from "../../interfaces/Employee";
 class Employees extends Component<{ setUser: Function, user: IEmployee }, { data: IEmployee[], user: IEmployee, setUser: Function }> {
