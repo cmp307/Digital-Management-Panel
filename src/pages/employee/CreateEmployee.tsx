@@ -32,12 +32,12 @@ class CreateEmployee extends Component<{ setUser: Function, user: IEmployee, nav
                 <TopBar />
                 <Breadcrumbs history={[
                     { name: 'Home', path: '/' },
-                    { name: 'Assets', path: '/assets' },
-                    { name: 'Create', path: '/assets/create' },
+                    { name: 'Employees', path: '/employees' },
+                    { name: 'Create', path: '/employees/create' },
                 ]} setUser={this.state.setUser} username={this.state.user.email} />
                 <h2 className="text-centre">Create an Employee</h2>
 
-                <form id="asset-form" method="get" action="http://localhost:3001/api/assets/create" onSubmit={async () => { await delay(1000); this.props.navigate('/assets') }}>
+                <form id="asset-form" method="get" action="http://localhost:3001/api/create/employee" onSubmit={async () => { await delay(1000); this.props.navigate('/employees') }}>
                     <div id="question">
                         <label htmlFor="forename"><i className="fa fa-pencil-square-o" /> Forename<span className="red-star">*</span></label><br />
                         <input type="text" id="forename" name="forename" onChange={e => this.handleChange('forename', e.target.value)} placeholder="Please enter the forename for the Employee." required></input>
@@ -46,15 +46,15 @@ class CreateEmployee extends Component<{ setUser: Function, user: IEmployee, nav
                         <label htmlFor="surname"><i className="fa fa-pencil-square-o" /> Surname<span className="red-star">*</span></label><br />
                         <input type="text" id="surname" name="surname" onChange={e => this.handleChange('surname', e.target.value)} placeholder="Please enter the surname for the Employee." required></input>
                     </div>
-                    
+
                     <div id="question">
                         <label htmlFor="email"><i className="fa fa-pencil-square-o" /> Email</label><br />
-                        <input type="text" id="email" name="email" disabled value={(this.state.form_data.forename && this.state.form_data.surname) ? `${this.state.form_data.forename[0]}.${this.state.form_data.surname}@scottishglen.co.uk` : ''}></input>
+                        <input type="text" id="email" name="email" onChange={e => this.handleChange('email', e.target.value)} disabled value={(this.state.form_data.forename && this.state.form_data.surname) ? `${this.state.form_data.forename[0]}.${this.state.form_data.surname}@scottishglen.co.uk` : ''}></input>
                     </div>
 
                     <div id="question">
-                        <label htmlFor="type"><i className="fa fa-exchange" /> Department<span className="red-star">*</span></label><br />
-                        <select name="type" id="type" required>
+                        <label htmlFor="department"><i className="fa fa-exchange" /> Department<span className="red-star">*</span></label><br />
+                        <select name="department" onChange={e => this.handleChange('department', e.target.value)} id="department" required>
                             <option disabled selected value=''>[Please select a Department for the Employee]</option>
                             {[
                                 'Finance',
@@ -69,11 +69,11 @@ class CreateEmployee extends Component<{ setUser: Function, user: IEmployee, nav
 
                     <div id="question">
                         <label htmlFor="password"><i className="fa fa-key" /> Password</label><br />
-                        <input type="password" id="password" name="password"></input>
+                        <input type="password" id="password" onChange={e => this.handleChange('password', e.target.value)} name="password"></input>
                     </div>
                     <div id="question">
-                        <label htmlFor="confirm-password"><i className="fa fa-key" /> Confirm Password</label><br />
-                        <input type="password" id="confirm-password" name="confirm-password"></input>
+                        <label htmlFor="confirmPassword"><i className="fa fa-key" /> Confirm Password</label><br />
+                        <input type="password" id="confirmPassword" onChange={e => this.handleChange('confirmPassword', e.target.value)} name="confirmPassword"></input>
                     </div>
 
                     <br />

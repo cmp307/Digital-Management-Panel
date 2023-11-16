@@ -134,6 +134,21 @@ server.get('/api/employee/:id/assets', async (req: any, res: any) => {
   res.json(data);
 });
 
+server.get('/api/create/employee', async (req: any, _: any) => {
+  console.log(req.query);
+  const db = await connectToMongoDB();
+  const collection = db.collection('employees');
+  const { forename, surname, department, email, password } = req.query;
+
+  collection.insertOne({
+    forename,
+    surname,
+    department,
+    email: `${forename[0]}.${surname}@scottishglen.co.uk`,
+    password
+  })
+})
+
 server.delete('/api/delete-all-assets', async (_: any, res: any) => {
   const db = await connectToMongoDB();
   const collection = db.collection('assets');
@@ -176,7 +191,7 @@ server.get('/api/assets/:id/edit', async (req: any, _: any) => {
   const collection = db.collection('assets');
   const id = req.params.id;
   const { name, type, model, manufacturer, ip, date, note, parent_employee } = req.query;
-  console.log('api/asset/edit',req.query)
+  console.log('api/asset/edit', req.query)
   const _employee = new mongo.ObjectId(parent_employee);
 
   const res = await collection.replaceOne({ _id: new mongo.ObjectId(id) }, {
