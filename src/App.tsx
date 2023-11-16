@@ -11,6 +11,7 @@ import Employee from './pages/employee/Employee'
 import Login from './pages/Login'
 import Versions from './pages/Versions';
 import EditAsset from './pages/hardware/EditAsset';
+import CreateEmployee from './pages/employee/CreateEmployee';
 
 function App() {
   const [user, setUser] = useState(undefined as any);
@@ -39,7 +40,7 @@ function App() {
           <Route path="/edit/assets/:id" element={<EditAsset setUser={setUser} user={user} />} />
           <Route path="/employees" element={<Employees setUser={setUser} user={user} />} />
           <Route path="/employees/:id" element={<Employee setUser={setUser} user={user} />} />
-          {/* <Route path="/employees/create" element={<CreateEmployee setUser={setUser} user={user} />} /> */}
+          <Route path="/employees/create" element={<CreateEmployee setUser={setUser} user={user} />} />
           {/* <Route path="/edit/employees/:id" element={<EditEmployee setUser={setUser} user={user} />} /> */}
           <Route path='*' element={<Error404 setUser={setUser} user={user} />} />
         </Routes>
