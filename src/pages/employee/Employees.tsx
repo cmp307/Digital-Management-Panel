@@ -1,10 +1,10 @@
 import Breadcrumbs from "../../components/Breadcrumbs";
 import TopBar from "../../components/TopBar";
 import { Link } from "react-router-dom";
-import EmployeeTable from "../../components/tables/EmployeeTable";
+import EmployeeTable from "../../components/employee/EmployeeTable";
 import { Component } from 'react';
-import { Employee } from "../../interfaces/Employee";
-class Employees extends Component<{ setUser: Function, user: Employee }, { data: Employee[], user: Employee, setUser: Function }> {
+import { IEmployee } from "../../interfaces/Employee";
+class Employees extends Component<{ setUser: Function, user: IEmployee }, { data: IEmployee[], user: IEmployee, setUser: Function }> {
     constructor(props: any) {
         super(props);
         this.state = {

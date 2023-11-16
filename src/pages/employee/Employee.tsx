@@ -1,13 +1,13 @@
 import TopBar from "../../components/TopBar.tsx";
 import '../../styles/Assets.scss';
 import "react-placeholder/lib/reactPlaceholder.css";
-import Table from '../../components/tables/AssetTable.tsx';
 import { Component } from "react";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { IEmployee } from '../../interfaces/Employee.ts';
 import Breadcrumbs from "../../components/Breadcrumbs.tsx";
-import { HardwareAsset } from "../../components/assets/HardwareAsset.ts";
+import { HardwareAsset } from "../../components/assets/hardware/HardwareAsset.ts";
+import HardwareAssetTable from "../../components/assets/hardware/HardwareAssetTable.tsx";
 
 class Employee extends Component<{ setUser: Function, user: IEmployee, id: string }, { employee_data?: IEmployee, asset_data?: HardwareAsset[], setUser: Function, user: IEmployee }> {
     private _id: string;
@@ -33,6 +33,7 @@ class Employee extends Component<{ setUser: Function, user: IEmployee, id: strin
         fetch(`http://127.0.0.1:3001/api/employee/${this._id}/assets`)
             .then((res) => res.json())
             .then((res) => res.map((x: any) => { return new HardwareAsset(x) }))
+            .then((res) => {console.log(res); return res})
             .then((res) => this.setState({ asset_data: res }))
             .catch((err) => {
                 console.error(err)
@@ -78,7 +79,7 @@ class Employee extends Component<{ setUser: Function, user: IEmployee, id: strin
                 <hr />
                 <h2 className="text-centre">Asset List</h2>
                 {this.state.asset_data ? <><p className="text-centre">This employee currently has <strong>{this.state.asset_data.length} {(this.state.asset_data.length > 1 || this.state.asset_data.length == 0) ? 'assets' : 'asset'}</strong> assigned to them.</p>
-                    <Table assets={this.state.asset_data} /></> : <p className="text-centre">Loading...</p>}
+                    <HardwareAssetTable assets={this.state.asset_data} /></> : <p className="text-centre">Loading...</p>}
 
             </>
         )
@@ -88,6 +89,5 @@ class Employee extends Component<{ setUser: Function, user: IEmployee, id: strin
 export default ({ setUser, user }: { setUser: Function, user: IEmployee }) => {
     const { id } = useParams();
     if (!id) throw new Error(`Invalid ID for Employee. Given: ${id}`);
-
     return <Employee setUser={setUser} user={user} id={id} />
 };

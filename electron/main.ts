@@ -129,7 +129,7 @@ server.get('/api/employee/:id/assets', async (req: any, res: any) => {
   const collection = db.collection('assets');
   const id = req.params.id;
   console.log('api/employee/id -> ', id);
-  const data = await collection.find({ employee: new mongo.ObjectId(id) }).toArray();
+  const data = await collection.find({ parent_employee: new mongo.ObjectId(id) }).toArray();
   console.log(data);
   res.json(data);
 });
