@@ -25,7 +25,7 @@ router.get('/view-all/:id', async (req: Request, res: Response) => {
         const collection = db.collection(DATABASE);
         const id = req.params.id;
 
-        const data = await collection.find({ parent_employee: new mongo.ObjectId(id) }).toArray();
+        const data = await collection.find({ 'parent_hardware.id': new mongo.ObjectId(id) }).toArray();
         res.json(data);
     })
 });
