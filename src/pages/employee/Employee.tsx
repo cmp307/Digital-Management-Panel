@@ -30,7 +30,7 @@ class Employee extends Component<{ setUser: Function, user: IEmployee, id: strin
                 console.error(err)
             })
 
-        fetch(`http://127.0.0.1:3001/api/assets/software/view-all/${this._id}`)
+        fetch(`http://127.0.0.1:3001/api/assets/hardware/view-all/${this._id}`)
             .then((res) => res.json())
             .then((res) => res.map((x: any) => { return new HardwareAsset(x) }))
             .then((res) => {console.log(res); return res})

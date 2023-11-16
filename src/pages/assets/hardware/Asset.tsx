@@ -23,7 +23,7 @@ class Asset extends Component<{ setUser: Function, user: IEmployee, id: string, 
     }
 
     componentDidMount() {
-        fetch(`http://127.0.0.1:3001/api/assets/software/${this._id}`)
+        fetch(`http://127.0.0.1:3001/api/assets/hardware/${this._id}`)
             .then((res) => res.json())
             .then((res) => new HardwareAsset(res))
             .then((res) => this.setState({ data: res }))
@@ -31,7 +31,7 @@ class Asset extends Component<{ setUser: Function, user: IEmployee, id: string, 
     }
 
     delete() {
-        fetch(`http://127.0.0.1:3001/api/assets/software/${this._id}`, { method: 'DELETE' }).then(() => {
+        fetch(`http://127.0.0.1:3001/api/assets/hardware/${this._id}`, { method: 'DELETE' }).then(() => {
             this.refreshPage();
         })
     }

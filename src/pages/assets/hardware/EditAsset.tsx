@@ -25,7 +25,7 @@ class EditAsset extends Component<{ setUser: Function, user: IEmployee, id: stri
     }
 
     componentDidMount() {
-        fetch(`http://127.0.0.1:3001/api/assets/software//${this._id}`)
+        fetch(`http://127.0.0.1:3001/api/assets/hardware//${this._id}`)
             .then((res) => res.json())
             .then((res) => new HardwareAsset(res))
             .then((res) => this.setState({ asset_data: res, form_data: res }))
@@ -48,7 +48,7 @@ class EditAsset extends Component<{ setUser: Function, user: IEmployee, id: stri
     onSubmit = (e: any) => {
         e.preventDefault();
         console.log('FORM DATA = ', this.state.form_data);
-        fetch(`http://127.0.0.1:3001/api/assets/software/${this._id}`, {
+        fetch(`http://127.0.0.1:3001/api/assets/hardware/${this._id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',

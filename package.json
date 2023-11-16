@@ -7,7 +7,7 @@
     "build": "tsc && vite build && electron-builder",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "test": "concurrently -k \"npm run dev\" \"wait-on http://localhost:5173/index.html && npx playwright test\""
+    "test": "concurrently -k \"npm run dev\" \"wait-on http://127.0.0.1:5173/index.html && npx playwright test\""
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",

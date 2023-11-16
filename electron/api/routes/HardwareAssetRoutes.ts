@@ -7,7 +7,7 @@ const router = express.Router();
 
 const DATABASE = "assets";
 
-// @ROUTE: GET api/assets/software/view-all
+// @ROUTE: GET api/assets/hardware/view-all
 // @DESCRIPTION: Used for viewing all Software Assets.
 router.get('/view-all', async (_: Request, res: Response) => {
     await wrapper(async (db: any) => {
@@ -18,7 +18,7 @@ router.get('/view-all', async (_: Request, res: Response) => {
     })
 });
 
-// @ROUTE: GET api/assets/software/view-all
+// @ROUTE: GET api/assets/hardware/view-all
 // @DESCRIPTION: Used for viewing all Software Assets.
 router.get('/view-all/:id', async (req: Request, res: Response) => {
     await wrapper(async (db: any) => {
@@ -30,7 +30,7 @@ router.get('/view-all/:id', async (req: Request, res: Response) => {
     })
 });
 
-// @ROUTE: DELETE api/assets/software/delete-all
+// @ROUTE: DELETE api/assets/hardware/delete-all
 // @DESCRIPTION: Used for deleting a Software Asset.
 router.delete('/delete-all', async (_: Request, res: Response) => {
     await wrapper(async (db: any) => {
@@ -41,7 +41,7 @@ router.delete('/delete-all', async (_: Request, res: Response) => {
     })
 });
 
-// @ROUTE: GET api/assets/software/:id
+// @ROUTE: GET api/assets/hardware/:id
 // @DESCRIPTION: Used for getting a Software Asset.
 router.get('/:id', async (req: Request, res: Response) => {
     await wrapper(async (db: any) => {
@@ -54,7 +54,7 @@ router.get('/:id', async (req: Request, res: Response) => {
     })
 });
 
-// @ROUTE: DELETE api/assets/software/:id
+// @ROUTE: DELETE api/assets/hardware/:id
 // @DESCRIPTION: Used for deleting a Software Asset.
 router.delete('/:id', async (req: Request, res: Response) => {
     await wrapper(async (db: any) => {
@@ -66,7 +66,7 @@ router.delete('/:id', async (req: Request, res: Response) => {
     })
 });
 
-// @ROUTE: POST api/assets/software
+// @ROUTE: POST api/assets/hardware
 // @DESCRIPTION: Used for creating a Software Asset.
 router.post('/', async (req: Request, _: Response) => {
     await wrapper(async (db: any) => {
@@ -88,7 +88,7 @@ router.post('/', async (req: Request, _: Response) => {
     })
 })
 
-// @ROUTE: PATCH api/assets/software/:id
+// @ROUTE: PATCH api/assets/hardware/:id
 // @DESCRIPTION: Used for editing a Software Asset.
 router.patch('/:id', async (req: Request, res: Response) => {
     await wrapper(async (db: any) => {
