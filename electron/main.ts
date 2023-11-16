@@ -138,7 +138,7 @@ server.get('/api/create/employee', async (req: any, _: any) => {
   console.log(req.query);
   const db = await connectToMongoDB();
   const collection = db.collection('employees');
-  const { forename, surname, department, email, password } = req.query;
+  const { forename, surname, department, password } = req.query;
 
   collection.insertOne({
     forename,

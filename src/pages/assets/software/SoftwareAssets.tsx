@@ -2,7 +2,7 @@ import Breadcrumbs from "../../../components/Breadcrumbs.tsx";
 import TopBar from "../../../components/TopBar.tsx";
 import '../../../styles/Assets.scss';
 import "react-placeholder/lib/reactPlaceholder.css";
-import Table from '../../../components/assets/software/SoftwareAssetTable.tsx';
+// import Table from '../../../components/assets/software/SoftwareAssetTable.tsx';
 import { Link } from "react-router-dom";
 import { Component } from 'react';
 import { IEmployee } from "../../../interfaces/Employee.ts";
