@@ -2,11 +2,11 @@ import Breadcrumbs from "../../../components/Breadcrumbs.tsx";
 import TopBar from "../../../components/TopBar.tsx";
 import '../../../styles/Assets.scss';
 import "react-placeholder/lib/reactPlaceholder.css";
-import Table from '../../../components/assets/software/SoftwareAssetTable.tsx';
 import { Link } from "react-router-dom";
 import { Component } from 'react';
 import { IEmployee } from "../../../interfaces/Employee.ts";
 import { SoftwareAsset } from "../../../components/assets/software/SoftwareAsset.ts";
+import SoftwareAssetTable from "../../../components/assets/software/SoftwareAssetTable.tsx";
 
 class SoftwareAssets extends Component<{ setUser: Function, user: IEmployee }, { data: SoftwareAsset[], user: IEmployee, setUser: Function }> {
     constructor(props: any) {
@@ -60,7 +60,7 @@ class SoftwareAssets extends Component<{ setUser: Function, user: IEmployee }, {
                 <hr />
                 <h2 className="text-centre">Software Asset List</h2>
                 <p className="text-centre">There is currently <strong>{this.state.data.length}</strong> software {(this.state.data.length > 1 || this.state.data.length == 0) ? 'assets' : 'asset'} stored within the Database.</p>
-                <Table assets={this.state.data} />
+                <SoftwareAssetTable assets={this.state.data} />
             </>
         )
     }

@@ -6,11 +6,12 @@ import { Component } from "react";
 import { Link, NavigateFunction } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
-import AssetInfoTable from "../../../components/assets/hardware/HardwareAssetInfoTable";
-import { HardwareAsset } from "../../../components/assets/hardware/HardwareAsset";
+import { SoftwareAsset as CSoftwareAsset } from "../../../components/assets/software/SoftwareAsset";
 import { IEmployee } from "../../../interfaces/Employee";
 import Breadcrumbs from "../../../components/Breadcrumbs";
-class Asset extends Component<{ setUser: Function, user: IEmployee, id: string, navigate:NavigateFunction }, { setUser: Function, user: IEmployee, data?: HardwareAsset }> {
+import SoftwareAssetInfoTable from "../../../components/assets/software/SoftwareAssetInfoTable";
+
+class SoftwareAsset extends Component<{ setUser: Function, user: IEmployee, id: string, navigate:NavigateFunction }, { setUser: Function, user: IEmployee, data?: CSoftwareAsset }> {
     private _id: string;
     constructor(props: any) {
         super(props)
@@ -23,9 +24,9 @@ class Asset extends Component<{ setUser: Function, user: IEmployee, id: string, 
     }
 
     componentDidMount() {
-        fetch(`http://127.0.0.1:3001/api/assets/hardware/${this._id}`)
+        fetch(`http://127.0.0.1:3001/api/assets/software/${this._id}`)
             .then((res) => res.json())
-            .then((res) => new HardwareAsset(res))
+            .then((res) => new CSoftwareAsset(res))
             .then((res) => this.setState({ data: res }))
             .catch((err) => console.error(err))
     }
@@ -60,8 +61,8 @@ class Asset extends Component<{ setUser: Function, user: IEmployee, id: string, 
                 <h2 className="text-centre">Full Asset Information</h2>
                 <hr />
                 <div id="centred-div">
-                    {this.state.data ? <AssetInfoTable asset={this.state.data} /> : 'Loading...'}
-                    <button className="btn btn-outline-primary" onClick={() => this.props.navigate(-1)}>Return to previous page!</button>
+                    {this.state.data ? <SoftwareAssetInfoTable asset={this.state.data} /> : 'Loading...'}
+                    <button className="btn btn-outline-primary" onClick={() => this.props.navigate(-1)}>Go back to previous page!</button>
                     <br /><br />
                 </div>
 
@@ -75,7 +76,7 @@ class Asset extends Component<{ setUser: Function, user: IEmployee, id: string, 
 export default ({ setUser, user }: { setUser: Function, user: IEmployee }) => {
     const { id } = useParams();
     const navigation = useNavigate();
-    if (!id) throw new Error(`Invalid ID for Employee. Given: ${id}`);
+    if (!id) throw new Error(`Invalid ID for Software Asset. Given: ${id}`);
 
-    return <Asset setUser={setUser} user={user} id={id} navigate={navigation} />
+    return <SoftwareAsset setUser={setUser} user={user} id={id} navigate={navigation} />
 };

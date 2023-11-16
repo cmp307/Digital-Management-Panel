@@ -25,7 +25,7 @@ class Home extends Component<{ setUser: Function, user: IEmployee }, { user: IEm
                         <br />
                         <h1>Welcome to the ScottishGlen Administration Panel!</h1>
                         <br />
-                        <p>From here you can manage the <Link to={'/assets'}>Hardware</Link> & Software assets and use it to get a general overview of the assets contained within the company.</p>
+                        <p>From here you can manage the <Link to={'/assets'}>Hardware</Link> & <Link to={'/software'}>Software</Link> assets and use it to get a general overview of the assets contained within the company.</p>
                         <p>It can also be used for Vulnerability Scanning through the <a href='https://nvd.nist.gov/' target='_blank'>National Vulnerability Database</a>. If at anytime you would like to return to this page, click the logo at the top of your screen!</p>
                     </div>
                 </div>

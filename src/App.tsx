@@ -14,6 +14,7 @@ import EditAsset from './pages/assets/hardware/EditAsset';
 import SoftwareAssets from './pages/assets/software/SoftwareAssets';
 import CreateEmployee from './pages/employee/CreateEmployee';
 import CreateSoftwareAsset from './pages/assets/software/CreateSoftwareAsset';
+import SoftwareAsset from './pages/assets/software/SoftwareAsset';
 
 function App() {
   const [user, setUser] = useState(undefined as any);
@@ -40,6 +41,7 @@ function App() {
           <Route path="/assets/:id" element={<Asset setUser={setUser} user={user} />} />
           <Route path="/assets/create" element={<CreateAssets setUser={setUser} user={user} />} />
           <Route path="/software" element={<SoftwareAssets setUser={setUser} user={user} />} />
+          <Route path="/software/:id" element={<SoftwareAsset setUser={setUser} user={user} />} />
           <Route path="/software/create" element={<CreateSoftwareAsset setUser={setUser} user={user} />} />
           <Route path="/edit/assets/:id" element={<EditAsset setUser={setUser} user={user} />} />
           <Route path="/employees" element={<Employees setUser={setUser} user={user} />} />

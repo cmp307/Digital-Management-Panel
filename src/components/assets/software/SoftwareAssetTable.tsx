@@ -1,7 +1,7 @@
 import { TextBlock } from "react-placeholder/lib/placeholders";
 import { Link } from "react-router-dom";
 import { Component } from 'react';
-import { SoftwareAsset } from "./SoftwareAsset";
+import { SoftwareAsset } from '../../../components/assets/software/SoftwareAsset';
 
 class SoftwareAssetTable extends Component<{ assets: SoftwareAsset[] }> {
     constructor(props: any) {
@@ -15,7 +15,7 @@ class SoftwareAssetTable extends Component<{ assets: SoftwareAsset[] }> {
 
     render() {
         console.log(this.props.assets);
-        if(!this.props.assets || this.props.assets.length == 0) {
+        if (!this.props.assets || this.props.assets.length == 0) {
             return <TextBlock rows={3} color='#CDCDCD' />
         }
 
