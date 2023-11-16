@@ -6,7 +6,7 @@ import './styles/index.scss'
 import Employees from './pages/employee/Employees'
 import CreateAssets from './pages/hardware/CreateAsset'
 import Error404 from './pages/Error404'
-import Asset from './pages/hardware/HardwareAssets'
+import Asset from './pages/hardware/Asset'
 import Employee from './pages/employee/Employee'
 import Login from './pages/Login'
 import Versions from './pages/Versions';

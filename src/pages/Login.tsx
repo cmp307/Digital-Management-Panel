@@ -52,12 +52,15 @@ class Login extends Component<{ setUser: Function, user: Employee }> {
     }
 
     componentDidMount() {
-        // @ts-ignore: Unreachable code error
-        window.electron.getData().then((data: IPCSystemData) => {
-            console.log('mountdata->',data);
-            this.setState({ data: data });
-        })
+        try {
+            // @ts-ignore: Unreachable code error
+            window.electron.getData().then((data: IPCSystemData) => {
+                console.log('mountdata->', data);
+                this.setState({ data: data });
+            })
+        } catch (error) { }
     }
+
     render() {
         return (
             <>
