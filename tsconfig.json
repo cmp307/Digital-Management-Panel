@@ -21,7 +21,7 @@
     "noFallthroughCasesInSwitch": true,
   },
   
-  "include": ["src", "electron"],
+  "include": ["src", "src/**/*", "src/**/**/*", "electron", "electron/**/*", "electron/**/**/*"],
   "exclude": ["./testing/**.spec.ts"],
   "references": [{ "path": "./tsconfig.node.json" }],
   "ts-node": {
