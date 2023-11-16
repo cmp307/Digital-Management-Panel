@@ -46,7 +46,6 @@ class SoftwareAssetTable extends Component<{ assets: SoftwareAsset[] }> {
                         ))}
                     </tbody>
                 </table>
-
             </div>
         );
 
