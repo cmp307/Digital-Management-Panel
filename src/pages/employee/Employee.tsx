@@ -5,11 +5,11 @@ import Table from '../../components/tables/AssetTable.tsx';
 import { Component } from "react";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { Asset } from "../../interfaces/Asset.ts";
-import { Employee as IEmployee } from '../../interfaces/Employee.ts';
+import { IEmployee } from '../../interfaces/Employee.ts';
 import Breadcrumbs from "../../components/Breadcrumbs.tsx";
+import { HardwareAsset } from "../../components/assets/HardwareAsset.ts";
 
-class Employee extends Component<{ setUser: Function, user: IEmployee, id: string }, { employee_data?: IEmployee, asset_data?: Asset[], setUser: Function, user: IEmployee }> {
+class Employee extends Component<{ setUser: Function, user: IEmployee, id: string }, { employee_data?: IEmployee, asset_data?: HardwareAsset[], setUser: Function, user: IEmployee }> {
     private _id: string;
     constructor(props: any) {
         super(props);
@@ -32,6 +32,7 @@ class Employee extends Component<{ setUser: Function, user: IEmployee, id: strin
 
         fetch(`http://127.0.0.1:3001/api/employee/${this._id}/assets`)
             .then((res) => res.json())
+            .then((res) => res.map((x: any) => { return new HardwareAsset(x) }))
             .then((res) => this.setState({ asset_data: res }))
             .catch((err) => {
                 console.error(err)

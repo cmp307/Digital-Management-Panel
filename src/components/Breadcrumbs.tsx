@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import '../styles/Breadcrumbs.scss';
 import { Component } from 'react';
-import { BreadcrumbHistory } from "../interfaces/Breadcrumbs";
+import { IBreadcrumbHistory } from "../interfaces/Breadcrumbs";
 
-class Breadcrumbs extends Component<{ username: string, history?: BreadcrumbHistory[], setUser: Function }, { setUser: Function }> {
+class Breadcrumbs extends Component<{ username: string, history?: IBreadcrumbHistory[], setUser: Function }, { setUser: Function }> {
     constructor(props: any) {
         super(props);
         this.state = {

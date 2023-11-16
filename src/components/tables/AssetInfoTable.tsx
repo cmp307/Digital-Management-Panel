@@ -1,10 +1,10 @@
 import { Component } from "react";
-import { Asset as Asset } from "../Asset";
 import PillButton from "../PillButton";
-import { Employee } from "../../interfaces/Employee";
+import { IEmployee } from "../../interfaces/Employee";
 import { Link } from "react-router-dom";
+import { HardwareAsset } from "../assets/HardwareAsset";
 
-class AssetInfoTable extends Component<{ asset: Asset }, { isLoaded: boolean, data?: Employee }> {
+class AssetInfoTable extends Component<{ asset: HardwareAsset }, { isLoaded: boolean, data?: IEmployee }> {
     constructor(props: any) {
         super(props);
         this.state = {
@@ -14,13 +14,13 @@ class AssetInfoTable extends Component<{ asset: Asset }, { isLoaded: boolean, da
     }
 
     componentDidMount() {
-        if (this.props.asset.employee) {
-            console.log(`http://127.0.0.1:3001/api/employee/${this.props.asset.employee.toString()}`);
-            fetch(`http://127.0.0.1:3001/api/employee/${this.props.asset.employee.toString()}`)
+        if (this.props.asset.parent_employee) {
+            console.log(`http://127.0.0.1:3001/api/employee/${this.props.asset.parent_employee.toString()}`);
+            fetch(`http://127.0.0.1:3001/api/employee/${this.props.asset.parent_employee.toString()}`)
                 .then((res) => res.json())
                 .then((res: any) => {
                     if (res) {
-                        const employee = res as Employee;
+                        const employee = res as IEmployee;
                         this.setState({ isLoaded: true, data: employee });
                     }
                 });
@@ -56,7 +56,7 @@ class AssetInfoTable extends Component<{ asset: Asset }, { isLoaded: boolean, da
                 </tr>
                 <tr>
                     <th><i className="fa fa-user" /> Supervising Employee</th>
-                    <td>{(this.state.data) ? <><Link to={`/employees/${this.props.asset.employee ?? '-'}`}>{this.state.data?.forename + ' ' + this.state.data.surname ?? '-'}</Link><code>(ID: {this.state.data?._id.toString() ?? '-'})</code></> : '-'}</td>
+                    <td>{(this.state.data) ? <><Link to={`/employees/${this.state.data._id}`}>{this.state.data?.forename + ' ' + this.state.data.surname ?? '-'}</Link><code>(ID: {this.state.data?._id.toString() ?? '-'})</code></> : '-'}</td>
                 </tr>
                 <tr>
                     <th><i className="fa fa-calendar" /> Purchase Date</th>

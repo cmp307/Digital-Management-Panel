@@ -4,13 +4,13 @@ import '../../styles/AssetsCreate.scss';
 import "react-placeholder/lib/reactPlaceholder.css";
 import { Component } from "react";
 import { NavigateFunction, useNavigate } from "react-router-dom";
-import { Employee } from "../../interfaces/Employee";
+import { IEmployee } from "../../interfaces/Employee";
 import Breadcrumbs from "../../components/Breadcrumbs";
 
 // https://stackoverflow.com/questions/14226803/wait-5-seconds-before-executing-next-line
 const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
 
-class CreateAssets extends Component<{ setUser: Function, user: Employee, navigate: NavigateFunction }, { data: Employee[], setUser: Function, user: Employee }> {
+class CreateAssets extends Component<{ setUser: Function, user: IEmployee, navigate: NavigateFunction }, { data: IEmployee[], setUser: Function, user: IEmployee }> {
     constructor(props: any) {
         super(props);
         this.state = {
@@ -96,7 +96,7 @@ class CreateAssets extends Component<{ setUser: Function, user: Employee, naviga
                     </div>
 
                     <label><i className="fa fa-user" /> What employee do you want to assign this asset to? <span className="red-star">*</span></label>
-                    <select name="employee" id="employee" required>
+                    <select name="parent_employee" id="parent_employee" required>
                         <option disabled selected value=''>[Please select an employee to assign this asset to]</option>
                         {this.state.data ? this.state.data.map((x) => {
                             return <option value={x._id.toString()}>{x.forename} {x.surname} ({x.department})</option>

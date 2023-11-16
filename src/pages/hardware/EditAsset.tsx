@@ -4,14 +4,14 @@ import '../../styles/AssetsCreate.scss';
 import "react-placeholder/lib/reactPlaceholder.css";
 import { Component } from "react";
 import { NavigateFunction, useNavigate, useParams } from "react-router-dom";
-import { Employee } from "../../interfaces/Employee";
+import { IEmployee } from "../../interfaces/Employee";
 import Breadcrumbs from "../../components/Breadcrumbs";
-import { Asset } from "../../components/Asset";
+import { HardwareAsset } from "../../components/assets/HardwareAsset";
 
 // https://stackoverflow.com/questions/14226803/wait-5-seconds-before-executing-next-line
 const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
 
-class EditAsset extends Component<{ setUser: Function, user: Employee, id: string, navigate: NavigateFunction }, { asset_data?: Asset, employee_data?: Employee[], setUser: Function, user: Employee, form_data: any }> {
+class EditAsset extends Component<{ setUser: Function, user: IEmployee, id: string, navigate: NavigateFunction }, { asset_data?: HardwareAsset, employee_data?: IEmployee[], setUser: Function, user: IEmployee, form_data: any }> {
     private _id: string;
     constructor(props: any) {
         super(props);
@@ -28,7 +28,7 @@ class EditAsset extends Component<{ setUser: Function, user: Employee, id: strin
     componentDidMount() {
         fetch(`http://127.0.0.1:3001/api/asset/${this._id}`)
             .then((res) => res.json())
-            .then((res) => new Asset(res))
+            .then((res) => new HardwareAsset(res))
             .then((res) => this.setState({ asset_data: res, form_data: res }))
             .then((res) => console.log(res))
             .catch((err) => console.error(err))
@@ -141,13 +141,13 @@ class EditAsset extends Component<{ setUser: Function, user: Employee, id: strin
                         </div>
 
                         <label><i className="fa fa-user" /> What employee do you want to assign this asset to?</label>
-                        <select name="employee" onChange={e => this.handleChange('employee', e.target.value)} id="employee" required>
-                            {(this.state.form_data.employee) ?
+                        <select name="parent_employee" onChange={e => this.handleChange('parent_employee', e.target.value)} id="parent_employee" required>
+                            {(this.state.form_data.parent_employee) ?
                                 <option disabled value=''>[Please select an employee to assign this asset to]</option> :
                                 <option disabled selected value=''>[Please select an employee to assign this asset to]</option>}
                             {this.state.employee_data ? this.state.employee_data.map((x) => {
-                                if (x._id.toString() == this._id) return <option selected value={x._id.toString()}>{x.name} ({x.department})</option>
-                                return <option value={x._id.toString()}>{x.name} ({x.department})</option>
+                                if (x._id.toString() == this.state.asset_data?.parent_employee.toString()) return <option selected value={x._id.toString()}>{x.forename} {x.surname} ({x.department})</option>
+                                return <option value={x._id.toString()}>{x.forename} {x.surname} ({x.department})</option>
                             }) : 'Loading...'}
                         </select>
 

@@ -1,4 +1,4 @@
-export interface BreadcrumbHistory {
+export interface IBreadcrumbHistory {
     name: string;
     path: string;
 }

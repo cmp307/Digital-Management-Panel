@@ -156,8 +156,8 @@ server.get('/api/assets/create', async (req: any, _: any) => {
   console.log(req.query);
   const db = await connectToMongoDB();
   const collection = db.collection('assets');
-  const { name, type, model, manufacturer, ip, date, note, employee } = req.query;
-  const _employee = new mongo.ObjectId(employee);
+  const { name, type, model, manufacturer, ip, date, note, parent_employee } = req.query;
+  const _employee = new mongo.ObjectId(parent_employee);
 
   collection.insertOne({
     name,
@@ -167,7 +167,7 @@ server.get('/api/assets/create', async (req: any, _: any) => {
     ip,
     date,
     note,
-    employee: _employee
+    parent_employee: _employee
   })
 })
 server.get('/api/assets/:id/edit', async (req: any, _: any) => {
@@ -175,9 +175,9 @@ server.get('/api/assets/:id/edit', async (req: any, _: any) => {
   const db = await connectToMongoDB();
   const collection = db.collection('assets');
   const id = req.params.id;
-  const { name, type, model, manufacturer, ip, date, note, employee } = req.query;
+  const { name, type, model, manufacturer, ip, date, note, parent_employee } = req.query;
   console.log('api/asset/edit',req.query)
-  const _employee = new mongo.ObjectId(employee);
+  const _employee = new mongo.ObjectId(parent_employee);
 
   const res = await collection.replaceOne({ _id: new mongo.ObjectId(id) }, {
     name,
@@ -187,7 +187,7 @@ server.get('/api/assets/:id/edit', async (req: any, _: any) => {
     ip,
     date,
     note,
-    employee: _employee
+    parent_employee: _employee
   }, { upsert: true });
   console.log(res);
 })

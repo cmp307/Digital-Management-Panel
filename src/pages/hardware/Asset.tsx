@@ -7,10 +7,10 @@ import { Link, NavigateFunction } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import AssetInfoTable from "../../components/tables/AssetInfoTable";
-import { Asset as CAsset } from "../../components/Asset";
-import { Employee } from "../../interfaces/Employee";
+import { HardwareAsset } from "../../components/assets/HardwareAsset";
+import { IEmployee } from "../../interfaces/Employee";
 import Breadcrumbs from "../../components/Breadcrumbs";
-class Asset extends Component<{ setUser: Function, user: Employee, id: string, navigate:NavigateFunction }, { setUser: Function, user: Employee, data?: CAsset }> {
+class Asset extends Component<{ setUser: Function, user: IEmployee, id: string, navigate:NavigateFunction }, { setUser: Function, user: IEmployee, data?: HardwareAsset }> {
     private _id: string;
     constructor(props: any) {
         super(props)
@@ -25,9 +25,14 @@ class Asset extends Component<{ setUser: Function, user: Employee, id: string, n
     componentDidMount() {
         fetch(`http://127.0.0.1:3001/api/asset/${this._id}`)
             .then((res) => res.json())
-            .then((res) => new CAsset(res))
+            .then((res) => new HardwareAsset(res))
             .then((res) => this.setState({ data: res }))
             .catch((err) => console.error(err))
+
+            console.log(this.state);
+            setTimeout(() => {
+                console.log(this.state);
+            }, 2000);
     }
 
     deleteAllAssets() {
@@ -72,7 +77,7 @@ class Asset extends Component<{ setUser: Function, user: Employee, id: string, n
 
 }
 
-export default ({ setUser, user }: { setUser: Function, user: Employee }) => {
+export default ({ setUser, user }: { setUser: Function, user: IEmployee }) => {
     const { id } = useParams();
     const navigation = useNavigate();
     if (!id) throw new Error(`Invalid ID for Employee. Given: ${id}`);

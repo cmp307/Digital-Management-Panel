@@ -1,3 +1,3 @@
-export interface IPCSystemData {
+export interface IIPCSystemData {
     cpu: string;
 }

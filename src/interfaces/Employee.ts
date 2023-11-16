@@ -1,6 +1,6 @@
 import { ObjectId } from "mongodb";
 
-export interface Employee {
+export interface IEmployee {
     _id: ObjectId;
     forename: string;
     surname: string;

@@ -2,9 +2,9 @@ import { TextBlock } from "react-placeholder/lib/placeholders";
 import PillButton from "../PillButton";
 import { Link } from "react-router-dom";
 import { Component } from 'react';
-import { Asset } from "../../interfaces/Asset";
+import { HardwareAsset } from "../assets/HardwareAsset";
 
-class AssetTable extends Component<{ assets: Asset[] }> {
+class AssetTable extends Component<{ assets: HardwareAsset[] }> {
     constructor(props: any) {
         super(props);
     }

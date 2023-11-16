@@ -1,23 +1,25 @@
 import { ObjectId } from "mongodb";
-import { Asset as IAsset } from "../interfaces/Asset";
+import { Asset } from "./Asset";
+import { IHardwareAsset } from "../../interfaces/Asset";
 
-export class Asset implements IAsset {
+export class HardwareAsset extends Asset implements IHardwareAsset {
     public _id: ObjectId;
     public name: string;
     public model: string;
     public date: string;
-    public employee: ObjectId;
+    public parent_employee: ObjectId;
     public ip: string;
     public manufacturer: string;
     public note: string;
     public type: string;
 
-    constructor(props: IAsset) {
+    constructor(props: HardwareAsset) {
+        super(props);
         this._id = props._id;
         this.name = props.name;
         this.model = props.model;
         this.date = props.date;
-        this.employee = props.employee;
+        this.parent_employee = props.parent_employee;
         this.ip = props.ip;
         this.manufacturer = props.manufacturer;
         this.note = props.note;
