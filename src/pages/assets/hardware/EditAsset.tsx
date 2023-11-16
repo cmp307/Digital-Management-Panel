@@ -1,12 +1,12 @@
 // import Breadcrumbs from "../components/Breadcrumbs";
-import TopBar from "../../components/TopBar";
-import '../../styles/AssetsCreate.scss';
+import TopBar from "../../../components/TopBar";
+import '../../../styles/AssetsCreate.scss';
 import "react-placeholder/lib/reactPlaceholder.css";
 import { Component } from "react";
 import { NavigateFunction, useNavigate, useParams } from "react-router-dom";
-import { IEmployee } from "../../interfaces/Employee";
-import Breadcrumbs from "../../components/Breadcrumbs";
-import { HardwareAsset } from "../../components/assets/HardwareAsset";
+import { IEmployee } from "../../../interfaces/Employee";
+import Breadcrumbs from "../../../components/Breadcrumbs";
+import { HardwareAsset } from "../../../components/assets/hardware/HardwareAsset";
 
 // https://stackoverflow.com/questions/14226803/wait-5-seconds-before-executing-next-line
 const delay = (ms: number) => new Promise(res => setTimeout(res, ms));

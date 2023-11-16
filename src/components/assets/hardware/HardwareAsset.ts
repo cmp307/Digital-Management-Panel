@@ -1,6 +1,6 @@
 import { ObjectId } from "mongodb";
-import { Asset } from "./Asset";
-import { IHardwareAsset } from "../../interfaces/Asset";
+import { Asset } from "../Asset";
+import { IHardwareAsset } from "../../../interfaces/Asset";
 
 export class HardwareAsset extends Asset implements IHardwareAsset {
     public _id: ObjectId;

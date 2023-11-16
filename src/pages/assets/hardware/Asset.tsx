@@ -1,15 +1,15 @@
 // import Breadcrumbs from "../components/Breadcrumbs";
-import TopBar from "../../components/TopBar";
-import '../../styles/Assets.scss';
+import TopBar from "../../../components/TopBar";
+import '../../../styles/Assets.scss';
 import "react-placeholder/lib/reactPlaceholder.css";
 import { Component } from "react";
 import { Link, NavigateFunction } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
-import AssetInfoTable from "../../components/tables/AssetInfoTable";
-import { HardwareAsset } from "../../components/assets/HardwareAsset";
-import { IEmployee } from "../../interfaces/Employee";
-import Breadcrumbs from "../../components/Breadcrumbs";
+import AssetInfoTable from "../../../components/assets/hardware/HardwareAssetInfoTable";
+import { HardwareAsset } from "../../../components/assets/hardware/HardwareAsset";
+import { IEmployee } from "../../../interfaces/Employee";
+import Breadcrumbs from "../../../components/Breadcrumbs";
 class Asset extends Component<{ setUser: Function, user: IEmployee, id: string, navigate:NavigateFunction }, { setUser: Function, user: IEmployee, data?: HardwareAsset }> {
     private _id: string;
     constructor(props: any) {

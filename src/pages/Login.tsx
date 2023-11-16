@@ -1,10 +1,10 @@
 import { Component } from "react";
 import TopBar from "../components/TopBar";
 import '../styles/Login.scss';
-import { Employee } from "../interfaces/Employee";
-import { IPCSystemData } from "../interfaces/IPC";
+import { IEmployee } from "../interfaces/Employee";
+import { IIPCSystemData } from "../interfaces/IPC";
 
-class Login extends Component<{ setUser: Function, user: Employee }> {
+class Login extends Component<{ setUser: Function, user: IEmployee }> {
     private _setUser: any;
     constructor(props: any) {
         super(props);
@@ -54,7 +54,7 @@ class Login extends Component<{ setUser: Function, user: Employee }> {
     componentDidMount() {
         try {
             // @ts-ignore: Unreachable code error
-            window.electron.getData().then((data: IPCSystemData) => {
+            window.electron.getData().then((data: IIPCSystemData) => {
                 console.log('mountdata->', data);
                 this.setState({ data: data });
             })

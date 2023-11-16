@@ -1,14 +1,15 @@
-import Breadcrumbs from "../../components/Breadcrumbs.tsx";
-import TopBar from "../../components/TopBar.tsx";
-import '../../styles/Assets.scss';
+import Breadcrumbs from "../../../components/Breadcrumbs.tsx";
+import TopBar from "../../../components/TopBar.tsx";
+import '../../../styles/Assets.scss';
 import "react-placeholder/lib/reactPlaceholder.css";
-import Table from '../../components/tables/AssetTable.tsx';
+// import Table from '../../../components/assets/software/SoftwareAssetTable.tsx';
 import { Link } from "react-router-dom";
 import { Component } from 'react';
-import { Employee } from "../../interfaces/Employee.ts";
-import { Asset } from "../../interfaces/Asset.ts";
+import { IEmployee } from "../../../interfaces/Employee.ts";
+import { HardwareAsset } from "../../../components/assets/hardware/HardwareAsset.ts";
+import { SoftwareAsset } from "../../../components/assets/software/SoftwareAsset.ts";
 
-class HardwareAssets extends Component<{ setUser: Function, user: Employee }, { data: Asset[], user: Employee, setUser: Function }> {
+class SoftwareAssets extends Component<{ setUser: Function, user: IEmployee }, { data: SoftwareAsset[], user: IEmployee, setUser: Function }> {
     constructor(props: any) {
         super(props);
         this.state = {
@@ -27,7 +28,7 @@ class HardwareAssets extends Component<{ setUser: Function, user: Employee }, { 
             .then((res) => res.json())
             .then((res) => {
                 const _state: any = this.state;
-                _state.data = [...res];
+                _state.data = [...res.map((x:any) => new HardwareAsset(x))];
                 this.setState(_state)
             })
             .catch((err) => console.error(err))
@@ -58,12 +59,12 @@ class HardwareAssets extends Component<{ setUser: Function, user: Employee }, { 
                     <button onClick={this.deleteAllAssets} className="btn btn-outline-danger"><i className="fa fa-trash" /> Delete <strong>All</strong> Assets</button>
                 </div>
                 <hr />
-                <h2 className="text-centre">Hardware Asset List</h2>
-                <p className="text-centre">There is currently <strong>{this.state.data.length}</strong> {(this.state.data.length > 1 || this.state.data.length == 0) ? 'assets' : 'asset'} stored within the Database.</p>
-                <Table assets={this.state.data} />
+                <h2 className="text-centre">Software Asset List</h2>
+                <p className="text-centre">There is currently <strong>{this.state.data.length}</strong> hardware {(this.state.data.length > 1 || this.state.data.length == 0) ? 'assets' : 'asset'} stored within the Database.</p>
+                {/* <Table assets={this.state.data} /> */}
             </>
         )
     }
 }
 
-export default HardwareAssets;
+export default SoftwareAssets;

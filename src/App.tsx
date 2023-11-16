@@ -1,16 +1,17 @@
 import { useState } from 'react';
 import { Routes, Route, HashRouter } from 'react-router-dom'
 import Home from './pages/Home'
-import HardwareAssets from './pages/hardware/HardwareAssets'
+import HardwareAssets from './pages/assets/hardware/HardwareAssets'
 import './styles/index.scss'
 import Employees from './pages/employee/Employees'
-import CreateAssets from './pages/hardware/CreateAsset'
+import CreateAssets from './pages/assets/hardware/CreateAsset'
 import Error404 from './pages/Error404'
-import Asset from './pages/hardware/Asset'
+import Asset from './pages/assets/hardware/Asset'
 import Employee from './pages/employee/Employee'
 import Login from './pages/Login'
 import Versions from './pages/Versions';
-import EditAsset from './pages/hardware/EditAsset';
+import EditAsset from './pages/assets/hardware/EditAsset';
+import SoftwareAssets from './pages/assets/software/SoftwareAssets';
 import CreateEmployee from './pages/employee/CreateEmployee';
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
           <Route path="/assets" element={<HardwareAssets setUser={setUser} user={user} />} />
           <Route path="/assets/:id" element={<Asset setUser={setUser} user={user} />} />
           <Route path="/assets/create" element={<CreateAssets setUser={setUser} user={user} />} />
+          <Route path="/software" element={<SoftwareAssets setUser={setUser} user={user} />} />
           <Route path="/edit/assets/:id" element={<EditAsset setUser={setUser} user={user} />} />
           <Route path="/employees" element={<Employees setUser={setUser} user={user} />} />
           <Route path="/employees/:id" element={<Employee setUser={setUser} user={user} />} />

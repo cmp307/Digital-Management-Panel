@@ -1,10 +1,10 @@
 import { Component } from "react";
-import PillButton from "../PillButton";
-import { IEmployee } from "../../interfaces/Employee";
+import PillButton from "../../PillButton";
+import { IEmployee } from "../../../interfaces/Employee";
 import { Link } from "react-router-dom";
-import { HardwareAsset } from "../assets/HardwareAsset";
+import { HardwareAsset } from "./HardwareAsset";
 
-class AssetInfoTable extends Component<{ asset: HardwareAsset }, { isLoaded: boolean, data?: IEmployee }> {
+class HardwareAssetInfoTable extends Component<{ asset: HardwareAsset }, { isLoaded: boolean, data?: IEmployee }> {
     constructor(props: any) {
         super(props);
         this.state = {
@@ -71,4 +71,4 @@ class AssetInfoTable extends Component<{ asset: HardwareAsset }, { isLoaded: boo
     }
 }
 
-export default AssetInfoTable;
+export default HardwareAssetInfoTable;
