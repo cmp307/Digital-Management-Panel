@@ -56,7 +56,7 @@ class AssetInfoTable extends Component<{ asset: Asset }, { isLoaded: boolean, da
                 </tr>
                 <tr>
                     <th><i className="fa fa-user" /> Supervising Employee</th>
-                    <td>{(this.state.data) ? <><Link to={`/employees/${this.props.asset.employee ?? '-'}`}>{this.state.data?.name ?? '-'}</Link><code>(ID: {this.state.data?._id.toString() ?? '-'})</code></> : '-'}</td>
+                    <td>{(this.state.data) ? <><Link to={`/employees/${this.props.asset.employee ?? '-'}`}>{this.state.data?.forename + ' ' + this.state.data.surname ?? '-'}</Link><code>(ID: {this.state.data?._id.toString() ?? '-'})</code></> : '-'}</td>
                 </tr>
                 <tr>
                     <th><i className="fa fa-calendar" /> Purchase Date</th>

@@ -30,7 +30,7 @@ class EmployeeTable extends Component<{ assets: Employee[] }> {
                         {this.props.assets.map((item: any) => (
                             <tr key={item._id}>
                                 <td><code>{item._id}</code></td>
-                                <td>{item.name}</td>
+                                <td>{item.forename.split('')[0] + '. ' + item.surname}</td>
                                 <td><PillButton label={item.department} /></td>
                                 <td>{item.email}</td>
                                 <td>

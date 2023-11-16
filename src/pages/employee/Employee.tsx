@@ -67,7 +67,9 @@ class Employee extends Component<{ setUser: Function, user: IEmployee, id: strin
                 <hr />
                 <div className="text-centre">
                     {this.state.employee_data == undefined ? 'Loading...' : <>
-                        <h2 className="text-centre">{this.state.employee_data.name}'s Personal Data</h2>
+                        <h2 className="text-centre">Employee's Personal Data</h2>
+                        <p>Forename: <code>{this.state.employee_data.forename}</code></p>
+                        <p>Surname: <code>{this.state.employee_data.surname}</code></p>
                         <p>E-Mail: <code>{this.state.employee_data.email}</code></p>
                         <p>Department: <code>{this.state.employee_data.department}</code></p>
                     </>}

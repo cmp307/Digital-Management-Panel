@@ -99,7 +99,7 @@ class CreateAssets extends Component<{ setUser: Function, user: Employee, naviga
                     <select name="employee" id="employee" required>
                         <option disabled selected value=''>[Please select an employee to assign this asset to]</option>
                         {this.state.data ? this.state.data.map((x) => {
-                            return <option value={x._id.toString()}>{x.name} ({x.department})</option>
+                            return <option value={x._id.toString()}>{x.forename} {x.surname} ({x.department})</option>
                         }) : 'Loading...'}
                     </select>
 
