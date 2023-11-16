@@ -12,6 +12,7 @@ import Login from './pages/Login'
 import Versions from './pages/Versions';
 import EditAsset from './pages/assets/hardware/EditAsset';
 import SoftwareAssets from './pages/assets/software/SoftwareAssets';
+import CreateEmployee from './pages/employee/CreateEmployee';
 
 function App() {
   const [user, setUser] = useState(undefined as any);
