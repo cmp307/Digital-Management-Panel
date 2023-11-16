@@ -23,14 +23,14 @@ class Employee extends Component<{ setUser: Function, user: IEmployee, id: strin
     }
 
     componentDidMount() {
-        fetch(`http://127.0.0.1:3001/api/employee/${this._id}`)
+        fetch(`http://127.0.0.1:3001/api/employees/${this._id}`)
             .then((res) => res.json())
             .then((res) => this.setState({ employee_data: res }))
             .catch((err) => {
                 console.error(err)
             })
 
-        fetch(`http://127.0.0.1:3001/api/employee/${this._id}/assets`)
+        fetch(`http://127.0.0.1:3001/api/assets/hardware/view-all/${this._id}`)
             .then((res) => res.json())
             .then((res) => res.map((x: any) => { return new HardwareAsset(x) }))
             .then((res) => {console.log(res); return res})
@@ -40,8 +40,8 @@ class Employee extends Component<{ setUser: Function, user: IEmployee, id: strin
             })
     }
 
-    deleteAllAssets() {
-        fetch('http://127.0.0.1:3001/api/delete-all-assets', { method: 'DELETE' }).then(() => {
+    delete() {
+        fetch(`http://127.0.0.1:3001/api/employees/${this._id}`, { method: 'DELETE' }).then(() => {
             this.refreshPage();
         })
     }
@@ -64,7 +64,7 @@ class Employee extends Component<{ setUser: Function, user: IEmployee, id: strin
                 <div id="action-buttons">
                     <Link to={`/employees/${this._id}/edit`} className="btn btn-outline-primary"><i className="fa fa-edit" /> Edit Employee</Link>
                     <button onClick={this.refreshPage} className="btn btn-outline-primary"><i className="fa fa-refresh" /> Refresh Employee</button>
-                    <button onClick={this.deleteAllAssets} className="btn btn-outline-danger"><i className="fa fa-trash" /> Delete <strong>All</strong> Employee Assets</button>
+                    <button onClick={this.delete} className="btn btn-outline-danger"><i className="fa fa-trash" /> Delete <strong>All</strong> Employee Assets</button>
                 </div>
                 <hr />
                 <div className="text-centre">

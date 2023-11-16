@@ -20,7 +20,7 @@ class Employees extends Component<{ setUser: Function, user: IEmployee }, { data
     componentDidMount() { this.updateEmployees() }
 
     updateEmployees() {
-        fetch('http://127.0.0.1:3001/api/employees')
+        fetch('http://127.0.0.1:3001/api/employees/view-all')
             .then((res) => res.json())
             .then((res) => {
                 const _state = this.state as any;
@@ -31,7 +31,7 @@ class Employees extends Component<{ setUser: Function, user: IEmployee }, { data
     }
 
     deleteAllEmployees() {
-        fetch('http://127.0.0.1:3001/api/delete-all-employees', { method: 'DELETE' }).then(() => {
+        fetch('http://127.0.0.1:3001/api/employees/delete-all', { method: 'DELETE' }).then(() => {
             this.refreshPage();
         })
     }

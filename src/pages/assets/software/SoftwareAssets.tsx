@@ -24,7 +24,7 @@ class SoftwareAssets extends Component<{ setUser: Function, user: IEmployee }, {
     // componentDidUpdate() { this.updateAssets() }
 
     updateAssets() {
-        fetch('http://127.0.0.1:3001/api/assets')
+        fetch('http://127.0.0.1:3001/api/assets/hardware/view-all')
             .then((res) => res.json())
             .then((res) => {
                 const _state: any = this.state;
@@ -35,7 +35,7 @@ class SoftwareAssets extends Component<{ setUser: Function, user: IEmployee }, {
     }
 
     deleteAllAssets() {
-        fetch('http://127.0.0.1:3001/api/delete-all-assets', { method: 'DELETE' }).then(() => {
+        fetch('http://127.0.0.1:3001/api/assets/hardware/delete-all', { method: 'DELETE' }).then(() => {
             this.refreshPage();
         })
     }
@@ -60,7 +60,7 @@ class SoftwareAssets extends Component<{ setUser: Function, user: IEmployee }, {
                 </div>
                 <hr />
                 <h2 className="text-centre">Software Asset List</h2>
-                <p className="text-centre">There is currently <strong>{this.state.data.length}</strong> hardware {(this.state.data.length > 1 || this.state.data.length == 0) ? 'assets' : 'asset'} stored within the Database.</p>
+                <p className="text-centre">There is currently <strong>{this.state.data.length}</strong> software {(this.state.data.length > 1 || this.state.data.length == 0) ? 'assets' : 'asset'} stored within the Database.</p>
                 {/* <Table assets={this.state.data} /> */}
             </>
         )

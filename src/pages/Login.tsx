@@ -35,7 +35,7 @@ class Login extends Component<{ setUser: Function, user: IEmployee }> {
     handleFormSubmission(e: any) {
         const _state = this.state as any;
         e.preventDefault();
-        fetch('http://localhost:3001/api/login', {
+        fetch('http://127.0.0.1:3001/api/employees/login', {
             method: 'POST',
             body: JSON.stringify(_state),
             headers: {

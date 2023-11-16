@@ -15,8 +15,7 @@ class HardwareAssetInfoTable extends Component<{ asset: HardwareAsset }, { isLoa
 
     componentDidMount() {
         if (this.props.asset.parent_employee) {
-            console.log(`http://127.0.0.1:3001/api/employee/${this.props.asset.parent_employee.toString()}`);
-            fetch(`http://127.0.0.1:3001/api/employee/${this.props.asset.parent_employee.toString()}`)
+            fetch(`http://127.0.0.1:3001/api/employees/${this.props.asset.parent_employee.toString()}`)
                 .then((res) => res.json())
                 .then((res: any) => {
                     if (res) {

@@ -21,7 +21,7 @@ class CreateAssets extends Component<{ setUser: Function, user: IEmployee, navig
     }
 
     componentDidMount() {
-        fetch('http://127.0.0.1:3001/api/employees')
+        fetch('http://127.0.0.1:3001/api/employees/view-all')
             .then((res) => res.json())
             .then((res) => this.setState({ data: res }))
             .then((res) => console.log(res))
@@ -39,7 +39,7 @@ class CreateAssets extends Component<{ setUser: Function, user: IEmployee, navig
                 ]} setUser={this.state.setUser} username={this.state.user.email} />
                 <h2 className="text-centre">Create an Asset</h2>
 
-                <form id="asset-form" method="get" action="http://localhost:3001/api/assets/create" onSubmit={async () => { await delay(1000); this.props.navigate('/assets') }}>
+                <form id="asset-form" method="post" action="http://127.0.0.1:3001/api/assets/hardware" onSubmit={async () => { await delay(1000); this.props.navigate('/assets') }}>
                     <div id="question">
                         <label htmlFor="name"><i className="fa fa-pencil-square-o" /> Asset Name<span className="red-star">*</span></label><br />
                         <input type="text" id="name" name="name" placeholder="Please enter the name for your Asset." required></input>
