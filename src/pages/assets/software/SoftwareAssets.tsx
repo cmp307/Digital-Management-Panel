@@ -60,7 +60,7 @@ class SoftwareAssets extends Component<{ setUser: Function, user: IEmployee }, {
                 </div>
                 <hr />
                 <h2 className="text-centre">Software Asset List</h2>
-                <p className="text-centre">There is currently <strong>{this.state.data.length}</strong> hardware {(this.state.data.length > 1 || this.state.data.length == 0) ? 'assets' : 'asset'} stored within the Database.</p>
+                <p className="text-centre">There is currently <strong>{this.state.data.length}</strong> software {(this.state.data.length > 1 || this.state.data.length == 0) ? 'assets' : 'asset'} stored within the Database.</p>
                 {/* <Table assets={this.state.data} /> */}
             </>
         )
