@@ -6,12 +6,14 @@ import { HardwareAsset } from "../hardware/HardwareAsset";
 import { Link } from "react-router-dom";
 
 class SoftwareAssetInfoTable extends Component<{ asset: SoftwareAsset }, { isLoaded: boolean, data?: HardwareAsset }> {
+    private date: Date;
     constructor(props: any) {
         super(props);
         this.state = {
             isLoaded: false,
             data: undefined
         };
+        this.date = new Date(this.props.asset.parent_hardware?.date ?? new Date().toISOString());
     }
 
     componentDidMount() {
@@ -25,6 +27,14 @@ class SoftwareAssetInfoTable extends Component<{ asset: SoftwareAsset }, { isLoa
                     }
                 });
         }
+    }
+
+    getLinkDate() {
+        const timestring = [
+            this.date.getHours().toString().padStart(2, '0'),
+            this.date.getMinutes().toString().padStart(2, '0')
+        ].join(':');
+        return `${this.date.toLocaleDateString()} (${timestring})`
     }
 
     render() {
@@ -48,20 +58,12 @@ class SoftwareAssetInfoTable extends Component<{ asset: SoftwareAsset }, { isLoa
                 </tr>
                 <tr>
                     <th><i className="fa fa-wifi" /> Parent Hardware</th>
-                    <td><Link to={`/assets/${this.state.data?._id}`}>{this.state.data?.name}</Link> ({this.state.data?.ip})</td>
-                </tr>
-                {/* <tr>
-                    <th><i className="fa fa-user" /> Supervising Employee</th>
-                    <td>{(this.state.data) ? <><Link to={`/employees/${this.state.data._id}`}>{this.state.data?.forename + ' ' + this.state.data.surname ?? '-'}</Link><code>(ID: {this.state.data?._id.toString() ?? '-'})</code></> : '-'}</td>
-                </tr> */}
-                {/* <tr>
-                    <th><i className="fa fa-calendar" /> Purchase Date</th>
-                    <td>{this.props.asset.date}</td>
+                    <td><Link to={`/assets/${this.state.data?._id}`}>{this.state.data?.name}</Link> (IP: <code>{this.state.data?.ip}</code>)</td>
                 </tr>
                 <tr>
-                    <th><i className="fa fa-sticky-note-o" /> Note</th>
-                    <td>{this.props.asset.note}</td>
-                </tr> */}
+                    <th><i className="fa fa-plus-circle" /> Created At</th>
+                    <td>{this.getLinkDate()}</td>
+                </tr>
             </table>
         )
     }
