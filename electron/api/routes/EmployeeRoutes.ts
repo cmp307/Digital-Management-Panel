@@ -9,7 +9,7 @@ const bcrypt = require('bcrypt');
 
 const DATABASE = "employees";
 
-// @ROUTE: GET api/assets/employees/login
+// @ROUTE: GET api/employees/login
 // @DESCRIPTION: Used for viewing all Employees.
 router.post('/login', async (req: Request, res: Response) => {
   try {
@@ -41,7 +41,7 @@ router.post('/login', async (req: Request, res: Response) => {
   }
 });
 
-// @ROUTE: GET api/assets/employees/view-all
+// @ROUTE: GET api/employees/view-all
 // @DESCRIPTION: Used for viewing all Employees.
 router.get('/view-all', async (_: Request, res: Response) => {
   await wrapper(async (db: any) => {
@@ -52,9 +52,9 @@ router.get('/view-all', async (_: Request, res: Response) => {
   })
 });
 
-// @ROUTE: GET api/assets/employees/:id
+// @ROUTE: GET api/employees/:id
 // @DESCRIPTION: Used for viewing an Employee.
-router.get('/api/employee/:id', async (req: Request, res: Response) => {
+router.get('/:id', async (req: Request, res: Response) => {
   await wrapper(async (db: any) => {
     const collection = db.collection('employees');
     const id = req.params.id;
@@ -64,13 +64,36 @@ router.get('/api/employee/:id', async (req: Request, res: Response) => {
   })
 });
 
-// @ROUTE: POST api/assets/employees/
+// @ROUTE: DELETE api/employees/:id
+// @DESCRIPTION: Used for deleting an Employee.
+router.delete('/:id', async (req: Request, res: Response) => {
+  await wrapper(async (db: any) => {
+      const collection = db.collection(DATABASE);
+      const id = req.params.id;
+
+      await collection.deleteOne({ _id: new mongo.ObjectId(id) });
+      res.json({ "status": true });
+  })
+});
+
+// @ROUTE: DELETE api/employees/delete-all
+// @DESCRIPTION: Used for deleting all Employees.
+router.delete('/delete-all', async (_: Request, res: Response) => {
+  await wrapper(async (db: any) => {
+      const collection = db.collection(DATABASE);
+
+      await collection.deleteMany({});
+      res.json({ "status": true });
+  })
+});
+
+// @ROUTE: POST api/employees/
 // @DESCRIPTION: Used for creating an Employee.
 router.post('/', async (req: Request, res: Response) => {
   await wrapper(async (db: any) => {
 
     const collection = db.collection('employees');
-    const { forename, surname, department, password, confirmPassword }:APIResponse.CreateEmployee = req.query as any as APIResponse.CreateEmployee;
+    const { forename, surname, department, password, confirmPassword }:APIResponse.CreateEmployee = req.body as any as APIResponse.CreateEmployee;
 
     const isPasswordValid = (password == confirmPassword);
 

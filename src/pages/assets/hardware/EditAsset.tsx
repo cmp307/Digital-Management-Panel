@@ -8,13 +8,11 @@ import { IEmployee } from "../../../interfaces/Employee";
 import Breadcrumbs from "../../../components/Breadcrumbs";
 import { HardwareAsset } from "../../../components/assets/hardware/HardwareAsset";
 
-// https://stackoverflow.com/questions/14226803/wait-5-seconds-before-executing-next-line
-const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
-
 class EditAsset extends Component<{ setUser: Function, user: IEmployee, id: string, navigate: NavigateFunction }, { asset_data?: HardwareAsset, employee_data?: IEmployee[], setUser: Function, user: IEmployee, form_data: any }> {
     private _id: string;
     constructor(props: any) {
         super(props);
+        this._id = props.id;
         this.state = {
             asset_data: undefined,
             employee_data: undefined,
@@ -22,18 +20,19 @@ class EditAsset extends Component<{ setUser: Function, user: IEmployee, id: stri
             user: props.user,
             form_data: {}
         }
-        this._id = props.id;
+        this.render = this.render.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
     componentDidMount() {
-        fetch(`http://127.0.0.1:3001/api/asset/${this._id}`)
+        fetch(`http://127.0.0.1:3001/api/assets/software//${this._id}`)
             .then((res) => res.json())
             .then((res) => new HardwareAsset(res))
             .then((res) => this.setState({ asset_data: res, form_data: res }))
             .then((res) => console.log(res))
             .catch((err) => console.error(err))
 
-        fetch('http://127.0.0.1:3001/api/employees')
+        fetch('http://127.0.0.1:3001/api/employees/view-all')
             .then((res) => res.json())
             .then((res) => this.setState({ employee_data: res }))
             .then((res) => console.log(res))
@@ -44,6 +43,21 @@ class EditAsset extends Component<{ setUser: Function, user: IEmployee, id: stri
         const curr = this.state.form_data;
         this.setState({ form_data: { ...curr, [key]: value } });
         console.log(this.state.form_data);
+    }
+
+    onSubmit = (e: any) => {
+        e.preventDefault();
+        console.log('FORM DATA = ', this.state.form_data);
+        fetch(`http://127.0.0.1:3001/api/assets/software/${this._id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(this.state.form_data)
+        }).then(() => {
+            this.props.navigate(`/assets/${this._id}`);
+        })
+        return false;
     }
 
     render() {
@@ -59,7 +73,7 @@ class EditAsset extends Component<{ setUser: Function, user: IEmployee, id: stri
                 <h2 className="text-centre">Edit an Asset</h2>
                 <p className="text-centre">Asset ID: <code>{this._id}</code></p>
                 {this.state.asset_data ?
-                    <form id="asset-form" method="get" action={`http://localhost:3001/api/assets/${this._id}/edit`} onSubmit={async () => { await delay(1000); this.props.navigate(`/assets/${this._id}`) }}>
+                    <form id="asset-form" onSubmit={this.onSubmit}>
                         <div id="question">
                             <label htmlFor="name"><i className="fa fa-pencil-square-o" /> Asset ID</label><br />
                             <input
@@ -155,8 +169,9 @@ class EditAsset extends Component<{ setUser: Function, user: IEmployee, id: stri
 
                         <input type="submit"></input>
                         <button className="cancel" type="button" onClick={() => this.props.navigate(-1)}>Cancel</button>
-                    </form>
-                    : <p className="text-centre">Loading...</p>}
+                    </form >
+                    : <p className="text-centre">Loading...</p>
+                }
             </>
         )
     }

@@ -17,24 +17,25 @@ class HardwareAssets extends Component<{ setUser: Function, user: IEmployee }, {
             setUser: props.setUser
         }
         this.updateAssets = this.updateAssets.bind(this);
+        this.deleteAllAssets = this.deleteAllAssets.bind(this);
     }
 
     componentDidMount() { this.updateAssets() }
     // componentDidUpdate() { this.updateAssets() }
 
     updateAssets() {
-        fetch('http://127.0.0.1:3001/api/assets')
+        fetch('http://127.0.0.1:3001/api/assets/software/view-all')
             .then((res) => res.json())
             .then((res) => {
                 const _state: any = this.state;
-                _state.data = [...res.map((x:any) => new HardwareAsset(x))];
+                _state.data = [...res.map((x: any) => new HardwareAsset(x))];
                 this.setState(_state)
             })
             .catch((err) => console.error(err))
     }
 
     deleteAllAssets() {
-        fetch('http://127.0.0.1:3001/api/delete-all-assets', { method: 'DELETE' }).then(() => {
+        fetch('http://127.0.0.1:3001/api/assets/software/delete-all', { method: 'DELETE' }).then(() => {
             this.refreshPage();
         })
     }

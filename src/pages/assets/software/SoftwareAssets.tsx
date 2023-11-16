@@ -24,7 +24,7 @@ class SoftwareAssets extends Component<{ setUser: Function, user: IEmployee }, {
     // componentDidUpdate() { this.updateAssets() }
 
     updateAssets() {
-        fetch('http://127.0.0.1:3001/api/assets')
+        fetch('http://127.0.0.1:3001/api/assets/software/view-all')
             .then((res) => res.json())
             .then((res) => {
                 const _state: any = this.state;
@@ -35,7 +35,7 @@ class SoftwareAssets extends Component<{ setUser: Function, user: IEmployee }, {
     }
 
     deleteAllAssets() {
-        fetch('http://127.0.0.1:3001/api/delete-all-assets', { method: 'DELETE' }).then(() => {
+        fetch('http://127.0.0.1:3001/api/assets/software/delete-all', { method: 'DELETE' }).then(() => {
             this.refreshPage();
         })
     }

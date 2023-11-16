@@ -9,6 +9,10 @@ class HardwareAssetTable extends Component<{ assets: HardwareAsset[] }> {
         super(props);
     }
 
+    refreshPage() {
+        window.location.reload();
+    }
+
     render() {
         if(!this.props.assets || this.props.assets.length == 0) {
             return <TextBlock rows={3} color='#CDCDCD' />
@@ -37,8 +41,8 @@ class HardwareAssetTable extends Component<{ assets: HardwareAsset[] }> {
                                     <Link to={`/assets/${item._id}`} role="button" id="blue-button" className="btn btn-outline-primary"><i className="fa fa-eye" /> View Asset</Link>
                                     <Link to={`/edit/assets/${item._id}`} role="button" id="blue-button" className="btn btn-outline-primary"><i className="fa fa-edit" /> Edit Asset</Link>
                                     <button onClick={() => {
-                                        fetch(`http://127.0.0.1:3001/api/assets/${item._id}/delete`, { method: 'DELETE' }).then(() => {
-                                            refreshPage();
+                                        fetch(`http://127.0.0.1:3001/api/assets/software/${item._id}`, { method: 'DELETE' }).then(() => {
+                                            this.refreshPage();
                                         })
                                     }} className="btn btn-outline-danger"><i className="fa fa-trash" /> Delete Asset</button>
                                 </td>
@@ -51,10 +55,6 @@ class HardwareAssetTable extends Component<{ assets: HardwareAsset[] }> {
         );
 
     }
-}
-
-function refreshPage() {
-    window.location.reload();
 }
 
 export default HardwareAssetTable;

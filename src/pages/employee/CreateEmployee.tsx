@@ -37,7 +37,7 @@ class CreateEmployee extends Component<{ setUser: Function, user: IEmployee, nav
                 ]} setUser={this.state.setUser} username={this.state.user.email} />
                 <h2 className="text-centre">Create an Employee</h2>
 
-                <form id="asset-form" method="get" action="http://localhost:3001/api/create/employee" onSubmit={async () => { await delay(1000); this.props.navigate('/employees') }}>
+                <form id="asset-form" method="post" action="http://127.0.0.1:3001/api/employees/" onSubmit={async () => { await delay(1000); this.props.navigate('/employees') }}>
                     <div id="question">
                         <label htmlFor="forename"><i className="fa fa-pencil-square-o" /> Forename<span className="red-star">*</span></label><br />
                         <input type="text" id="forename" name="forename" onChange={e => this.handleChange('forename', e.target.value)} placeholder="Please enter the forename for the Employee." required></input>

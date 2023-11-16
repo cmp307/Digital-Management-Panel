@@ -23,20 +23,15 @@ class Asset extends Component<{ setUser: Function, user: IEmployee, id: string, 
     }
 
     componentDidMount() {
-        fetch(`http://127.0.0.1:3001/api/asset/${this._id}`)
+        fetch(`http://127.0.0.1:3001/api/assets/software/${this._id}`)
             .then((res) => res.json())
             .then((res) => new HardwareAsset(res))
             .then((res) => this.setState({ data: res }))
             .catch((err) => console.error(err))
-
-            console.log(this.state);
-            setTimeout(() => {
-                console.log(this.state);
-            }, 2000);
     }
 
-    deleteAllAssets() {
-        fetch('http://127.0.0.1:3001/api/delete-all-assets', { method: 'DELETE' }).then(() => {
+    delete() {
+        fetch(`http://127.0.0.1:3001/api/assets/software/${this._id}`, { method: 'DELETE' }).then(() => {
             this.refreshPage();
         })
     }
@@ -59,7 +54,7 @@ class Asset extends Component<{ setUser: Function, user: IEmployee, id: string, 
                 <div id="action-buttons">
                     <Link to={`/edit/assets/${this._id}`} className="btn btn-outline-primary"><i className="fa fa-edit" /> Edit Asset</Link>
                     <button onClick={this.refreshPage} className="btn btn-outline-primary"><i className="fa fa-refresh" /> Refresh Asset</button>
-                    <button onClick={this.deleteAllAssets} className="btn btn-outline-danger"><i className="fa fa-trash" /> Delete Asset</button>
+                    <button onClick={this.delete} className="btn btn-outline-danger"><i className="fa fa-trash" /> Delete Asset</button>
                 </div>
                 <hr />
                 <h2 className="text-centre">Full Asset Information</h2>
