@@ -2,17 +2,17 @@ import Breadcrumbs from "../../../components/Breadcrumbs.tsx";
 import TopBar from "../../../components/TopBar.tsx";
 import '../../../styles/Assets.scss';
 import "react-placeholder/lib/reactPlaceholder.css";
-import Table from '../../../components/assets/hardware/HardwareAssetTable.tsx';
 import { Link } from "react-router-dom";
 import { Component } from 'react';
 import { IEmployee } from "../../../interfaces/Employee.ts";
 import { HardwareAsset } from "../../../components/assets/hardware/HardwareAsset.ts";
+import HardwareAssetTable from "../../../components/assets/hardware/HardwareAssetTable.tsx";
 
-class HardwareAssets extends Component<{ setUser: Function, user: IEmployee }, { data: HardwareAsset[], user: IEmployee, setUser: Function }> {
+class HardwareAssets extends Component<{ setUser: Function, user: IEmployee }, { hardware_data: HardwareAsset[], user: IEmployee, setUser: Function }> {
     constructor(props: any) {
         super(props);
         this.state = {
-            data: [],
+            hardware_data: [],
             user: props.user,
             setUser: props.setUser
         }
@@ -27,9 +27,7 @@ class HardwareAssets extends Component<{ setUser: Function, user: IEmployee }, {
         fetch('http://127.0.0.1:3001/api/assets/hardware/view-all')
             .then((res) => res.json())
             .then((res) => {
-                const _state: any = this.state;
-                _state.data = [...res.map((x: any) => new HardwareAsset(x))];
-                this.setState(_state)
+                this.setState({ hardware_data: [...res.map((x: any) => new HardwareAsset(x))] })
             })
             .catch((err) => console.error(err))
     }
@@ -60,8 +58,8 @@ class HardwareAssets extends Component<{ setUser: Function, user: IEmployee }, {
                 </div>
                 <hr />
                 <h2 className="text-centre">Hardware Asset List</h2>
-                <p className="text-centre">There is currently <strong>{this.state.data.length}</strong> hardware {(this.state.data.length > 1 || this.state.data.length == 0) ? 'assets' : 'asset'} stored within the Database.</p>
-                <Table assets={this.state.data} />
+                <p className="text-centre">There is currently <strong>{this.state.hardware_data.length}</strong> hardware {(this.state.hardware_data.length > 1 || this.state.hardware_data.length == 0) ? 'assets' : 'asset'} stored within the Database.</p>
+                <HardwareAssetTable assets={this.state.hardware_data} />
             </>
         )
     }

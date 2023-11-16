@@ -1,7 +1,5 @@
 import { Component } from "react";
-import PillButton from "../../PillButton";
 import { SoftwareAsset } from "./SoftwareAsset";
-import { ISoftwareAsset } from "../../../interfaces/Asset";
 import { HardwareAsset } from "../hardware/HardwareAsset";
 import { Link } from "react-router-dom";
 

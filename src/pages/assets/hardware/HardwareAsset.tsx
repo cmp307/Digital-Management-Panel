@@ -6,18 +6,22 @@ import { Component } from "react";
 import { Link, NavigateFunction } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
-import AssetInfoTable from "../../../components/assets/hardware/HardwareAssetInfoTable";
-import { HardwareAsset } from "../../../components/assets/hardware/HardwareAsset";
+import { HardwareAsset as CHardwareAsset } from "../../../components/assets/hardware/HardwareAsset";
 import { IEmployee } from "../../../interfaces/Employee";
 import Breadcrumbs from "../../../components/Breadcrumbs";
-class Asset extends Component<{ setUser: Function, user: IEmployee, id: string, navigate:NavigateFunction }, { setUser: Function, user: IEmployee, data?: HardwareAsset }> {
+import HardwareAssetInfoTable from "../../../components/assets/hardware/HardwareAssetInfoTable";
+import SoftwareAssetTable from "../../../components/assets/software/SoftwareAssetTable";
+import { SoftwareAsset } from "../../../components/assets/software/SoftwareAsset";
+
+class HardwareAsset extends Component<{ setUser: Function, user: IEmployee, id: string, navigate: NavigateFunction }, { hardware_data?: CHardwareAsset, software_data?: SoftwareAsset[], setUser: Function, user: IEmployee }> {
     private _id: string;
     constructor(props: any) {
         super(props)
         this.state = {
+            hardware_data: undefined,
+            software_data: [],
             setUser: props.setUser,
-            user: props.user,
-            data: undefined
+            user: props.user
         }
         this._id = props.id
     }
@@ -25,8 +29,14 @@ class Asset extends Component<{ setUser: Function, user: IEmployee, id: string, 
     componentDidMount() {
         fetch(`http://127.0.0.1:3001/api/assets/hardware/${this._id}`)
             .then((res) => res.json())
-            .then((res) => new HardwareAsset(res))
-            .then((res) => this.setState({ data: res }))
+            .then((res) => new CHardwareAsset(res))
+            .then((res) => this.setState({ hardware_data: res }))
+            .catch((err) => console.error(err))
+
+        fetch(`http://127.0.0.1:3001/api/assets/software/view-all/${this._id}`)
+            .then((res) => res.json())
+            .then((res) => res.map((x: any) => new SoftwareAsset(x)))
+            .then((res) => this.setState({ software_data: [...res] }))
             .catch((err) => console.error(err))
     }
 
@@ -57,12 +67,23 @@ class Asset extends Component<{ setUser: Function, user: IEmployee, id: string, 
                     <button onClick={this.delete} className="btn btn-outline-danger"><i className="fa fa-trash" /> Delete Asset</button>
                 </div>
                 <hr />
-                <h2 className="text-centre">Full Asset Information</h2>
+                <h2 className="text-centre">Hardware Asset Information</h2>
                 <hr />
-                <div id="centred-div">
-                    {this.state.data ? <AssetInfoTable asset={this.state.data} /> : 'Loading...'}
-                    <button className="btn btn-outline-primary" onClick={() => this.props.navigate(-1)}>Return to previous page!</button>
-                    <br /><br />
+                {this.state.hardware_data ?
+                    <div id="centred-div">
+                        <HardwareAssetInfoTable asset={this.state.hardware_data} />
+                    </div> :
+                    <p>Loading...</p>
+                }
+                <hr />
+                <h2 className="text-centre">Linked Software Assets</h2>
+                <hr />
+                <div>
+                    {this.state.software_data ? <SoftwareAssetTable assets={this.state.software_data} /> : 'Loading...'}
+                    <div className="text-centre">
+                        <button className="btn btn-outline-primary" onClick={() => this.props.navigate(-1)}>Return to previous page!</button>
+                    </div>
+                    <br />
                 </div>
 
             </>
@@ -77,5 +98,5 @@ export default ({ setUser, user }: { setUser: Function, user: IEmployee }) => {
     const navigation = useNavigate();
     if (!id) throw new Error(`Invalid ID for Employee. Given: ${id}`);
 
-    return <Asset setUser={setUser} user={user} id={id} navigate={navigation} />
+    return <HardwareAsset setUser={setUser} user={user} id={id} navigate={navigation} />
 };

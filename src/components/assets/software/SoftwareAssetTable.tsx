@@ -2,6 +2,7 @@ import { TextBlock } from "react-placeholder/lib/placeholders";
 import { Link } from "react-router-dom";
 import { Component } from 'react';
 import { SoftwareAsset } from '../../../components/assets/software/SoftwareAsset';
+import PillButton from "../../PillButton";
 
 class SoftwareAssetTable extends Component<{ assets: SoftwareAsset[] }> {
     constructor(props: any) {
@@ -27,6 +28,7 @@ class SoftwareAssetTable extends Component<{ assets: SoftwareAsset[] }> {
                             <th scope="col">Asset ID</th>
                             <th scope="col">System Name</th>
                             <th scope="col">System Version</th>
+                            <th scope="col">Risk Level</th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
@@ -36,6 +38,7 @@ class SoftwareAssetTable extends Component<{ assets: SoftwareAsset[] }> {
                                 <td><code>{item._id}</code></td>
                                 <td>{item.name}</td>
                                 <td><code>{item.version}</code></td>
+                                <td><PillButton label="Critical" /></td>
                                 <td>
                                     <Link to={`/software/${item._id}`} role="button" id="blue-button" className="btn btn-outline-primary "><i className="fa fa-eye" /> View Asset</Link>
                                     <Link to={`/edit/software/${item._id}`} role="button" id="blue-button" className="btn btn-outline-primary "><i className="fa fa-edit" /> Edit Asset</Link>
@@ -44,7 +47,7 @@ class SoftwareAssetTable extends Component<{ assets: SoftwareAsset[] }> {
                                             this.refreshPage();
                                         })
                                     }} className="btn btn-outline-danger"><i className="fa fa-trash" /> Delete Asset</button>
-                                    <Link to={`/software/${item._id}/scan`} role="button" id="blue-button" className="btn btn-outline-secondary"><i className="fa fa-dot-circle-o" /> Scan Asset</Link>
+                                    <Link to={`/software/${item._id}/scan`} role="button" id="blue-button" className="btn btn-outline-secondary disabled"><i className="fa fa-dot-circle-o" /> Scan Asset</Link>
                                 </td>
                             </tr>
                         ))}

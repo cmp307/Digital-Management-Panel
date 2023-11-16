@@ -58,7 +58,7 @@ class SoftwareAsset extends Component<{ setUser: Function, user: IEmployee, id: 
                     <button onClick={this.delete} className="btn btn-outline-danger"><i className="fa fa-trash" /> Delete Asset</button>
                 </div>
                 <hr />
-                <h2 className="text-centre">Full Asset Information</h2>
+                <h2 className="text-centre">Hardware Asset Information</h2>
                 <hr />
                 <div id="centred-div">
                     {this.state.data ? <SoftwareAssetInfoTable asset={this.state.data} /> : 'Loading...'}
