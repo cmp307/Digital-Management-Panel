@@ -5,7 +5,7 @@ const express = require('express');
 const mongo = require('mongodb');
 const router = express.Router();
 
-const DATABASE = "hardware";
+const DATABASE = "assets";
 
 // @ROUTE: GET api/assets/hardware/view-all
 // @DESCRIPTION: Used for viewing all Software Assets.

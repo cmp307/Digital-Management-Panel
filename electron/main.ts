@@ -10,13 +10,11 @@ server.use(cors());
 server.use(bodyParser.json())
 server.use(bodyParser.urlencoded({ extended: false }))
 
-import HardwareAssetRoutes from './api/routes/HardwareAssetRoutes';
-import SoftwareAssetRoutes from './api/routes/SoftwareAssetRoutes';
+import SoftwareAssetRoutes from './api/routes/HardwareAssetRoutes';
 import EmployeeRoutes from './api/routes/EmployeeRoutes';
 
 
-server.use('/api/assets/hardware', HardwareAssetRoutes);
-server.use('/api/assets/software', SoftwareAssetRoutes);
+server.use('/api/assets/hardware', SoftwareAssetRoutes);
 server.use('/api/employees', EmployeeRoutes);
 
 // ========================  GENERATED CODE ========================
@@ -40,7 +38,7 @@ function createWindow() {
     show: false
   })
 
-  // win.removeMenu();
+  win.removeMenu();
 
   win.webContents.on('did-finish-load', () => {
     win?.webContents.send('main-process-message', (new Date).toLocaleString())
