@@ -8,7 +8,7 @@ import { Component } from 'react';
 import { Employee } from "../../interfaces/Employee.ts";
 import { Asset } from "../../interfaces/Asset.ts";
 
-class Assets extends Component<{ setUser: Function, user: Employee }, { data: Asset[], user: Employee, setUser: Function }> {
+class HardwareAssets extends Component<{ setUser: Function, user: Employee }, { data: Asset[], user: Employee, setUser: Function }> {
     constructor(props: any) {
         super(props);
         this.state = {
@@ -66,4 +66,4 @@ class Assets extends Component<{ setUser: Function, user: Employee }, { data: As
     }
 }
 
-export default Assets;
+export default HardwareAssets;
