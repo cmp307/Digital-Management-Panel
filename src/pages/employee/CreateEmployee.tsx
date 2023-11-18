@@ -20,10 +20,33 @@ class CreateEmployee extends Component<{ setUser: Function, user: IEmployee, nav
         }
     }
 
+    onSubmit = async (e: any) => {
+        console.log('submitted')
+        e.preventDefault();
+
+        const data = this.state.form_data;
+        const { password, confirmPassword } = data;
+        console.log(data);
+        if (password == confirmPassword) {
+
+            const emp = await fetch('http://127.0.0.1:3001/api/employees/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            }).then(() => {
+                this.props.navigate('/employees');
+            })
+        }
+
+        return false;
+        // method="post" action="" onSubmit={async () => { await delay(1000); this.props.navigate('/employees') }
+    }
+
     handleChange(key: string, value: any) {
         const curr = this.state.form_data;
         this.setState({ form_data: { ...curr, [key]: value } });
-        console.log(this.state);
     }
 
     render() {
@@ -37,7 +60,7 @@ class CreateEmployee extends Component<{ setUser: Function, user: IEmployee, nav
                 ]} setUser={this.state.setUser} username={this.state.user.email} />
                 <h2 className="text-centre">Create an Employee</h2>
 
-                <form id="asset-form" method="post" action="http://127.0.0.1:3001/api/employees/" onSubmit={async () => { await delay(1000); this.props.navigate('/employees') }}>
+                <form id="asset-form" onSubmit={this.onSubmit}>
                     <div id="question">
                         <label htmlFor="forename"><i className="fa fa-pencil-square-o" /> Forename<span className="red-star">*</span></label><br />
                         <input type="text" id="forename" name="forename" onChange={e => this.handleChange('forename', e.target.value)} placeholder="Please enter the forename for the Employee." required></input>
