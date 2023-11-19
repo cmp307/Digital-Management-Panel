@@ -1,7 +1,7 @@
 @import "~bootstrap/scss/bootstrap";
 
 * {
-    font-family: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans","Liberation Sans",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 .text-centre {
@@ -42,5 +42,22 @@
 }
 
 .red-star {
-    color: #e74c3c!important;
+    color: #e74c3c !important;
+}
+
+.hero {
+    background-color: #3498db;
+    color: white;
+    margin: 0;
+    padding: 0;
+
+    hr {
+        border: 0;
+        border-top: 1px solid #2980b9;
+        /* Create a border on top with the same color as the background */
+    }
+
+    #spacer {
+        padding-top: 10px;
+    }
 }

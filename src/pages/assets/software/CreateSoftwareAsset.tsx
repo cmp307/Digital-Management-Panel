@@ -59,7 +59,11 @@ class CreateSoftwareAsset extends Component<{ setUser: Function, user: IEmployee
                     { name: 'Software Assets', path: '/software' },
                     { name: 'Create', path: '/software/create' },
                 ]} setUser={this.state.setUser} username={this.state.user.email} />
-                <h2 className="text-centre">Create a Software Asset</h2>
+                <div className="hero">
+                    <div id="spacer"></div>
+                    <h2 className="text-centre"><i className="fa fa-cloud-download" /> Create a Software Asset</h2>
+                    <hr />
+                </div>
 
                 <form id="asset-form" onSubmit={this.onSubmit}>
                     <div id="question">

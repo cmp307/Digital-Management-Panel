@@ -51,14 +51,24 @@ class SoftwareAssets extends Component<{ setUser: Function, user: IEmployee }, {
                     { name: 'Home', path: '/' },
                     { name: 'Software Assets', path: '/software' },
                 ]} setUser={this.props.setUser} username={this.props.user.email} />
-                <h2 className="text-centre">Action Buttons</h2>
-                <div id="action-buttons">
-                    <Link to={'/software/create'} className="btn btn-outline-primary"><i className="fa fa-plus" /> Create an Asset</Link>
-                    <button onClick={this.refreshPage} className="btn btn-outline-primary"><i className="fa fa-refresh" /> Refresh List</button>
-                    <button onClick={this.deleteAllAssets} className="btn btn-outline-danger"><i className="fa fa-trash" /> Delete <strong>All</strong> Assets</button>
+
+                <div className="hero">
+                    <div id="spacer"></div>
+                    <h2 className="text-centre"><i className="fa fa-terminal" /> Action Buttons</h2>
+                    <hr />
                 </div>
-                <hr />
-                <h2 className="text-centre">Software Asset List</h2>
+
+                <div id="action-buttons">
+                    <Link to={'/software/create'} className="btn btn-outline-success"><i className="fa fa-plus" /> Create a Software Asset</Link>
+                    <button onClick={this.refreshPage} className="btn btn-outline-primary"><i className="fa fa-refresh" /> Refresh List</button>
+                    <button onClick={this.deleteAllAssets} className="btn btn-outline-danger"><i className="fa fa-trash" /> Delete <strong>All</strong> Software Assets</button>
+                </div>
+
+                <div className="hero">
+                    <hr />
+                    <h2 className="text-centre"><i className="fa fa-cloud-download" /> Software Asset List</h2>
+                    <hr />
+                </div>
                 <p className="text-centre">There is currently <strong>{this.state.data.length}</strong> software {(this.state.data.length > 1 || this.state.data.length == 0) ? 'assets' : 'asset'} stored within the Database.</p>
                 <SoftwareAssetTable assets={this.state.data} />
             </>

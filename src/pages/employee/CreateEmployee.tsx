@@ -58,7 +58,11 @@ class CreateEmployee extends Component<{ setUser: Function, user: IEmployee, nav
                     { name: 'Employees', path: '/employees' },
                     { name: 'Create', path: '/employees/create' },
                 ]} setUser={this.state.setUser} username={this.state.user.email} />
-                <h2 className="text-centre">Create an Employee</h2>
+                <div className="hero">
+                    <div id="spacer"></div>
+                    <h2 className="text-centre"><i className="fa fa-user" /> Create an Employee</h2>
+                    <hr />
+                </div>
 
                 <form id="asset-form" onSubmit={this.onSubmit}>
                     <div id="question">

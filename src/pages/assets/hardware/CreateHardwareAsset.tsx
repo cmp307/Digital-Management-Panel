@@ -37,7 +37,11 @@ class CreateAssets extends Component<{ setUser: Function, user: IEmployee, navig
                     { name: 'Hardware Assets', path: '/hardware' },
                     { name: 'Create', path: '/hardware/create' },
                 ]} setUser={this.state.setUser} username={this.state.user.email} />
-                <h2 className="text-centre">Create an Asset</h2>
+                <div className="hero">
+                    <div id="spacer"></div>
+                    <h2 className="text-centre"><i className="fa fa-server" /> Create a Hardware Asset</h2>
+                    <hr />
+                </div>
 
                 <form id="asset-form" method="post" action="http://127.0.0.1:3001/api/assets/hardware" onSubmit={async () => { await delay(1000); this.props.navigate('/assets') }}>
                     <div id="question">

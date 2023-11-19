@@ -55,7 +55,7 @@ class EditHardwareAsset extends Component<{ setUser: Function, user: IEmployee, 
             },
             body: JSON.stringify(this.state.form_data)
         }).then(() => {
-            this.props.navigate(`/assets/${this._id}`);
+            this.props.navigate(`/hardware/${this._id}`);
         })
         return false;
     }

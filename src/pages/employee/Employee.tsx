@@ -60,7 +60,11 @@ class Employee extends Component<{ setUser: Function, user: IEmployee, id: strin
                     { name: 'Employees', path: '/employees' },
                     { name: this._id ?? '-', path: `/employees/${this._id}` },
                 ]} setUser={this.props.setUser} username={this.props.user.email} />
-                <h2 className="text-centre">Action Buttons</h2>
+                <div className="hero">
+                    <div id="spacer"></div>
+                    <h2 className="text-centre"><i className="fa fa-terminal" /> Action Buttons</h2>
+                    <hr />
+                </div>
                 <div id="action-buttons">
                     <Link to={`/employees/${this._id}/edit`} className="btn btn-outline-primary"><i className="fa fa-edit" /> Edit Employee</Link>
                     <button onClick={this.refreshPage} className="btn btn-outline-primary"><i className="fa fa-refresh" /> Refresh Employee</button>
@@ -69,7 +73,11 @@ class Employee extends Component<{ setUser: Function, user: IEmployee, id: strin
                 <hr />
                 <div className="text-centre">
                     {this.state.employee_data == undefined ? 'Loading...' : <>
-                        <h2 className="text-centre">Employee's Personal Data</h2>
+                        <div className="hero">
+                            <hr />
+                            <h2 className="text-centre"><i className="fa fa-user" /> Employee's Personal Data</h2>
+                            <hr />
+                        </div>
                         <p>Forename: <code>{this.state.employee_data.forename}</code></p>
                         <p>Surname: <code>{this.state.employee_data.surname}</code></p>
                         <p>E-Mail: <code>{this.state.employee_data.email}</code></p>
@@ -78,8 +86,11 @@ class Employee extends Component<{ setUser: Function, user: IEmployee, id: strin
                 </div>
                 {this.state.asset_data && this.state.asset_data.length > 0 ?
                     <div className="text-centre">
-                        <hr />
-                        <h2>Asset List</h2>
+                        <div className="hero">
+                            <hr />
+                            <h2><i className="fa fa-server" /> Hardware Asset List</h2>
+                            <hr />
+                        </div>
                         <p>This employee currently has <strong>{this.state.asset_data.length} {(this.state.asset_data.length > 1 || this.state.asset_data.length == 0) ? 'assets' : 'asset'}</strong> assigned to them.</p>
                         <HardwareAssetTable assets={this.state.asset_data} />
                     </div> :
