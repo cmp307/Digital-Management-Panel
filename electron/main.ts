@@ -5,6 +5,8 @@ const cors = require('cors');
 const bodyParser = require('body-parser')
 const express = require('express');
 const server = express();
+const sysinfo = require('systeminformation');
+const os = require('os');
 
 server.use(cors());
 server.use(bodyParser.json())
@@ -37,10 +39,12 @@ function createWindow() {
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
     },
-    width: 1500,
+    width: 1690,
     height: 1000,
     show: false
   })
+
+
 
   // win.removeMenu();
 
@@ -73,16 +77,26 @@ app.on('activate', () => {
 })
 // ======================= END OF GENERATED CODE ================================
 
-app.whenReady().then(() => {
-  const os = require('os');
-  ipcMain.handle('get-data', () => {
+app.whenReady().then(async () => {
+  const osInfo = await sysinfo.osInfo();
+  const systemInfo = await sysinfo.system();
+  const batteryInfo = await sysinfo.battery();
+
+  ipcMain.handle('get-data', async () => {
     const data = {
-      cpu: os.cpus()[0].model
+      cpu: os.cpus()[0].model,
+      platform: osInfo.platform,
+      distro: osInfo.distro,
+      release: osInfo.release,
+      manufacturer: systemInfo.manufacturer,
+      model: systemInfo.model,
+      ip: (await getDefaultInterface()).ip4,
+      hostname: osInfo.hostname,
+      isLaptop: batteryInfo.hasBattery,
     };
     console.log('ipc data ->', data)
     return data;
   })
-
   createWindow();
 })
 
@@ -91,3 +105,12 @@ app.on('ready', () => {
     console.log('Server is running on port 3001');
   });
 })
+
+export function getDefaultInterface() {
+  return sysinfo.networkInterfaces().then(async (interfaces: any) => {
+    return sysinfo.networkInterfaceDefault().then((def: string) => {
+      const filtered = interfaces.filter((x: any) => x.iface === def);
+      return filtered[0];
+    });
+  });
+};
