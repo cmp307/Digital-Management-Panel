@@ -5,7 +5,7 @@ const express = require('express');
 const mongo = require('mongodb');
 const router = express.Router();
 
-const DATABASE = "hardware";
+const DATABASE = "software";
 const LINK_COLLECTION_DATABASE = "asset-links";
 
 // @ROUTE: GET api/assets/hardware/view-all
@@ -26,7 +26,7 @@ router.get('/view-all/:id', async (req: Request, res: Response) => {
         const collection = db.collection(DATABASE);
         const id = req.params.id;
 
-        const data = await collection.find({ parent_employee: new mongo.ObjectId(id) }).toArray();
+        const data = await collection.find({ 'parent_hardware.id': new mongo.ObjectId(id) }).toArray();
         res.json(data);
     })
 });
@@ -68,7 +68,7 @@ router.delete('/:id', async (req: Request, res: Response) => {
         await collection.deleteOne({ _id: new mongo.ObjectId(id) });
 
         const _linkCollection = db.collection(LINK_COLLECTION_DATABASE);
-        await _linkCollection.deleteMany({});
+        await _linkCollection.deleteMany({ hardware_id: new mongo.ObjectId(id) });
         res.json({ "status": true });
     })
 });
@@ -79,24 +79,21 @@ router.post('/', async (req: Request, res: Response) => {
     await wrapper(async (db: any) => {
         console.log(req.body);
         const collection = db.collection(DATABASE);
-        const { name, type, model, manufacturer, ip, date, note, parent_employee } = req.body;
-        const _employee = new mongo.ObjectId(parent_employee);
+        const { name, manufacturer, version, risk_level } = req.body;
 
-        const isFound = await collection.find({ name, model, manufacturer, ip }).toArray();
+        const isFound = await collection.find({ name, manufacturer, version }).toArray();
         if(isFound.length > 0) return res.send({ status: false });
-        
+
         const resp = await collection.insertOne({
             name,
-            type,
-            model,
             manufacturer,
-            ip,
-            date,
-            note,
-            parent_employee: _employee
+            version,
+            risk_level: risk_level ?? 'N/A',
+            created_at: new Date().toISOString(),
+            last_edit_at: new Date().toISOString()
         })
 
-        return res.json({ status: true, id: resp.insertedId });
+        res.json({ status: true, id: resp.insertedId })
     })
 })
 
@@ -104,20 +101,18 @@ router.post('/', async (req: Request, res: Response) => {
 // @DESCRIPTION: Used for editing a Software Asset.
 router.patch('/:id', async (req: Request, res: Response) => {
     await wrapper(async (db: any) => {
+        console.log(req.body);
         const collection = db.collection(DATABASE);
         const id = req.params.id;
-        const { name, type, model, manufacturer, ip, date, note, parent_employee } = req.body;
-        const _employee = new mongo.ObjectId(parent_employee);
+        const { name, manufacturer, version, riskLevel, created_at } = req.body;
 
         await collection.replaceOne({ _id: new mongo.ObjectId(id) }, {
             name,
-            type,
-            model,
             manufacturer,
-            ip,
-            date,
-            note,
-            parent_employee: _employee
+            version,
+            risk_level: riskLevel ?? 'N/A',
+            created_at,
+            last_edit_at: new Date().toISOString()
         }, { upsert: true });
 
         res.send({ status: true })

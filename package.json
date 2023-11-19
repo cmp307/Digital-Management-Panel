@@ -3,6 +3,7 @@
   "private": true,
   "version": "1.0.1",
   "scripts": {
+    "start": "vite",
     "dev": "vite",
     "build": "tsc && vite build && electron-builder",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
@@ -22,7 +23,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-placeholder": "^4.1.0",
-    "react-router-dom": "^6.17.0"
+    "react-router-dom": "^6.17.0",
+    "systeminformation": "^5.21.17"
   },
   "devDependencies": {
     "@playwright/test": "^1.39.0",

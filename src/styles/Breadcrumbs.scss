@@ -10,9 +10,14 @@
     a {
         color: white;
     }
-    
+
     p {
         margin: 0px;
+        
+        i,
+        strong {
+            user-select: none;
+        }
     }
 
     .left-aligned {
@@ -20,7 +25,7 @@
         padding-left: 5px;
         margin: 0px;
     }
-    
+
     .right-aligned {
         display: flex;
         align-items: center;
@@ -35,7 +40,7 @@
             margin-left: 10px;
         }
     }
-    
+
     .clear {
         clear: both;
     }

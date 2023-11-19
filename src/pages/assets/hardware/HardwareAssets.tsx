@@ -2,17 +2,17 @@ import Breadcrumbs from "../../../components/Breadcrumbs.tsx";
 import TopBar from "../../../components/TopBar.tsx";
 import '../../../styles/Assets.scss';
 import "react-placeholder/lib/reactPlaceholder.css";
-import Table from '../../../components/assets/hardware/HardwareAssetTable.tsx';
 import { Link } from "react-router-dom";
 import { Component } from 'react';
 import { IEmployee } from "../../../interfaces/Employee.ts";
 import { HardwareAsset } from "../../../components/assets/hardware/HardwareAsset.ts";
+import HardwareAssetTable from "../../../components/assets/hardware/HardwareAssetTable.tsx";
 
-class HardwareAssets extends Component<{ setUser: Function, user: IEmployee }, { data: HardwareAsset[], user: IEmployee, setUser: Function }> {
+class HardwareAssets extends Component<{ setUser: Function, user: IEmployee }, { hardware_data: HardwareAsset[], user: IEmployee, setUser: Function }> {
     constructor(props: any) {
         super(props);
         this.state = {
-            data: [],
+            hardware_data: [],
             user: props.user,
             setUser: props.setUser
         }
@@ -27,9 +27,7 @@ class HardwareAssets extends Component<{ setUser: Function, user: IEmployee }, {
         fetch('http://127.0.0.1:3001/api/assets/hardware/view-all')
             .then((res) => res.json())
             .then((res) => {
-                const _state: any = this.state;
-                _state.data = [...res.map((x: any) => new HardwareAsset(x))];
-                this.setState(_state)
+                this.setState({ hardware_data: [...res.map((x: any) => new HardwareAsset(x))] })
             })
             .catch((err) => console.error(err))
     }
@@ -50,18 +48,29 @@ class HardwareAssets extends Component<{ setUser: Function, user: IEmployee }, {
                 <TopBar />
                 <Breadcrumbs history={[
                     { name: 'Home', path: '/' },
-                    { name: 'Assets', path: '/assets' },
+                    { name: 'Hardware Assets', path: '/hardware' },
                 ]} setUser={this.props.setUser} username={this.props.user.email} />
-                <h2 className="text-centre">Action Buttons</h2>
-                <div id="action-buttons">
-                    <Link to={'/assets/create'} className="btn btn-outline-primary"><i className="fa fa-plus" /> Create an Asset</Link>
-                    <button onClick={this.refreshPage} className="btn btn-outline-primary"><i className="fa fa-refresh" /> Refresh List</button>
-                    <button onClick={this.deleteAllAssets} className="btn btn-outline-danger"><i className="fa fa-trash" /> Delete <strong>All</strong> Assets</button>
+
+                <div className="hero">
+                    <div id="spacer"></div>
+                    <h2 className="text-centre"><i className="fa fa-terminal" /> Action Buttons</h2>
+                    <hr />
                 </div>
-                <hr />
-                <h2 className="text-centre">Hardware Asset List</h2>
-                <p className="text-centre">There is currently <strong>{this.state.data.length}</strong> hardware {(this.state.data.length > 1 || this.state.data.length == 0) ? 'assets' : 'asset'} stored within the Database.</p>
-                <Table assets={this.state.data} />
+
+                <div id="action-buttons">
+                    <Link to={'/hardware/create'} className="btn btn-outline-success"><i className="fa fa-plus" /> Create a Hardware Asset</Link>
+                    <button onClick={this.refreshPage} className="btn btn-outline-primary"><i className="fa fa-refresh" /> Refresh List</button>
+                    <button onClick={this.deleteAllAssets} className="btn btn-outline-danger"><i className="fa fa-trash" /> Delete <strong>All</strong> Hardware Assets</button>
+                </div>
+
+                <div className="hero">
+                    <hr />
+                    <h2 className="text-centre"><i className="fa fa-server" /> Hardware Asset List</h2>
+                    <hr />
+                </div>
+
+                <p className="text-centre">There is currently <strong>{this.state.hardware_data.length}</strong> hardware {(this.state.hardware_data.length > 1 || this.state.hardware_data.length == 0) ? 'assets' : 'asset'} stored within the Database.</p>
+                <HardwareAssetTable assets={this.state.hardware_data} />
             </>
         )
     }

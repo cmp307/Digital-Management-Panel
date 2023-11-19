@@ -35,7 +35,7 @@ class EmployeeTable extends Component<{ assets: IEmployee[] }> {
                                 <td>{item.email}</td>
                                 <td>
                                     <Link to={`/employees/${item._id}`} role="button" id="blue-button" className="btn btn-outline-primary"><i className="fa fa-eye" /> View Employee</Link>
-                                    <Link to={`/edit/employees/${item._id}`} role="button" id="blue-button" className="btn btn-outline-primary"><i className="fa fa-edit" /> Edit Employee</Link>
+                                    <Link to={`/employees/${item._id}/edit`} role="button" id="blue-button" className="btn btn-outline-primary"><i className="fa fa-edit" /> Edit Employee</Link>
                                     <button onClick={() => {
                                         fetch(`http://127.0.0.1:3001/api/employees/${item._id}`, { method: 'DELETE' }).then(() => {
                                             refreshPage();

@@ -20,10 +20,33 @@ class CreateEmployee extends Component<{ setUser: Function, user: IEmployee, nav
         }
     }
 
+    onSubmit = async (e: any) => {
+        console.log('submitted')
+        e.preventDefault();
+
+        const data = this.state.form_data;
+        const { password, confirmPassword } = data;
+        console.log(data);
+        if (password == confirmPassword) {
+
+            const emp = await fetch('http://127.0.0.1:3001/api/employees/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            }).then(() => {
+                this.props.navigate('/employees');
+            })
+        }
+
+        return false;
+        // method="post" action="" onSubmit={async () => { await delay(1000); this.props.navigate('/employees') }
+    }
+
     handleChange(key: string, value: any) {
         const curr = this.state.form_data;
         this.setState({ form_data: { ...curr, [key]: value } });
-        console.log(this.state);
     }
 
     render() {
@@ -35,9 +58,13 @@ class CreateEmployee extends Component<{ setUser: Function, user: IEmployee, nav
                     { name: 'Employees', path: '/employees' },
                     { name: 'Create', path: '/employees/create' },
                 ]} setUser={this.state.setUser} username={this.state.user.email} />
-                <h2 className="text-centre">Create an Employee</h2>
+                <div className="hero">
+                    <div id="spacer"></div>
+                    <h2 className="text-centre"><i className="fa fa-user" /> Create an Employee</h2>
+                    <hr />
+                </div>
 
-                <form id="asset-form" method="post" action="http://127.0.0.1:3001/api/employees/" onSubmit={async () => { await delay(1000); this.props.navigate('/employees') }}>
+                <form id="asset-form" onSubmit={this.onSubmit}>
                     <div id="question">
                         <label htmlFor="forename"><i className="fa fa-pencil-square-o" /> Forename<span className="red-star">*</span></label><br />
                         <input type="text" id="forename" name="forename" onChange={e => this.handleChange('forename', e.target.value)} placeholder="Please enter the forename for the Employee." required></input>
@@ -48,12 +75,12 @@ class CreateEmployee extends Component<{ setUser: Function, user: IEmployee, nav
                     </div>
 
                     <div id="question">
-                        <label htmlFor="email"><i className="fa fa-pencil-square-o" /> Email</label><br />
+                        <label htmlFor="email"><i className="fa fa-envelope-o" /> Email</label><br />
                         <input type="text" id="email" name="email" onChange={e => this.handleChange('email', e.target.value)} disabled value={(this.state.form_data.forename && this.state.form_data.surname) ? `${this.state.form_data.forename[0]}.${this.state.form_data.surname}@scottishglen.co.uk` : ''}></input>
                     </div>
 
                     <div id="question">
-                        <label htmlFor="department"><i className="fa fa-exchange" /> Department<span className="red-star">*</span></label><br />
+                        <label htmlFor="department"><i className="fa fa-users" /> Department<span className="red-star">*</span></label><br />
                         <select name="department" onChange={e => this.handleChange('department', e.target.value)} id="department" required>
                             <option disabled selected value=''>[Please select a Department for the Employee]</option>
                             {[

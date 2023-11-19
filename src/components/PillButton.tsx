@@ -44,6 +44,21 @@ class PillButton extends Component<{ label: string }> {
             case 'information technology':
                 style = '#f5cd79'
                 break;
+            case 'critical':
+                style = '#c0392b'
+                break;
+            case 'high':
+                style = '#e74c3c'
+                break;
+            case 'medium':
+                style = '#f1c40f'
+                break;
+            case 'low':
+                style = '#3498db'
+                break;
+            case 'n/a':
+                style = '#bdc3c7'
+                break;
             default:
                 style = '#a29bfe'
                 break;

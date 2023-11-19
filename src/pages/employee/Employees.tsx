@@ -49,14 +49,20 @@ class Employees extends Component<{ setUser: Function, user: IEmployee }, { data
                     { name: 'Employees', path: '/employees' },
                 ]} setUser={this.props.setUser} username={this.props.user.email} />
 
-                <h2 className="text-centre">Action Buttons</h2>
-                <div id="action-buttons">
-                    <Link to={'/employees/create'} className="btn btn-outline-primary"><i className="fa fa-plus" /> Create Employee</Link>
-                    <button onClick={this.refreshPage} className="btn btn-outline-primary"><i className="fa fa-refresh" /> Refresh Employees</button>
-                    <button onClick={this.deleteAllEmployees} className="btn btn-outline-danger"><i className="fa fa-trash" /> Delete <strong>All</strong> Employees</button>
+                <div className="hero">
+                    <div id="spacer"></div>
+                    <h2 className="text-centre"><i className="fa fa-terminal" /> Action Buttons</h2>
+                    <hr />
                 </div>
-                <hr />
-                <h2 className="text-centre">Employee List</h2>
+                <div id="action-buttons">
+                    <Link to={'/employees/create'} className="btn btn-outline-success"><i className="fa fa-plus" /> Create an Employee</Link>
+                    <button onClick={this.refreshPage} className="btn btn-outline-primary"><i className="fa fa-refresh" /> Refresh Employees</button>
+                </div>
+                <div className="hero">
+                    <hr />
+                    <h2 className="text-centre"><i className="fa fa-user" /> Employee List</h2>
+                    <hr />
+                </div>
                 <p className="text-centre">There is currently <strong>{this.state.data.length}</strong> {(this.state.data.length > 1 || this.state.data.length == 0) ? 'employees' : 'employee'} stored within the Database.</p>
                 <EmployeeTable assets={this.state.data} />
             </>

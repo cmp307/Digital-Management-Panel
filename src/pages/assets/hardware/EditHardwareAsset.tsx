@@ -8,7 +8,7 @@ import { IEmployee } from "../../../interfaces/Employee";
 import Breadcrumbs from "../../../components/Breadcrumbs";
 import { HardwareAsset } from "../../../components/assets/hardware/HardwareAsset";
 
-class EditAsset extends Component<{ setUser: Function, user: IEmployee, id: string, navigate: NavigateFunction }, { asset_data?: HardwareAsset, employee_data?: IEmployee[], setUser: Function, user: IEmployee, form_data: any }> {
+class EditHardwareAsset extends Component<{ setUser: Function, user: IEmployee, id: string, navigate: NavigateFunction }, { asset_data?: HardwareAsset, employee_data?: IEmployee[], setUser: Function, user: IEmployee, form_data: any }> {
     private _id: string;
     constructor(props: any) {
         super(props);
@@ -55,7 +55,7 @@ class EditAsset extends Component<{ setUser: Function, user: IEmployee, id: stri
             },
             body: JSON.stringify(this.state.form_data)
         }).then(() => {
-            this.props.navigate(`/assets/${this._id}`);
+            this.props.navigate(`/hardware/${this._id}`);
         })
         return false;
     }
@@ -66,9 +66,9 @@ class EditAsset extends Component<{ setUser: Function, user: IEmployee, id: stri
                 <TopBar />
                 <Breadcrumbs history={[
                     { name: 'Home', path: '/' },
-                    { name: 'Assets', path: '/assets' },
-                    { name: this.props.id, path: `/assets/${this._id}` },
-                    { name: 'Edit', path: '/assets/edit' },
+                    { name: 'Hardware Assets', path: '/hardware' },
+                    { name: this.props.id, path: `/hardware/${this._id}` },
+                    { name: 'Edit', path: `/hardware/${this._id}/edit` },
                 ]} setUser={this.state.setUser} username={this.state.user.email} />
                 <h2 className="text-centre">Edit an Asset</h2>
                 <p className="text-centre">Asset ID: <code>{this._id}</code></p>
@@ -182,5 +182,5 @@ export default (props: any) => {
     if (!id) throw new Error(`EditAsset: Invalid ID for Asset. Given: ${id}`);
 
     const navigation = useNavigate();
-    return <EditAsset {...props} navigate={navigation} id={id} />
+    return <EditHardwareAsset {...props} navigate={navigation} id={id} />
 };

@@ -9,8 +9,8 @@ const bcrypt = require('bcrypt');
 
 const DATABASE = "employees";
 
-// @ROUTE: GET api/employees/login
-// @DESCRIPTION: Used for viewing all Employees.
+// @ROUTE: PSOT api/employees/login
+// @DESCRIPTION: Used for viewing logging a user into the system.
 router.post('/login', async (req: Request, res: Response) => {
   try {
     await wrapper(async (db: any) => {
@@ -33,6 +33,29 @@ router.post('/login', async (req: Request, res: Response) => {
         return res.json({ status: false })
       }
       return res.json({ status: true, data })
+    })
+  } catch (error) {
+    console.log(error);
+    res.status(400);
+    return res.json({ status: false })
+  }
+});
+
+// @ROUTE: PSOT api/employees/generate-password
+// @DESCRIPTION: Used for generating a password.
+router.post('/generate-password', async (req: Request, res: Response) => {
+  try {
+    await wrapper(async (db: any) => {
+      const { password } = req.body;
+      console.log(req.body);
+      if (!password) throw new Error("Required fields not provided.");
+
+      const crypt = await bcrypt.hashSync(password, 10);
+      if (!crypt) {
+        res.status(400)
+        return res.json({ status: false })
+      }
+      return res.json({ status: true, password: crypt })
     })
   } catch (error) {
     console.log(error);
@@ -68,11 +91,11 @@ router.get('/:id', async (req: Request, res: Response) => {
 // @DESCRIPTION: Used for deleting an Employee.
 router.delete('/:id', async (req: Request, res: Response) => {
   await wrapper(async (db: any) => {
-      const collection = db.collection(DATABASE);
-      const id = req.params.id;
+    const collection = db.collection(DATABASE);
+    const id = req.params.id;
 
-      await collection.deleteOne({ _id: new mongo.ObjectId(id) });
-      res.json({ "status": true });
+    await collection.deleteOne({ _id: new mongo.ObjectId(id) });
+    res.json({ "status": true });
   })
 });
 
@@ -80,10 +103,10 @@ router.delete('/:id', async (req: Request, res: Response) => {
 // @DESCRIPTION: Used for deleting all Employees.
 router.delete('/delete-all', async (_: Request, res: Response) => {
   await wrapper(async (db: any) => {
-      const collection = db.collection(DATABASE);
+    const collection = db.collection(DATABASE);
 
-      await collection.deleteMany({});
-      res.json({ "status": true });
+    await collection.deleteMany({});
+    res.json({ "status": true });
   })
 });
 
@@ -93,7 +116,7 @@ router.post('/', async (req: Request, res: Response) => {
   await wrapper(async (db: any) => {
 
     const collection = db.collection('employees');
-    const { forename, surname, department, password, confirmPassword }:APIResponse.CreateEmployee = req.body as any as APIResponse.CreateEmployee;
+    const { forename, surname, department, password, confirmPassword }: APIResponse.CreateEmployee = req.body as any as APIResponse.CreateEmployee;
 
     const isPasswordValid = (password == confirmPassword);
 
@@ -107,12 +130,25 @@ router.post('/', async (req: Request, res: Response) => {
       return res.json({ status: false })
     }
 
+    const passwordRequest = await fetch('http://127.0.0.1:3001/api/employees/generate-password', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ "password": password })
+    })
+      .then((res) => res.json())
+    if (!passwordRequest) {
+      res.status(500)
+      res.json({ status: false });
+    }
+
     collection.insertOne({
       forename,
       surname,
       department,
       email: `${forename[0]}.${surname}@scottishglen.co.uk`,
-      password
+      password: passwordRequest.password
     })
   })
 });

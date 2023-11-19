@@ -21,9 +21,12 @@ class Versions extends Component<{ user: IEmployee, setUser: Function, navigate:
                 { name: 'Versions', path: '/versions' },
 
             ]} setUser={this.props.setUser} username={this.props.user.email} />
-            <br />
             <div className="text-centre software">
-                <h1>Software Information</h1>
+                <div className="hero">
+                    <div id="spacer"></div>
+                    <h2><i className="fa fa-info-circle" /> Software Information</h2>
+                    <hr />
+                </div>
                 <p>If software is noticed to be out of date or subject to a Vulnerability report. Advise Development team ASAP so that the issue can be triaged and resolved.</p>
                 <p>Created by: <a href="https://github.com/LiamTownsley2" target="_blank">Liam Townsley</a> (<code>ID: 2301060</code>)</p>
                 <p><img src={'https://i.imgur.com/UDbWcZO.png'} /><strong>Node.js</strong><br />v{(window as any).api.node()}</p>
