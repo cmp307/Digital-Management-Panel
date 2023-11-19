@@ -54,7 +54,7 @@ router.post('/', async (req: Request, res: Response) => {
 
 // @ROUTE: GET api/asset-links/hardware/:id
 // @DESCRIPTION: Used for getting ALL Asset Links for a specific Hardware Asset.
-router.get('/hardware/:id', async (req: Request, res: Response) => {
+router.get('/hardware/:id/get-all', async (req: Request, res: Response) => {
     await wrapper(async (db: any) => {
         const collection: Collection = db.collection(DATABASE);
         const id = req.params.id;
@@ -66,6 +66,27 @@ router.get('/hardware/:id', async (req: Request, res: Response) => {
             const subresp = await db.collection('software').findOne({ _id: link.software_id }) ?? undefined;
             resp_arr.push({
                 software: subresp,
+                link: resp[i]
+            });
+        }
+        return res.json(resp_arr.filter(x => !!x));
+    });
+});
+
+// @ROUTE: GET api/asset-links/hardware/:id
+// @DESCRIPTION: Used for getting ALL Asset Links for a specific Hardware Asset.
+router.get('/software/:id/get-all', async (req: Request, res: Response) => {
+    await wrapper(async (db: any) => {
+        const collection: Collection = db.collection(DATABASE);
+        const id = req.params.id;
+
+        const resp = await collection.find({ software_id: new mongo.ObjectId(id) }).toArray();
+
+        let resp_arr = [];
+        for (const [i, link] of resp.entries()) {
+            const subresp = await db.collection('hardware').findOne({ _id: link.hardware_id }) ?? undefined;
+            resp_arr.push({
+                hardware: subresp,
                 link: resp[i]
             });
         }
