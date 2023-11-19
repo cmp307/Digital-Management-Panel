@@ -47,7 +47,7 @@ class HardwareAssetTable extends Component<{ assets: HardwareAsset[] }> {
                                     }} className="btn btn-outline-danger"><i className="fa fa-trash" /> Delete Asset</button>
                                 </td>
                             </tr>
-                        )) : <p>Loading...</p>}
+                        )) : <p className="text-centre">Loading...</p>}
                     </tbody>
                 </table>
 

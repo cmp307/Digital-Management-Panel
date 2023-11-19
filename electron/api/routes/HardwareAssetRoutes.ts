@@ -6,6 +6,7 @@ const mongo = require('mongodb');
 const router = express.Router();
 
 const DATABASE = "hardware";
+const LINK_COLLECTION_DATABASE = "asset-links";
 
 // @ROUTE: GET api/assets/hardware/view-all
 // @DESCRIPTION: Used for viewing all Software Assets.
@@ -37,6 +38,9 @@ router.delete('/delete-all', async (_: Request, res: Response) => {
         const collection = db.collection(DATABASE);
 
         await collection.deleteMany({});
+
+        const _linkCollection = db.collection(LINK_COLLECTION_DATABASE);
+        await _linkCollection.deleteMany({});
         res.send({ "status": true });
     })
 });
@@ -62,20 +66,26 @@ router.delete('/:id', async (req: Request, res: Response) => {
         const id = req.params.id;
 
         await collection.deleteOne({ _id: new mongo.ObjectId(id) });
+
+        const _linkCollection = db.collection(LINK_COLLECTION_DATABASE);
+        await _linkCollection.deleteMany({});
         res.json({ "status": true });
     })
 });
 
 // @ROUTE: POST api/assets/hardware
 // @DESCRIPTION: Used for creating a Software Asset.
-router.post('/', async (req: Request, _: Response) => {
+router.post('/', async (req: Request, res: Response) => {
     await wrapper(async (db: any) => {
         console.log(req.body);
         const collection = db.collection(DATABASE);
         const { name, type, model, manufacturer, ip, date, note, parent_employee } = req.body;
         const _employee = new mongo.ObjectId(parent_employee);
 
-        collection.insertOne({
+        const isFound = await collection.find({ name, model, manufacturer, ip }).toArray();
+        if(isFound.length > 0) return res.send({ status: false });
+        
+        const resp = await collection.insertOne({
             name,
             type,
             model,
@@ -85,6 +95,8 @@ router.post('/', async (req: Request, _: Response) => {
             note,
             parent_employee: _employee
         })
+
+        return res.json({ status: true, id: resp.insertedId });
     })
 })
 

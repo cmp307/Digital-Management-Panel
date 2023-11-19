@@ -49,8 +49,9 @@ class SoftwareLinkTable extends Component<{ assets: { software: SoftwareAsset, l
                                             this.refreshPage();
                                         })
                                     }} className="btn btn-outline-danger"><i className="fa fa-trash" /> Delete Asset Link</button>
-                                    <Link to={`/software/${item.software._id}/scan`} role="button" id="blue-button" className="btn btn-outline-secondary disabled"><i className="fa fa-dot-circle-o" /> Scan Asset</Link>
-                                </td>
+                                    <Link to={`/software/${item._id}/scans`} role="button" id="blue-button" className="btn btn-outline-secondary disabled"><i className="fa fa-dot-circle-o" /> View Scans</Link>
+                                    {/* @TODO (NIST): Change below link to API request to start a scan. */}
+                                    <Link to={`/software/${item._id}/scan`} role="button" id="blue-button" className="btn btn-outline-secondary disabled"><i className="fa fa-wrench" /> Scan Asset</Link>                                </td>
                             </tr>
                         ))}
                     </tbody>

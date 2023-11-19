@@ -26,7 +26,7 @@ router.post('/', async (req: Request, res: Response) => {
         console.log('request got at PSOT asset-links/')
         const { hardware_id, software_id, date, created_by }: APIResponse.CreateAssetLink = req.body as APIResponse.CreateAssetLink;
         const collection: Collection = db.collection(DATABASE);
-
+        console.log('post asset links', req.body);
         const HardwareID = new mongo.ObjectId(hardware_id);
         const SoftwareID = new mongo.ObjectId(software_id)
 

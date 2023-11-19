@@ -32,7 +32,7 @@ class InstallSoftware extends Component<{ setUser: Function, user: IEmployee, na
             .catch((err) => console.error(err))
     }
 
-    onSubmit = (e:any) => {
+    onSubmit = (e: any) => {
         e.preventDefault();
         console.log(this.state);
         //method="post" action="http://127.0.0.1:3001/api/asset-link/" onSubmit={async () => { await delay(1000); this.props.navigate('/assets')
@@ -71,7 +71,11 @@ class InstallSoftware extends Component<{ setUser: Function, user: IEmployee, na
                     { name: this._id, path: `/hardware/${this._id}` },
                     { name: 'Link Software', path: `/hardware/${this._id}/install` },
                 ]} setUser={this.state.setUser} username={this.state.user.email} />
-                <h2 className="text-centre">Link a Software Asset</h2>
+                <div className="hero">
+                    <div id="spacer"></div>
+                    <h2 className="text-centre"><i className="fa fa-cloud-download" /> Link a Software Asset</h2>
+                    <hr />
+                </div>
 
                 <form id="asset-form" onSubmit={this.onSubmit}>
                     <label><i className="fa fa-user" /> What Software Asset do you want to link this asset to? <span className="red-star">*</span></label>

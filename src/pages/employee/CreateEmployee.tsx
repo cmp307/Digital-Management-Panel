@@ -75,12 +75,12 @@ class CreateEmployee extends Component<{ setUser: Function, user: IEmployee, nav
                     </div>
 
                     <div id="question">
-                        <label htmlFor="email"><i className="fa fa-pencil-square-o" /> Email</label><br />
+                        <label htmlFor="email"><i className="fa fa-envelope-o" /> Email</label><br />
                         <input type="text" id="email" name="email" onChange={e => this.handleChange('email', e.target.value)} disabled value={(this.state.form_data.forename && this.state.form_data.surname) ? `${this.state.form_data.forename[0]}.${this.state.form_data.surname}@scottishglen.co.uk` : ''}></input>
                     </div>
 
                     <div id="question">
-                        <label htmlFor="department"><i className="fa fa-exchange" /> Department<span className="red-star">*</span></label><br />
+                        <label htmlFor="department"><i className="fa fa-users" /> Department<span className="red-star">*</span></label><br />
                         <select name="department" onChange={e => this.handleChange('department', e.target.value)} id="department" required>
                             <option disabled selected value=''>[Please select a Department for the Employee]</option>
                             {[

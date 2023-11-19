@@ -1,7 +1,13 @@
 @import "~bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 * {
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+    ::selection {
+        background-color: #30336b;
+        color: white;
+    }
 }
 
 .text-centre {
@@ -32,6 +38,19 @@
 
 #info-child {
     width: 40%;
+    text-align: center;
+
+    a {
+        text-decoration: none;
+        background-color: #30336b;
+        color: white;
+        padding: 2px 15px;
+        border-radius: 10px;
+        transition: background-color 0.3s ease-in-out;
+    }
+    a:hover {
+            background-color: #3498db;
+    }
 }
 
 .software {
@@ -45,8 +64,26 @@
     color: #e74c3c !important;
 }
 
+.hero-index {
+    background-color: #30336b !important;
+}
+
 .hero {
-    background-color: #3498db;
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 700;
+        margin: 8px 0px;
+        i {
+            padding-right: 10px;
+        }
+    }
+
+    user-select: none;
+    background-color: #30336b;
     color: white;
     margin: 0;
     padding: 0;
@@ -60,4 +97,27 @@
     #spacer {
         padding-top: 10px;
     }
+}
+
+#single-asset-table {
+    a {
+        i {
+            padding-right: 5px;
+        }
+
+        // text-decoration: none;
+    }
+}
+
+tr th {
+    user-select: none;
+}
+
+tr#warning,
+tr#warning i {
+    background-color: #f8d7da;
+}
+
+tr#warning {
+    border: 3px solid #f5c2c7;
 }

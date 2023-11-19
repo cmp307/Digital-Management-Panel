@@ -2,7 +2,6 @@ import { Component } from "react";
 import TopBar from "../components/TopBar";
 import '../styles/Login.scss';
 import { IEmployee } from "../interfaces/Employee";
-import { IIPCSystemData } from "../interfaces/IPC";
 
 class Login extends Component<{ setUser: Function, user: IEmployee }> {
     private _setUser: any;
@@ -16,7 +15,6 @@ class Login extends Component<{ setUser: Function, user: IEmployee }> {
         this._setUser = props.setUser;
         this.handleFormSubmission = this.handleFormSubmission.bind(this);
         this.handleFormUpdate = this.handleFormUpdate.bind(this);
-        this.componentDidMount = this.componentDidMount.bind(this);
     }
 
     handleFormUpdate(e: any) {
@@ -49,16 +47,6 @@ class Login extends Component<{ setUser: Function, user: IEmployee }> {
                 localStorage.setItem('user', JSON.stringify(_state))
             }
         });
-    }
-
-    componentDidMount() {
-        try {
-            // @ts-ignore: Unreachable code error
-            window.electron.getData().then((data: IIPCSystemData) => {
-                console.log('mountdata->', data);
-                this.setState({ data: data });
-            })
-        } catch (error) { }
     }
 
     render() {

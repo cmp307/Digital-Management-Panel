@@ -66,7 +66,7 @@ class HardwareAsset extends Component<{ setUser: Function, user: IEmployee, id: 
                     <hr />
                 </div>
                 <div id="action-buttons">
-                    <Link to={`/hardware/${this._id}/install`} className="btn btn-outline-primary"><i className="fa fa-tasks" /> Link Software</Link>
+                    <Link to={`/hardware/${this._id}/install`} className="btn btn-outline-primary"><i className="fa fa-cloud-download" /> Link Software</Link>
                     <Link to={`/hardware/${this._id}/edit`} className="btn btn-outline-primary"><i className="fa fa-edit" /> Edit Asset</Link>
                     <button onClick={this.refreshPage} className="btn btn-outline-primary"><i className="fa fa-refresh" /> Refresh Asset</button>
                     <button onClick={this.delete} className="btn btn-outline-danger"><i className="fa fa-trash" /> Delete Asset</button>
@@ -80,7 +80,7 @@ class HardwareAsset extends Component<{ setUser: Function, user: IEmployee, id: 
                     <div id="centred-div">
                         <HardwareAssetInfoTable asset={this.state.hardware_data} />
                     </div> :
-                    <p>Loading...</p>
+                    <p className="text-centre">Loading...</p>
                 }
 
                 {this.state.software_data && this.state.software_data.length > 0 ?

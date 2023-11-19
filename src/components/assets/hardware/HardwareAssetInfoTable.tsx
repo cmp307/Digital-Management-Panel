@@ -27,6 +27,8 @@ class HardwareAssetInfoTable extends Component<{ asset: HardwareAsset }, { isLoa
     }
 
     render() {
+        const name = (this.state.data?.forename + ' ' + this.state.data?.surname) ?? '-';
+
         return (
             <table id="single-asset-table" className="table">
                 <tr>
@@ -39,11 +41,11 @@ class HardwareAssetInfoTable extends Component<{ asset: HardwareAsset }, { isLoa
                 </tr>
                 <tr>
                     <th><i className="fa fa-list-alt" /> Model</th>
-                    <td>{this.props.asset.model ?? '-'}</td>
+                    <td>{(!(this.props.asset.model == "" || !this.props.asset.model)) ? this.props.asset.model : '-'}</td>
                 </tr>
                 <tr>
                     <th><i className="fa fa-cogs" /> Manufacturer</th>
-                    <td>{this.props.asset.manufacturer ?? '-'}</td>
+                    <td>{(!(this.props.asset.model == "" || !this.props.asset.model)) ? this.props.asset.manufacturer : '-'}</td>
                 </tr>
                 <tr>
                     <th><i className="fa fa-exchange" /> Asset Type</th>
@@ -53,17 +55,22 @@ class HardwareAssetInfoTable extends Component<{ asset: HardwareAsset }, { isLoa
                     <th><i className="fa fa-wifi" /> IP Address</th>
                     <td>{this.props.asset.ip ?? '-'}</td>
                 </tr>
-                <tr>
-                    <th><i className="fa fa-user" /> Supervising Employee</th>
-                    <td>{(this.state.data) ? <><Link to={`/employees/${this.state.data._id}`}>{this.state.data?.forename + ' ' + this.state.data.surname ?? '-'}</Link><code>(ID: {this.state.data?._id.toString() ?? '-'})</code></> : '-'}</td>
-                </tr>
+                {(this.state.data) ?
+                    <tr>
+                        <th><i className="fa fa-user" /> Supervising Employee</th>
+                        <td><><Link to={`/employees/${this.state.data._id}`}><i className="fa fa-link" />{name}</Link><code>(ID: {this.state.data?._id.toString()})</code></></td>
+                    </tr>
+                    : <tr id="warning">
+                        <th><i className="fa fa-user" /> Supervising Employee</th>
+                        <td>-</td>
+                    </tr>}
                 <tr>
                     <th><i className="fa fa-calendar" /> Purchase Date</th>
-                    <td>{this.props.asset.date}</td>
+                    <td>{(!(this.props.asset.date == "" || !this.props.asset.date) ? this.props.asset.date : '-')}</td>
                 </tr>
                 <tr>
                     <th><i className="fa fa-sticky-note-o" /> Note</th>
-                    <td>{this.props.asset.note}</td>
+                    <td>{(!(this.props.asset.date == "" || !this.props.asset.note) ? this.props.asset.note : '-')}</td>
                 </tr>
             </table>
         )

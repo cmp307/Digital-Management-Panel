@@ -8,6 +8,7 @@ import { IEmployee } from '../../interfaces/Employee.ts';
 import Breadcrumbs from "../../components/Breadcrumbs.tsx";
 import { HardwareAsset } from "../../components/assets/hardware/HardwareAsset.ts";
 import HardwareAssetTable from "../../components/assets/hardware/HardwareAssetTable.tsx";
+import PillButton from "../../components/PillButton.tsx";
 
 class Employee extends Component<{ setUser: Function, user: IEmployee, id: string, navigate: NavigateFunction }, { employee_data?: IEmployee, asset_data?: HardwareAsset[], setUser: Function, user: IEmployee }> {
     private _id: string;
@@ -70,7 +71,6 @@ class Employee extends Component<{ setUser: Function, user: IEmployee, id: strin
                     <button onClick={this.refreshPage} className="btn btn-outline-primary"><i className="fa fa-refresh" /> Refresh Employee</button>
                     <button onClick={this.delete} className="btn btn-outline-danger"><i className="fa fa-trash" /> Delete <strong>All</strong> Employee Assets</button>
                 </div>
-                <hr />
                 <div className="text-centre">
                     {this.state.employee_data == undefined ? 'Loading...' : <>
                         <div className="hero">
@@ -78,10 +78,30 @@ class Employee extends Component<{ setUser: Function, user: IEmployee, id: strin
                             <h2 className="text-centre"><i className="fa fa-user" /> Employee's Personal Data</h2>
                             <hr />
                         </div>
-                        <p>Forename: <code>{this.state.employee_data.forename}</code></p>
-                        <p>Surname: <code>{this.state.employee_data.surname}</code></p>
-                        <p>E-Mail: <code>{this.state.employee_data.email}</code></p>
-                        <p>Department: <code>{this.state.employee_data.department}</code></p>
+                        <div id="centred-div">
+                            <table id="single-asset-table" className="table">
+                                <tr>
+                                    <th><i className="fa fa-id-card-o" />Employee ID</th>
+                                    <td><code>{this._id}</code></td>
+                                </tr>
+                                <tr>
+                                    <th><i className="fa fa-pencil-square-o" /> Forename</th>
+                                    <td>{this.state.employee_data.forename}</td>
+                                </tr>
+                                <tr>
+                                    <th><i className="fa fa-pencil-square-o" /> Surname</th>
+                                    <td>{this.state.employee_data.surname}</td>
+                                </tr>
+                                <tr>
+                                    <th><i className="fa fa-users" /> Department</th>
+                                    <td><PillButton label={this.state.employee_data.department} /></td>
+                                </tr>
+                                <tr>
+                                    <th><i className="fa fa-envelope-o" /> E-Mail</th>
+                                    <td><a href={'mailto:'+this.state.employee_data.email}>{this.state.employee_data.email}</a></td>
+                                </tr>
+                            </table>
+                        </div>
                     </>}
                 </div>
                 {this.state.asset_data && this.state.asset_data.length > 0 ?
