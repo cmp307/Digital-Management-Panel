@@ -38,10 +38,10 @@ class SoftwareAssetTable extends Component<{ assets: SoftwareAsset[] }> {
                                 <td><code>{item._id}</code></td>
                                 <td>{item.name}</td>
                                 <td><code>{item.version}</code></td>
-                                <td><PillButton label="Critical" /></td>
+                                <td><PillButton label={item.risk_level} /></td>
                                 <td>
                                     <Link to={`/software/${item._id}`} role="button" id="blue-button" className="btn btn-outline-primary "><i className="fa fa-eye" /> View Asset</Link>
-                                    <Link to={`/edit/software/${item._id}`} role="button" id="blue-button" className="btn btn-outline-primary "><i className="fa fa-edit" /> Edit Asset</Link>
+                                    <Link to={`/software/${item._id}/edit`} role="button" id="blue-button" className="btn btn-outline-primary "><i className="fa fa-edit" /> Edit Asset</Link>
                                     <button onClick={() => {
                                         fetch(`http://127.0.0.1:3001/api/assets/software/${item._id}`, { method: 'DELETE' }).then(() => {
                                             this.refreshPage();

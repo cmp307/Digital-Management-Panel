@@ -1,38 +1,25 @@
 import { Component } from "react";
 import { SoftwareAsset } from "./SoftwareAsset";
 import { HardwareAsset } from "../hardware/HardwareAsset";
-import { Link } from "react-router-dom";
+import PillButton from "../../PillButton";
 
 class SoftwareAssetInfoTable extends Component<{ asset: SoftwareAsset }, { isLoaded: boolean, data?: HardwareAsset }> {
-    private date: Date;
     constructor(props: any) {
         super(props);
         this.state = {
             isLoaded: false,
             data: undefined
         };
-        this.date = new Date(this.props.asset.parent_hardware?.date ?? new Date().toISOString());
+        this.render = this.render.bind(this);
     }
 
     componentDidMount() {
-        if (this.props.asset.parent_hardware?.id) {
-            fetch(`http://127.0.0.1:3001/api/assets/hardware/${this.props.asset.parent_hardware?.id.toString()}`)
-                .then((res) => res.json())
-                .then((res: any) => {
-                    if (res) {
-                        const parent = new HardwareAsset(res);
-                        this.setState({ isLoaded: true, data: parent });
-                    }
-                });
-        }
-    }
-
-    getLinkDate() {
-        const timestring = [
-            this.date.getHours().toString().padStart(2, '0'),
-            this.date.getMinutes().toString().padStart(2, '0')
-        ].join(':');
-        return `${this.date.toLocaleDateString()} (${timestring})`
+        console.log(this.props.asset);
+        fetch(`http://127.0.0.1:3001/api/asset-link/software/${this.props.asset._id.toString()}`)
+            .then((res) => res.json())
+            .then((res: any) => {
+                this.setState({ isLoaded: true, data: new HardwareAsset(res) });
+            });
     }
 
     render() {
@@ -55,12 +42,20 @@ class SoftwareAssetInfoTable extends Component<{ asset: SoftwareAsset }, { isLoa
                     <td>{this.props.asset.version ?? '-'}</td>
                 </tr>
                 <tr>
-                    <th><i className="fa fa-wifi" /> Parent Hardware</th>
-                    <td><Link to={`/assets/${this.state.data?._id}`}>{this.state.data?.name}</Link> (IP: <code>{this.state.data?.ip}</code>)</td>
+                    <th><i className="fa fa-exclamation-circle" /> Risk Level</th>
+                    <td><PillButton label={this.props.asset?.risk_level ?? 'N/A'} /></td>
                 </tr>
                 <tr>
-                    <th><i className="fa fa-plus-circle" /> Created At</th>
-                    <td>{this.getLinkDate()}</td>
+                    <th><i className="fa fa-calendar" /> Created At</th>
+                    <td>{(new Date(this.props.asset?.created_at).toLocaleDateString() + ` (${new Date(this.props.asset.created_at).toLocaleTimeString()})`) ?? 'Loading...'}</td>
+                </tr>
+                {/* <tr>
+                    <th><i className="fa fa-user" /> Created By</th>
+                    <td>{(new Date(this.props.asset?.created_at).toLocaleDateString() + ` (${new Date(this.props.asset.created_at).toLocaleTimeString()})`) ?? 'Loading...'}</td>
+                </tr> */}
+                <tr>
+                    <th><i className="fa fa-calendar" /> Last Edited At</th>
+                    <td>{(new Date(this.props.asset?.last_edit_at).toLocaleDateString() + ` (${new Date(this.props.asset.last_edit_at).toLocaleTimeString()})`) ?? 'Loading...'}</td>
                 </tr>
             </table>
         )

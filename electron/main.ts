@@ -13,10 +13,12 @@ server.use(bodyParser.urlencoded({ extended: false }))
 import HardwareAssetRoutes from './api/routes/HardwareAssetRoutes';
 import SoftwareAssetRoutes from './api/routes/SoftwareAssetRoutes';
 import EmployeeRoutes from './api/routes/EmployeeRoutes';
+import AssetLinkRoutes from './api/routes/AssetLinkRoutes';
 
 
 server.use('/api/assets/hardware', HardwareAssetRoutes);
 server.use('/api/assets/software', SoftwareAssetRoutes);
+server.use('/api/asset-link', AssetLinkRoutes);
 server.use('/api/employees', EmployeeRoutes);
 
 // ========================  GENERATED CODE ========================

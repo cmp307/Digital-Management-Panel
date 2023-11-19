@@ -66,9 +66,9 @@ class EditHardwareAsset extends Component<{ setUser: Function, user: IEmployee, 
                 <TopBar />
                 <Breadcrumbs history={[
                     { name: 'Home', path: '/' },
-                    { name: 'Assets', path: '/assets' },
-                    { name: this.props.id, path: `/assets/${this._id}` },
-                    { name: 'Edit', path: '/assets/edit' },
+                    { name: 'Hardware Assets', path: '/hardware' },
+                    { name: this.props.id, path: `/hardware/${this._id}` },
+                    { name: 'Edit', path: `/hardware/${this._id}/edit` },
                 ]} setUser={this.state.setUser} username={this.state.user.email} />
                 <h2 className="text-centre">Edit an Asset</h2>
                 <p className="text-centre">Asset ID: <code>{this._id}</code></p>

@@ -48,11 +48,11 @@ class HardwareAssets extends Component<{ setUser: Function, user: IEmployee }, {
                 <TopBar />
                 <Breadcrumbs history={[
                     { name: 'Home', path: '/' },
-                    { name: 'Assets', path: '/assets' },
+                    { name: 'Hardware Assets', path: '/hardware' },
                 ]} setUser={this.props.setUser} username={this.props.user.email} />
                 <h2 className="text-centre">Action Buttons</h2>
                 <div id="action-buttons">
-                    <Link to={'/assets/create'} className="btn btn-outline-primary"><i className="fa fa-plus" /> Create an Asset</Link>
+                    <Link to={'/hardware/create'} className="btn btn-outline-primary"><i className="fa fa-plus" /> Create an Asset</Link>
                     <button onClick={this.refreshPage} className="btn btn-outline-primary"><i className="fa fa-refresh" /> Refresh List</button>
                     <button onClick={this.deleteAllAssets} className="btn btn-outline-danger"><i className="fa fa-trash" /> Delete <strong>All</strong> Assets</button>
                 </div>

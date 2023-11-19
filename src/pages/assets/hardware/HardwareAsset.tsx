@@ -12,6 +12,7 @@ import Breadcrumbs from "../../../components/Breadcrumbs";
 import HardwareAssetInfoTable from "../../../components/assets/hardware/HardwareAssetInfoTable";
 import SoftwareAssetTable from "../../../components/assets/software/SoftwareAssetTable";
 import { SoftwareAsset } from "../../../components/assets/software/SoftwareAsset";
+import SoftwareLinkTable from "../../../components/assets/software/SoftwareLinkTable";
 
 class HardwareAsset extends Component<{ setUser: Function, user: IEmployee, id: string, navigate: NavigateFunction }, { hardware_data?: CHardwareAsset, software_data?: SoftwareAsset[], setUser: Function, user: IEmployee }> {
     private _id: string;
@@ -33,9 +34,9 @@ class HardwareAsset extends Component<{ setUser: Function, user: IEmployee, id: 
             .then((res) => this.setState({ hardware_data: res }))
             .catch((err) => console.error(err))
 
-        fetch(`http://127.0.0.1:3001/api/assets/software/view-all/${this._id}`)
+        fetch(`http://127.0.0.1:3001/api/asset-link/hardware/${this._id}`)
             .then((res) => res.json())
-            .then((res) => res.map((x: any) => new SoftwareAsset(x)))
+            .then((res) => res.map((x: any) => { return { software: new SoftwareAsset(x.software), link: x.link } }))
             .then((res) => this.setState({ software_data: [...res] }))
             .catch((err) => console.error(err))
     }
@@ -51,18 +52,20 @@ class HardwareAsset extends Component<{ setUser: Function, user: IEmployee, id: 
     }
 
     render() {
+        console.log(this.state.software_data);
         return (
             <>
                 <TopBar />
                 <Breadcrumbs history={[
                     { name: 'Home', path: '/' },
-                    { name: 'Assets', path: '/assets' },
-                    { name: this._id ?? '-', path: `/assets/${this._id}` },
+                    { name: 'Hardware Assets', path: '/hardware' },
+                    { name: this._id ?? '-', path: `/hardware/${this._id}` },
                 ]} setUser={this.props.setUser} username={this.props.user.email} />
 
                 <h2 className="text-centre">Action Buttons</h2>
                 <div id="action-buttons">
-                    <Link to={`/edit/assets/${this._id}`} className="btn btn-outline-primary"><i className="fa fa-edit" /> Edit Asset</Link>
+                    <Link to={`/hardware/${this._id}/install`} className="btn btn-outline-primary"><i className="fa fa-tasks" /> Link Software</Link>
+                    <Link to={`/hardware/${this._id}/edit`} className="btn btn-outline-primary"><i className="fa fa-edit" /> Edit Asset</Link>
                     <button onClick={this.refreshPage} className="btn btn-outline-primary"><i className="fa fa-refresh" /> Refresh Asset</button>
                     <button onClick={this.delete} className="btn btn-outline-danger"><i className="fa fa-trash" /> Delete Asset</button>
                 </div>
@@ -75,16 +78,18 @@ class HardwareAsset extends Component<{ setUser: Function, user: IEmployee, id: 
                     </div> :
                     <p>Loading...</p>
                 }
-                <hr />
-                <h2 className="text-centre">Linked Software Assets</h2>
-                <hr />
-                <div>
-                    {this.state.software_data ? <SoftwareAssetTable assets={this.state.software_data} /> : 'Loading...'}
+
+                {this.state.software_data && this.state.software_data.length > 0 ?
                     <div className="text-centre">
-                        <button className="btn btn-outline-primary" onClick={() => this.props.navigate(-1)}>Return to previous page!</button>
-                    </div>
-                    <br />
-                </div>
+                        <hr />
+                        <h2 className="text-centre">Linked Software Assets</h2>
+                        <hr />
+                        <div>
+                            <SoftwareLinkTable assets={this.state.software_data} id={this.props.id} />
+                            <button className="btn btn-outline-primary" onClick={() => this.props.navigate(-1)}>Return to previous page!</button>
+                        </div>
+                        <br />
+                    </div> : <></>}
 
             </>
         )

@@ -61,7 +61,7 @@ class EditSoftwareAsset extends Component<{ setUser: Function, user: IEmployee, 
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(this.state.form_data)
+            body: JSON.stringify({ ...this.state.form_data, created_at: this.state.asset_data?.created_at })
         }).then(() => {
             this.props.navigate(`/software/${this._id}`);
         })
@@ -74,13 +74,13 @@ class EditSoftwareAsset extends Component<{ setUser: Function, user: IEmployee, 
                 <TopBar />
                 <Breadcrumbs history={[
                     { name: 'Home', path: '/' },
-                    { name: 'Assets', path: '/software' },
+                    { name: 'Software Assets', path: '/software' },
                     { name: this.props.id, path: `/software/${this._id}` },
                     { name: 'Edit', path: `/software/${this._id}/edit` },
                 ]} setUser={this.state.setUser} username={this.state.user.email} />
                 <h2 className="text-centre">Edit a Software Asset</h2>
                 <p className="text-centre">Asset ID: <code>{this._id}</code></p>
-                {this.state.asset_data ?
+                {this.state.asset_data || this.state.form_data ?
                     <form id="asset-form" onSubmit={this.onSubmit}>
                         <div id="question">
                             <label htmlFor="name"><i className="fa fa-pencil-square-o" /> Asset Name<span className="red-star">*</span></label><br />
@@ -116,22 +116,23 @@ class EditSoftwareAsset extends Component<{ setUser: Function, user: IEmployee, 
                                 placeholder="Please enter the name for your Asset." required></input>
                         </div>
 
-
-                        <label><i className="fa fa-user" /> What Hardware Asset should this software be assigned to? <span className="red-star">*</span></label>
-                        <select
-                            name="parent_id"
-                            id="parent_id"
-                            value={this.state.form_data?.parentID ?? undefined}
-                            onChange={e => this.handleChange('parent_id', e.target.value)} required>
-                            {(this.state.form_data?.parent_hardware.id) ? <option disabled selected value=''>[Select a Hardware Asset to assign this Software Asset to]</option> : <option disabled value=''>[Select a Hardware Asset to assign this Software Asset to]</option>}
-                            {this.state.hardware_data ? this.state.hardware_data.map((x: HardwareAsset) => {
-                                if (this.state.form_data?.parent_hardware.id == x._id.toString()) {
-                                    return <option value={x._id.toString()} selected>[{x.type}] {x.name} (IP: {x.ip})</option>
-                                }
-                                return <option value={x._id.toString()}>[{x.type}] {x.name} (IP: {x.ip})</option>
-                            }) : 'Loading...'}
-                        </select>
-
+                        <div id="question">
+                            <label htmlFor="riskLevel"><i className="fa fa-exclamation-circle" /> Risk Level<span className="red-star">*</span></label><br />
+                            <p><strong>NOTE</strong>: It is recommended that you run a Vulnerability Scan instead of editing this field manually.</p>
+                            <select onChange={e => this.handleChange('riskLevel', e.target.value)} name="riskLevel" id="riskLevel" required>
+                                {[
+                                    'Critical',
+                                    'High',
+                                    'Medium',
+                                    'Low',
+                                    'N/A'
+                                ]
+                                    .map((x) => {
+                                        if (x == this.state.form_data?.riskLevel) return <option selected value={x}>{x}</option>
+                                        return <option value={x}>{x}</option>
+                                    })}
+                            </select>
+                        </div>
                         <br />
 
                         <input type="submit"></input>

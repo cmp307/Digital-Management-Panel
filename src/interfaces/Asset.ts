@@ -18,7 +18,8 @@ export interface IHardwareAsset extends IAsset {
 export interface ISoftwareAsset extends IAsset {
     version: string;
     manufacturer: string;
-    parent_hardware?: IParentHardware
+    risk_level: string;
+    created_at: string
 }
 
 export interface IParentHardware {

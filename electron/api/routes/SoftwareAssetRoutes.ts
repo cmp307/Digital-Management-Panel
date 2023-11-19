@@ -72,16 +72,15 @@ router.post('/', async (req: Request, res: Response) => {
     await wrapper(async (db: any) => {
         console.log(req.body);
         const collection = db.collection(DATABASE);
-        const { name, manufacturer, version, parent_id } = req.body;
+        const { name, manufacturer, version, risk_level } = req.body;
 
         collection.insertOne({
             name,
             manufacturer,
             version,
-            parent_hardware: {
-                id: new mongo.ObjectId(parent_id),
-                date: new Date().toISOString()
-            }
+            risk_level: risk_level ?? 'N/A',
+            created_at: new Date().toISOString(),
+            last_edit_at: new Date().toISOString()
         })
 
         res.send({ status: true })
@@ -95,16 +94,15 @@ router.patch('/:id', async (req: Request, res: Response) => {
         console.log(req.body);
         const collection = db.collection(DATABASE);
         const id = req.params.id;
-        const { name, manufacturer, version, parent_id } = req.body;
+        const { name, manufacturer, version, riskLevel, created_at } = req.body;
 
         await collection.replaceOne({ _id: new mongo.ObjectId(id) }, {
             name,
             manufacturer,
             version,
-            parent_hardware: {
-                id: new mongo.ObjectId(parent_id),
-                date: new Date().toISOString()
-            }
+            risk_level: riskLevel ?? 'N/A',
+            created_at,
+            last_edit_at: new Date().toISOString()
         }, { upsert: true });
 
         res.send({ status: true })

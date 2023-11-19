@@ -9,7 +9,7 @@ import Breadcrumbs from "../../components/Breadcrumbs.tsx";
 import { HardwareAsset } from "../../components/assets/hardware/HardwareAsset.ts";
 import HardwareAssetTable from "../../components/assets/hardware/HardwareAssetTable.tsx";
 
-class Employee extends Component<{ setUser: Function, user: IEmployee, id: string, navigate:NavigateFunction }, { employee_data?: IEmployee, asset_data?: HardwareAsset[], setUser: Function, user: IEmployee }> {
+class Employee extends Component<{ setUser: Function, user: IEmployee, id: string, navigate: NavigateFunction }, { employee_data?: IEmployee, asset_data?: HardwareAsset[], setUser: Function, user: IEmployee }> {
     private _id: string;
     constructor(props: any) {
         super(props);
@@ -76,12 +76,16 @@ class Employee extends Component<{ setUser: Function, user: IEmployee, id: strin
                         <p>Department: <code>{this.state.employee_data.department}</code></p>
                     </>}
                 </div>
-                <hr />
-                <h2 className="text-centre">Asset List</h2>
-                {this.state.asset_data ? <><p className="text-centre">This employee currently has <strong>{this.state.asset_data.length} {(this.state.asset_data.length > 1 || this.state.asset_data.length == 0) ? 'assets' : 'asset'}</strong> assigned to them.</p>
-                    <HardwareAssetTable assets={this.state.asset_data} /></> : <p className="text-centre">Loading...</p>}
+                {this.state.asset_data && this.state.asset_data.length > 0 ?
+                    <div className="text-centre">
+                        <hr />
+                        <h2>Asset List</h2>
+                        <p>This employee currently has <strong>{this.state.asset_data.length} {(this.state.asset_data.length > 1 || this.state.asset_data.length == 0) ? 'assets' : 'asset'}</strong> assigned to them.</p>
+                        <HardwareAssetTable assets={this.state.asset_data} />
+                    </div> :
+                    <></>}
                 <div id="centred-div">
-                <button className="btn btn-outline-primary" onClick={() => this.props.navigate(-1)}>Return to previous page!</button>
+                    <button className="btn btn-outline-primary" onClick={() => this.props.navigate(-1)}>Return to previous page!</button>
                 </div>
             </>
         )

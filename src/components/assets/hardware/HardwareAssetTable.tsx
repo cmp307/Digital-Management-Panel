@@ -38,8 +38,8 @@ class HardwareAssetTable extends Component<{ assets: HardwareAsset[] }> {
                                 <td><PillButton label={item.type} /></td>
                                 <td>{item.ip}</td>
                                 <td>
-                                    <Link to={`/assets/${item._id}`} role="button" id="blue-button" className="btn btn-outline-primary"><i className="fa fa-eye" /> View Asset</Link>
-                                    <Link to={`/edit/assets/${item._id}`} role="button" id="blue-button" className="btn btn-outline-primary"><i className="fa fa-edit" /> Edit Asset</Link>
+                                    <Link to={`/hardware/${item._id}`} role="button" id="blue-button" className="btn btn-outline-primary"><i className="fa fa-eye" /> View Asset</Link>
+                                    <Link to={`/hardware/${item._id}/edit`} role="button" id="blue-button" className="btn btn-outline-primary"><i className="fa fa-edit" /> Edit Asset</Link>
                                     <button onClick={() => {
                                         fetch(`http://127.0.0.1:3001/api/assets/hardware/${item._id}`, { method: 'DELETE' }).then(() => {
                                             this.refreshPage();

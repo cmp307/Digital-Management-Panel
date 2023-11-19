@@ -24,7 +24,7 @@ class CreateSoftwareAsset extends Component<{ setUser: Function, user: IEmployee
     componentDidMount() {
         fetch('http://127.0.0.1:3001/api/assets/hardware/view-all')
             .then((res) => res.json())
-            .then((res) => res.map((x:any) => new HardwareAsset(x)))
+            .then((res) => res.map((x: any) => new HardwareAsset(x)))
             .then((res) => this.setState({ data: res }))
             .catch((err) => console.error(err))
     }
@@ -43,7 +43,7 @@ class CreateSoftwareAsset extends Component<{ setUser: Function, user: IEmployee
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(this.state.form_data)
+            body: JSON.stringify({ ...this.state.form_data, risk_level: 'N/A' })
         }).then(() => {
             this.props.navigate(`/software`);
         })
@@ -56,7 +56,7 @@ class CreateSoftwareAsset extends Component<{ setUser: Function, user: IEmployee
                 <TopBar />
                 <Breadcrumbs history={[
                     { name: 'Home', path: '/' },
-                    { name: 'Software', path: '/software' },
+                    { name: 'Software Assets', path: '/software' },
                     { name: 'Create', path: '/software/create' },
                 ]} setUser={this.state.setUser} username={this.state.user.email} />
                 <h2 className="text-centre">Create a Software Asset</h2>
@@ -76,15 +76,6 @@ class CreateSoftwareAsset extends Component<{ setUser: Function, user: IEmployee
                         <label htmlFor="name"><i className="fa fa-code-fork" /> Asset Version<span className="red-star">*</span></label><br />
                         <input type="text" id="name" name="name" onChange={e => this.handleChange('version', e.target.value)} placeholder="Please enter the name for your Asset." required></input>
                     </div>
-
-
-                    <label><i className="fa fa-user" /> What Hardware Asset should this software be assigned to? <span className="red-star">*</span></label>
-                    <select name="parent_id" id="parent_id"  onChange={e => this.handleChange('parent_id', e.target.value)} required>
-                        <option disabled selected value=''>[Select a Hardware Asset to assign this Software Asset to]</option>
-                        {this.state.data ? this.state.data.map((x) => {
-                            return <option value={x._id.toString()}>[{x.type}] {x.name} (IP: {x.ip})</option>
-                        }) : 'Loading...'}
-                    </select>
 
                     <br />
 

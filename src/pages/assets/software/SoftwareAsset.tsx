@@ -11,7 +11,7 @@ import { IEmployee } from "../../../interfaces/Employee";
 import Breadcrumbs from "../../../components/Breadcrumbs";
 import SoftwareAssetInfoTable from "../../../components/assets/software/SoftwareAssetInfoTable";
 
-class SoftwareAsset extends Component<{ setUser: Function, user: IEmployee, id: string, navigate:NavigateFunction }, { setUser: Function, user: IEmployee, data?: CSoftwareAsset }> {
+class SoftwareAsset extends Component<{ setUser: Function, user: IEmployee, id: string, navigate: NavigateFunction }, { setUser: Function, user: IEmployee, data?: CSoftwareAsset }> {
     private _id: string;
     constructor(props: any) {
         super(props)
@@ -47,18 +47,19 @@ class SoftwareAsset extends Component<{ setUser: Function, user: IEmployee, id: 
                 <TopBar />
                 <Breadcrumbs history={[
                     { name: 'Home', path: '/' },
-                    { name: 'Assets', path: '/assets' },
-                    { name: this._id ?? '-', path: `/assets/${this._id}` },
+                    { name: 'Software Assets', path: '/software' },
+                    { name: this._id ?? '-', path: `/software/${this._id}` },
                 ]} setUser={this.props.setUser} username={this.props.user.email} />
 
                 <h2 className="text-centre">Action Buttons</h2>
                 <div id="action-buttons">
-                    <Link to={`/edit/assets/${this._id}`} className="btn btn-outline-primary"><i className="fa fa-edit" /> Edit Asset</Link>
+                    <Link to={`/software/${this._id}/scan`} role="button" id="blue-button" className="btn btn-outline-secondary disabled"><i className="fa fa-dot-circle-o" /> Scan Asset</Link>
+                    <Link to={`/software/${this._id}/edit`} className="btn btn-outline-primary"><i className="fa fa-edit" /> Edit Asset</Link>
                     <button onClick={this.refreshPage} className="btn btn-outline-primary"><i className="fa fa-refresh" /> Refresh Asset</button>
                     <button onClick={this.delete} className="btn btn-outline-danger"><i className="fa fa-trash" /> Delete Asset</button>
                 </div>
                 <hr />
-                <h2 className="text-centre">Hardware Asset Information</h2>
+                <h2 className="text-centre">Software Asset Information</h2>
                 <hr />
                 <div id="centred-div">
                     {this.state.data ? <SoftwareAssetInfoTable asset={this.state.data} /> : 'Loading...'}

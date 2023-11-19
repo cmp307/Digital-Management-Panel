@@ -31,7 +31,7 @@ class Home extends Component<{ setUser: Function, user: IEmployee }, { user: IEm
                 </div>
                 <div className="container py-4 px-3 mx-auto button-list-container">
                     <div className="text-center button-list-child">
-                        <Link to="/assets" className="btn btn-outline-primary" role="button"><i className="fa fa-server" /> View &amp; Manage Hardware Assets</Link>
+                        <Link to="/hardware" className="btn btn-outline-primary" role="button"><i className="fa fa-server" /> View &amp; Manage Hardware Assets</Link>
                         <Link to="/software" className="btn btn-outline-primary" role="button"><i className="fa fa-cloud-download" /> View &amp; Manage Software Assets</Link>
                         <Link to="/employees" className="btn btn-outline-primary" role="button"><i className="fa fa-sitemap" /> View &amp; Manage Employees</Link>
                         <Link to="/versions" className="btn btn-outline-secondary" role="button"><i className="fa fa-info" /> View Software Information</Link>

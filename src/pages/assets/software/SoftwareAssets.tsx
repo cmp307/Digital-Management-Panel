@@ -27,7 +27,7 @@ class SoftwareAssets extends Component<{ setUser: Function, user: IEmployee }, {
             .then((res) => res.json())
             .then((res) => {
                 const _state: any = this.state;
-                _state.data = [...res.map((x:any) => new SoftwareAsset(x))];
+                _state.data = [...res.map((x: any) => new SoftwareAsset(x))];
                 this.setState(_state)
             })
             .catch((err) => console.error(err))
@@ -49,7 +49,7 @@ class SoftwareAssets extends Component<{ setUser: Function, user: IEmployee }, {
                 <TopBar />
                 <Breadcrumbs history={[
                     { name: 'Home', path: '/' },
-                    { name: 'Assets', path: '/assets' },
+                    { name: 'Software Assets', path: '/software' },
                 ]} setUser={this.props.setUser} username={this.props.user.email} />
                 <h2 className="text-centre">Action Buttons</h2>
                 <div id="action-buttons">

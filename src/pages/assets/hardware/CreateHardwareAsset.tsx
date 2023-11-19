@@ -34,8 +34,8 @@ class CreateAssets extends Component<{ setUser: Function, user: IEmployee, navig
                 <TopBar />
                 <Breadcrumbs history={[
                     { name: 'Home', path: '/' },
-                    { name: 'Assets', path: '/assets' },
-                    { name: 'Create', path: '/assets/create' },
+                    { name: 'Hardware Assets', path: '/hardware' },
+                    { name: 'Create', path: '/hardware/create' },
                 ]} setUser={this.state.setUser} username={this.state.user.email} />
                 <h2 className="text-centre">Create an Asset</h2>
 
@@ -106,6 +106,7 @@ class CreateAssets extends Component<{ setUser: Function, user: IEmployee, navig
                     <br />
 
                     <input type="submit"></input>
+                    <button className="cancel" type="button" onClick={() => this.props.navigate(-1)}>Cancel</button>
                 </form>
             </>
         )
