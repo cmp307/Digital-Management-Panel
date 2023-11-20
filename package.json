@@ -33,7 +33,7 @@
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.11.0",
     "@typescript-eslint/parser": "^6.11.0",
-    "@vitejs/plugin-react": "^4.1.1",
+    "@vitejs/plugin-react": "^4.2.0",
     "concurrently": "^8.2.2",
     "electron": "^27.1.0",
     "electron-builder": "^24.6.4",
