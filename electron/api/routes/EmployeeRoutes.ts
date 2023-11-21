@@ -45,18 +45,16 @@ router.post('/login', async (req: Request, res: Response) => {
 // @DESCRIPTION: Used for generating a password.
 router.post('/generate-password', async (req: Request, res: Response) => {
   try {
-    await wrapper(async (db: any) => {
-      const { password } = req.body;
-      console.log(req.body);
-      if (!password) throw new Error("Required fields not provided.");
+    const { password } = req.body;
+    console.log(req.body);
+    if (!password) throw new Error("Required fields not provided.");
 
-      const crypt = await bcrypt.hashSync(password, 10);
-      if (!crypt) {
-        res.status(400)
-        return res.json({ status: false })
-      }
-      return res.json({ status: true, password: crypt })
-    })
+    const crypt = await bcrypt.hashSync(password, 10);
+    if (!crypt) {
+      res.status(400)
+      return res.json({ status: false })
+    }
+    return res.json({ status: true, password: crypt })
   } catch (error) {
     console.log(error);
     res.status(400);
@@ -152,5 +150,27 @@ router.post('/', async (req: Request, res: Response) => {
     })
   })
 });
+
+// @ROUTE: PATCH api/employees/:id
+// @DESCRIPTION: Used for editing an Employee.
+router.patch('/:id', async (req: Request, res: Response) => {
+  await wrapper(async (db: any) => {
+    const collection = db.collection(DATABASE);
+    const id = req.params.id;
+    const { forename, surname, department } = req.body;
+
+    await collection.updateOne({ _id: new mongo.ObjectId(id) }, {
+      $set: {
+        forename,
+        surname,
+        department,
+        email: `${forename[0]}.${surname}@scottishglen.co.uk`
+      }
+    });
+
+    res.send({ status: true })
+  })
+})
+
 
 export default router;

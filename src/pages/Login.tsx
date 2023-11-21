@@ -54,31 +54,41 @@ class Login extends Component<{ setUser: Function, user: IEmployee }> {
             <>
                 <TopBar linkToHomepage={false} />
                 <br></br>
-                <div className="alert alert-info" role="alert">
-                    <h4 className="alert-heading">Demonstration Login!</h4>
-                    <p>As this is a demonstration you may login using the credentials listed below. You can then create new Employee Accounts and login with them.</p>
-                    <hr />
-                    <p className="mb-0"><strong>E-Mail Address</strong>: demo@example.com</p>
-                    <p className="mb-0"><strong>Password</strong>: demo</p>
+                <div id="clippy-alert" className="alert alert-warning" role="alert">
+                    <div>
+                        <img src="https://i.imgur.com/7Y6f2JD.png" />
+                    </div>
+                    <div>
+                        <h4 className="alert-heading">Demonstration Login!</h4>
+                        <p>As this is a demonstration you may login using the credentials listed below. You can then create new Employee Accounts and login with them.</p>
+                        <hr />
+                        <p className="mb-0"><strong>E-Mail Address</strong>: demo@example.com</p>
+                        <p className="mb-0"><strong>Password</strong>: demo</p>
+                    </div>
+
                 </div>
                 <div className="container py-4 px-3 mx-auto">
                     <div className="text-center">
-                        <form id="login" onSubmit={this.handleFormSubmission}>
-                            <label htmlFor="email">E-Mail Address</label><br></br>
+                        <form id="asset-form" className="login-form" onSubmit={this.handleFormSubmission}>
+                            <label htmlFor="email"><i className="fa fa-envelope-o" /> E-Mail Address</label>
                             <input
                                 id="email"
                                 name="email"
                                 placeholder="Please enter your e-mail address."
                                 type="email"
                                 onChange={this.handleFormUpdate}></input>
-                            <label htmlFor="password">Password</label><br></br>
+                            <label htmlFor="password"><i className="fa fa-lock" /> Password</label>
                             <input
                                 id="password"
                                 name="password"
                                 placeholder="Please enter your password."
                                 type="password"
                                 onChange={this.handleFormUpdate}></input>
-                            <input type="submit" />
+                            <input type="submit"></input>
+                            <button role="button" id="cancel" onClick={() => {
+                                // @ts-ignore: Unreachable code error
+                                window.electron.close();
+                            }}>Close Application</button>
                         </form>
                     </div>
                 </div>

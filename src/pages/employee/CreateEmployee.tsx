@@ -7,9 +7,6 @@ import { NavigateFunction, useNavigate } from "react-router-dom";
 import { IEmployee } from "../../interfaces/Employee";
 import Breadcrumbs from "../../components/Breadcrumbs";
 
-// https://stackoverflow.com/questions/14226803/wait-5-seconds-before-executing-next-line
-const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
-
 class CreateEmployee extends Component<{ setUser: Function, user: IEmployee, navigate: NavigateFunction }, { setUser: Function, user: IEmployee, form_data: any }> {
     constructor(props: any) {
         super(props);
@@ -29,7 +26,7 @@ class CreateEmployee extends Component<{ setUser: Function, user: IEmployee, nav
         console.log(data);
         if (password == confirmPassword) {
 
-            const emp = await fetch('http://127.0.0.1:3001/api/employees/', {
+            await fetch('http://127.0.0.1:3001/api/employees/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

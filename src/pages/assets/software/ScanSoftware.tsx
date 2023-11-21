@@ -13,7 +13,7 @@ import SoftwareAssetInfoTable from "../../../components/assets/software/Software
 import HardwareLinkTable from "../../../components/assets/hardware/HardwareLinkTable";
 import { HardwareAsset } from "../../../components/assets/hardware/HardwareAsset";
 
-class SoftwareAsset extends Component<{ setUser: Function, user: IEmployee, id: string, navigate: NavigateFunction }, { setUser: Function, user: IEmployee, software_data?: CSoftwareAsset, hardware_data?: { hardware: HardwareAsset, link: any }[] }> {
+class ScanSoftware extends Component<{ setUser: Function, user: IEmployee, id: string, navigate: NavigateFunction }, { setUser: Function, user: IEmployee, software_data?: CSoftwareAsset, hardware_data?: { hardware: HardwareAsset, link: any }[] }> {
     private _id: string;
     constructor(props: any) {
         super(props)
@@ -43,12 +43,6 @@ class SoftwareAsset extends Component<{ setUser: Function, user: IEmployee, id: 
             .then((res) => console.log('fetched', res))
     }
 
-    delete() {
-        fetch(`http://127.0.0.1:3001/api/assets/software/${this._id}`, { method: 'DELETE' }).then(() => {
-            this.refreshPage();
-        })
-    }
-
     refreshPage() {
         window.location.reload();
     }
@@ -63,6 +57,7 @@ class SoftwareAsset extends Component<{ setUser: Function, user: IEmployee, id: 
                     { name: 'Home', path: '/' },
                     { name: 'Software Assets', path: '/software' },
                     { name: this._id ?? '-', path: `/software/${this._id}` },
+                    { name: 'Scan', path: `/software/${this._id}/scan` },
                 ]} setUser={this.props.setUser} username={this.props.user.email} />
                 <div className="hero">
                     <div id="spacer"></div>
@@ -110,7 +105,7 @@ class SoftwareAsset extends Component<{ setUser: Function, user: IEmployee, id: 
 export default ({ setUser, user }: { setUser: Function, user: IEmployee }) => {
     const { id } = useParams();
     const navigation = useNavigate();
-    if (!id) throw new Error(`Invalid ID for Software Asset. Given: ${id}`);
+    if (!id) throw new Error(`Invalid ID for Software Asset Scan. Given: ${id}`);
 
-    return <SoftwareAsset setUser={setUser} user={user} id={id} navigate={navigation} />
+    return <ScanSoftware setUser={setUser} user={user} id={id} navigate={navigation} />
 };

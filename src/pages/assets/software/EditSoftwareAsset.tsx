@@ -78,8 +78,12 @@ class EditSoftwareAsset extends Component<{ setUser: Function, user: IEmployee, 
                     { name: this.props.id, path: `/software/${this._id}` },
                     { name: 'Edit', path: `/software/${this._id}/edit` },
                 ]} setUser={this.state.setUser} username={this.state.user.email} />
-                <h2 className="text-centre">Edit a Software Asset</h2>
-                <p className="text-centre">Asset ID: <code>{this._id}</code></p>
+                <div className="hero">
+                <div id="spacer"></div>
+                <h2 className="text-centre"><i className="fa fa-cloud-download" /> Edit a Software Asset</h2>
+                <hr />
+                </div>
+                <p className="text-centre"><i className="fa fa-id-card-o" /> <strong>Asset ID</strong>: <code>{this._id}</code></p>
                 {this.state.asset_data || this.state.form_data ?
                     <form id="asset-form" onSubmit={this.onSubmit}>
                         <div id="question">
@@ -117,9 +121,10 @@ class EditSoftwareAsset extends Component<{ setUser: Function, user: IEmployee, 
                         </div>
 
                         <div id="question">
-                            <label htmlFor="riskLevel"><i className="fa fa-exclamation-circle" /> Risk Level<span className="red-star">*</span></label><br />
+                            <label htmlFor="riskLevel"><i className="fa fa-exclamation-circle" /> Risk Level</label><br />
                             <p><strong>NOTE</strong>: It is recommended that you run a Vulnerability Scan instead of editing this field manually.</p>
-                            <select onChange={e => this.handleChange('riskLevel', e.target.value)} name="riskLevel" id="riskLevel" required>
+                            <select value={this.state.form_data.riskLevel ?? undefined} onChange={e => this.handleChange('riskLevel', e.target.value)} name="riskLevel" id="riskLevel" required>
+                                {(this.state.form_data.riskLevel || undefined) == undefined ? <option disabled selected>[It is recommended that you run a Vulnerability Scan instead of editing this field manually.]</option> : <></>}
                                 {[
                                     'Critical',
                                     'High',

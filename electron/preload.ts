@@ -5,7 +5,8 @@
 import { contextBridge, ipcRenderer } from 'electron'
 
 contextBridge.exposeInMainWorld('electron', {
-  getData: () => ipcRenderer.invoke('get-data')
+  getData: () => ipcRenderer.invoke('get-data'),
+  close: () => ipcRenderer.invoke('close')
 })
 contextBridge.exposeInMainWorld('api', withPrototype({
   node: () => process.versions.node,

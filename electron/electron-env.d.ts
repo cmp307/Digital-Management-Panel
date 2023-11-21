@@ -6,6 +6,7 @@
 
 export interface IElectronAPI {
   getData: () => Promise<void>;
+  close: () => Promise<void>;
 }
 
 export interface IAPI {

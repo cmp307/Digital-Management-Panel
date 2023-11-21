@@ -34,24 +34,27 @@ class HardwareLinkTable extends Component<{ assets: { hardware: HardwareAsset, l
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.assets.map((item: any) => (
-                            <tr key={item.hardware._id}>
-                                <td><code>{item.hardware._id}</code></td>
-                                <td>{item.hardware.name}</td>
-                                <td><PillButton label={item.hardware.type} /></td>
-                                <td><code>{item.hardware.ip}</code></td>
-                                <td>{item.link.created_by}</td>
-                                <td>
-                                    <Link to={`/hardware/${item.hardware._id}`} role="button" id="blue-button" className="btn btn-outline-primary "><i className="fa fa-eye" /> View Asset</Link>
-                                    <Link to={`/hardware/${item.hardware._id}/edit`} role="button" id="blue-button" className="btn btn-outline-primary "><i className="fa fa-edit" /> Edit Asset</Link>
-                                    <button onClick={() => {
-                                        fetch(`http://127.0.0.1:3001/api/asset-link/hardware/${this.props.id}/${item.software._id}`, { method: 'DELETE' }).then(() => {
-                                            this.refreshPage();
-                                        })
-                                    }} className="btn btn-outline-danger"><i className="fa fa-trash" /> Delete Asset Link</button>
-                                </td>
-                            </tr>
-                        ))}
+                        {this.props.assets.map((item: any) => {
+                            if(!item.hardware || !item.link) return <></>;
+                            return (
+                                <tr key={item.hardware._id}>
+                                    <td><code>{item.hardware._id}</code></td>
+                                    <td>{item.hardware.name}</td>
+                                    <td><PillButton label={item.hardware.type} /></td>
+                                    <td><code>{item.hardware.ip}</code></td>
+                                    <td>{item.link.created_by}</td>
+                                    <td>
+                                        <Link to={`/hardware/${item.hardware._id}`} role="button" id="blue-button" className="btn btn-outline-primary "><i className="fa fa-eye" /> View Asset</Link>
+                                        <Link to={`/hardware/${item.hardware._id}/edit`} role="button" id="blue-button" className="btn btn-outline-primary "><i className="fa fa-edit" /> Edit Asset</Link>
+                                        <button onClick={() => {
+                                            fetch(`http://127.0.0.1:3001/api/asset-link/hardware/${this.props.id}/${item.software._id}`, { method: 'DELETE' }).then(() => {
+                                                this.refreshPage();
+                                            })
+                                        }} className="btn btn-outline-danger"><i className="fa fa-trash" /> Delete Asset Link</button>
+                                    </td>
+                                </tr>
+                            )
+                        })}
                     </tbody>
                 </table>
             </div >
