@@ -5,7 +5,7 @@ import Breadcrumbs from '../components/Breadcrumbs';
 import { IEmployee } from '../interfaces/Employee';
 import { IIPCSystemData } from '../interfaces/IPC';
 
-class Home extends Component<{ setUser: Function, user: IEmployee }, { user: IEmployee, setUser: Function, data: any }> {
+class Home extends Component<{ setUser: Function, user: IEmployee, hasRan: boolean, setRan: Function }, { user: IEmployee, setUser: Function, data: any }> {
     constructor(props: any) {
         super(props);
         this.state = {
@@ -19,6 +19,8 @@ class Home extends Component<{ setUser: Function, user: IEmployee }, { user: IEm
     }
 
     componentDidMount() {
+        if(this.props.hasRan == true) return;
+        this.props.setRan(true);
         try {
             // @ts-ignore: Unreachable code error
             window.electron.getData().then(async (data: IIPCSystemData) => {

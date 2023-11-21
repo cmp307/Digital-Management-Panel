@@ -20,12 +20,15 @@ import EditSoftwareAsset from './pages/assets/software/EditSoftwareAsset';
 import Employees from './pages/employee/Employees';
 import Employee from './pages/employee/Employee';
 import CreateEmployee from './pages/employee/CreateEmployee';
+import EditEmployee from './pages/employee/EditEmployee';
 
 import Error404 from './pages/Error404';
 import Versions from './pages/Versions';
 
 function App() {
   const [user, setUser] = useState(undefined as any);
+  const [hasRan, setRan] = useState(false);
+
   if (!user) {
     try {
       const storage_user = JSON.parse(localStorage.getItem('user')!);
@@ -45,7 +48,7 @@ function App() {
       <HashRouter>
         <Routes>
           {/* Index Route */}
-          <Route index element={<Home setUser={setUser} user={user} />} />
+          <Route index element={<Home setUser={setUser} user={user} hasRan={hasRan} setRan={setRan} />} />
 
           {/* Hardware Routes */}
           <Route path="/hardware" element={<HardwareAssets setUser={setUser} user={user} />} />
@@ -64,7 +67,7 @@ function App() {
           <Route path="/employees" element={<Employees setUser={setUser} user={user} />} />
           <Route path="/employees/:id" element={<Employee setUser={setUser} user={user} />} />
           <Route path="/employees/create" element={<CreateEmployee setUser={setUser} user={user} />} />
-          {/* <Route path="/employees/:id/edit" element={<EditEmployee setUser={setUser} user={user} />} /> */}
+          <Route path="/employees/:id/edit" element={<EditEmployee setUser={setUser} user={user} />} />
 
           {/* Misc. Routes */}
           <Route path="/versions" element={<Versions setUser={setUser} user={user} />} />
