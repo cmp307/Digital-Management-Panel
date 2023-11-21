@@ -75,16 +75,18 @@ router.delete('/:id', async (req: Request, res: Response) => {
 
 // @ROUTE: POST api/assets/hardware
 // @DESCRIPTION: Used for creating a Software Asset.
+const ipRegex = /\b(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b|\b(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}\b/;
 router.post('/', async (req: Request, res: Response) => {
     await wrapper(async (db: any) => {
         console.log(req.body);
         const collection = db.collection(DATABASE);
         const { name, type, model, manufacturer, ip, date, note, parent_employee } = req.body;
-        const _employee = new mongo.ObjectId(parent_employee);
+        const _employee = (parent_employee) ? new mongo.ObjectId(parent_employee) : undefined;
 
         const isFound = await collection.find({ name, model, manufacturer, ip }).toArray();
-        if(isFound.length > 0) return res.send({ status: false });
-        
+        if (isFound.length > 0) return res.send({ status: false });
+        if (!ipRegex.test(ip)) return res.send({ status: false })
+
         const resp = await collection.insertOne({
             name,
             type,
