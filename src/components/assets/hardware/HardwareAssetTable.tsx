@@ -28,6 +28,7 @@ class HardwareAssetTable extends Component<{ assets: HardwareAsset[] }> {
                             <th scope="col">System Type</th>
                             <th scope="col">System IP</th>
                             <th scope="col"></th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -37,6 +38,7 @@ class HardwareAssetTable extends Component<{ assets: HardwareAsset[] }> {
                                 <td>{item.name}</td>
                                 <td><PillButton label={item.type} /></td>
                                 <td>{item.ip}</td>
+                                <td>{(item.parent_employee) ? <></> : <p className="red-text"><i className="fa fa-exclamation-circle"/> No Supervising Employee</p>}</td>
                                 <td>
                                     <Link to={`/hardware/${item._id}`} role="button" id="blue-button" className="btn btn-outline-primary"><i className="fa fa-eye" /> View Asset</Link>
                                     <Link to={`/hardware/${item._id}/edit`} role="button" id="blue-button" className="btn btn-outline-primary"><i className="fa fa-edit" /> Edit Asset</Link>

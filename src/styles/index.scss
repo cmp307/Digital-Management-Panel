@@ -121,3 +121,37 @@ tr#warning i {
 tr#warning {
     border: 3px solid #f5c2c7;
 }
+
+#clippy-alert {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    img {
+        height: 200px;
+    }
+}
+
+button#cancel {
+    padding: 12px 20px;
+    border: none;
+    background-color: #e74c3c;
+    color: white;
+    border-radius: 10px;
+}
+
+.red-text {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+tbody tr {
+    vertical-align: middle;
+    td {
+        vertical-align: middle;
+    }
+    p, p i {
+        vertical-align: middle;
+    }
+}

@@ -67,7 +67,7 @@ class Employee extends Component<{ setUser: Function, user: IEmployee, id: strin
                     <hr />
                 </div>
                 <div id="action-buttons">
-                    <Link to={`/employees/${this._id}/edit`} className="btn btn-outline-primary"><i className="fa fa-edit" /> Edit Employee</Link>
+                    <Link to={`/employees/${this._id}/edit`} className={"btn btn-outline-primary " + (this._id == '655bf70f3ee93eb2c723dc9d' ? 'disabled' : '')}><i className="fa fa-edit" /> Edit Employee</Link>
                     <button onClick={this.refreshPage} className="btn btn-outline-primary"><i className="fa fa-refresh" /> Refresh Employee</button>
                     <button onClick={this.delete} className="btn btn-outline-danger"><i className="fa fa-trash" /> Delete <strong>All</strong> Employee Assets</button>
                 </div>
@@ -98,7 +98,7 @@ class Employee extends Component<{ setUser: Function, user: IEmployee, id: strin
                                 </tr>
                                 <tr>
                                     <th><i className="fa fa-envelope-o" /> E-Mail</th>
-                                    <td><a href={'mailto:'+this.state.employee_data.email}>{this.state.employee_data.email}</a></td>
+                                    <td><a href={'mailto:' + this.state.employee_data.email}>{this.state.employee_data.email}</a></td>
                                 </tr>
                             </table>
                         </div>

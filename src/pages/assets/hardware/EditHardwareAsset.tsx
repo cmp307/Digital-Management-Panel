@@ -70,8 +70,13 @@ class EditHardwareAsset extends Component<{ setUser: Function, user: IEmployee, 
                     { name: this.props.id, path: `/hardware/${this._id}` },
                     { name: 'Edit', path: `/hardware/${this._id}/edit` },
                 ]} setUser={this.state.setUser} username={this.state.user.email} />
-                <h2 className="text-centre">Edit an Asset</h2>
-                <p className="text-centre">Asset ID: <code>{this._id}</code></p>
+                <div className="hero">
+                <div id="spacer"></div>
+                <h2 className="text-centre"><i className="fa fa-server" />Edit a Hardware Asset</h2>    
+                <hr />            
+                </div>
+
+                <p className="text-centre"><i className="fa fa-id-card-o" /> <strong>Asset ID</strong>: <code>{this._id}</code></p>
                 {this.state.asset_data ?
                     <form id="asset-form" onSubmit={this.onSubmit}>
                         <div id="question">
@@ -85,7 +90,7 @@ class EditHardwareAsset extends Component<{ setUser: Function, user: IEmployee, 
                                 disabled></input>
                         </div>
                         <div id="question">
-                            <label htmlFor="name"><i className="fa fa-pencil-square-o" /> Asset Name</label><br />
+                            <label htmlFor="name"><i className="fa fa-pencil-square-o" /> Asset Name<span className="red-star">*</span></label><br />
                             <input
                                 type="text"
                                 id="name"
@@ -96,7 +101,7 @@ class EditHardwareAsset extends Component<{ setUser: Function, user: IEmployee, 
                                 required></input>
                         </div>
                         <div id="question">
-                            <label htmlFor="type"><i className="fa fa-exchange" /> Asset Type</label><br />
+                            <label htmlFor="type"><i className="fa fa-exchange" /> Asset Type<span className="red-star">*</span></label><br />
                             <select onChange={e => this.handleChange('type', e.target.value)} name="type" id="type" required>
                                 {(this.state.form_data.type ?
                                     <option disabled selected value=''>[Please select a type for your Asset]</option> :
@@ -131,7 +136,7 @@ class EditHardwareAsset extends Component<{ setUser: Function, user: IEmployee, 
 
 
                         <div id="question">
-                            <label htmlFor="ip"><i className="fa fa-wifi" /> IP Address (<code>IPv4/IPv6</code>)</label><br />
+                            <label htmlFor="ip"><i className="fa fa-wifi" /> IP Address (<code>IPv4/IPv6</code>)<span className="red-star">*</span></label><br />
                             <input
                                 type="text"
                                 id="ip"
@@ -154,13 +159,13 @@ class EditHardwareAsset extends Component<{ setUser: Function, user: IEmployee, 
                             <textarea id="note" name="note" value={this.state.form_data.note} onChange={e => this.handleChange('note', e.target.value)} placeholder="Would you like to leave a note on this asset?"></textarea>
                         </div>
 
-                        <label><i className="fa fa-user" /> What employee do you want to assign this asset to?</label>
+                        <label><i className="fa fa-user" /> What employee do you want to assign this asset to?<span className="red-star">*</span></label>
                         <select name="parent_employee" onChange={e => this.handleChange('parent_employee', e.target.value)} id="parent_employee" required>
                             {(this.state.form_data.parent_employee) ?
                                 <option disabled value=''>[Please select an employee to assign this asset to]</option> :
                                 <option disabled selected value=''>[Please select an employee to assign this asset to]</option>}
                             {this.state.employee_data ? this.state.employee_data.map((x) => {
-                                if (x._id.toString() == this.state.asset_data?.parent_employee.toString()) return <option selected value={x._id.toString()}>{x.forename} {x.surname} ({x.department})</option>
+                                if ((this.state.asset_data?.parent_employee && (x._id.toString() == this.state.asset_data.parent_employee.toString()))) return <option selected value={x._id.toString()}>{x.forename} {x.surname} ({x.department})</option>
                                 return <option value={x._id.toString()}>{x.forename} {x.surname} ({x.department})</option>
                             }) : 'Loading...'}
                         </select>

@@ -8,9 +8,6 @@ import { IEmployee } from "../../../interfaces/Employee";
 import Breadcrumbs from "../../../components/Breadcrumbs";
 import { SoftwareAsset } from "../../../components/assets/software/SoftwareAsset";
 
-// https://stackoverflow.com/questions/14226803/wait-5-seconds-before-executing-next-line
-const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
-
 class InstallSoftware extends Component<{ setUser: Function, user: IEmployee, navigate: NavigateFunction, id: string }, { data: SoftwareAsset[], setUser: Function, user: IEmployee, form_data: any }> {
     private _id: string;
     constructor(props: any) {
