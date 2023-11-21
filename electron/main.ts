@@ -39,7 +39,7 @@ function createWindow() {
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
     },
-    width: 1690,
+    width: 1750,
     height: 1000,
     show: false
   })
@@ -96,7 +96,13 @@ app.whenReady().then(async () => {
     };
     console.log('ipc data ->', data)
     return data;
-  })
+  });
+
+  ipcMain.handle('close', async () => {
+    app.exit();
+    return true;
+  });
+
   createWindow();
 })
 
