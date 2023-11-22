@@ -1,13 +1,7 @@
 @import "~bootstrap/scss/bootstrap";
-@import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 * {
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-
-    ::selection {
-        background-color: #30336b;
-        color: white;
-    }
+    font-family: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans","Liberation Sans",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
 }
 
 .text-centre {
@@ -48,8 +42,9 @@
         border-radius: 10px;
         transition: background-color 0.3s ease-in-out;
     }
+
     a:hover {
-            background-color: #3498db;
+        background-color: #3498db;
     }
 }
 
@@ -69,6 +64,7 @@
 }
 
 .hero {
+
     h1,
     h2,
     h3,
@@ -77,6 +73,7 @@
         font-family: 'Poppins', sans-serif;
         font-weight: 700;
         margin: 8px 0px;
+
         i {
             padding-right: 10px;
         }
@@ -148,10 +145,82 @@ button#cancel {
 
 tbody tr {
     vertical-align: middle;
+
     td {
         vertical-align: middle;
     }
-    p, p i {
+
+    p,
+    p i {
         vertical-align: middle;
     }
+}
+
+#references,
+#weaknesses {
+    P {
+        padding-bottom: 0px;
+        margin-bottom: 0px;
+    }
+    a {
+        // background-color: #f1f2f3;
+        // border-radius: 10px;
+        color: black;
+        // padding: 5px 10px;
+        // margin: 0px 5px;
+        // margin-bottom: 10px;
+
+        i {
+            padding-right: 5px;
+        }
+    }
+}
+
+#weaknesses {
+    margin-bottom: 20px;
+}
+
+.vuln-data {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 50%;
+}
+
+.card-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    p {
+        margin-bottom: 0px;
+    }
+}
+
+.card-body {
+    display: flex;
+    flex-direction: row;
+
+    #description {
+        width: 100%;
+        padding-right: 20px;
+        max-width: 75%;
+    }
+}
+
+.card-footer {
+    background-color: #f1f2f3;
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#scores {
+    p {
+        margin: 0px;
+    }
+    margin-bottom: 10px;
 }

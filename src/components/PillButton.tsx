@@ -1,6 +1,6 @@
 import { Component } from 'react';
 
-class PillButton extends Component<{ label: string }> {
+class PillButton extends Component<{ label: string, substring?: string }> {
     render() {
         let style;
 
@@ -30,7 +30,7 @@ class PillButton extends Component<{ label: string }> {
                 style = '#95a5a6'
                 break;
             case 'finance':
-                style= '#786fa6'
+                style = '#786fa6'
                 break;
             case 'human resources':
                 style = '#63cdda'
@@ -64,7 +64,7 @@ class PillButton extends Component<{ label: string }> {
                 break;
         }
         return (
-            <span className={'badge rounded-pill'} style={{ backgroundColor: style, color: 'white' }}>{this.props.label}</span>
+            <span className={'badge rounded-pill'} style={{ backgroundColor: style, color: 'white' }}>{this.props.label}{(this.props.substring) ? ` ${this.props.substring}` : ''}</span>
         )
     }
 }

@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { wrapper } from "..";
+import { SoftwareAsset } from "../../../src/components/assets/software/SoftwareAsset";
 
 const express = require('express');
 const mongo = require('mongodb');
@@ -7,6 +8,7 @@ const router = express.Router();
 
 const DATABASE = "software";
 const LINK_COLLECTION_DATABASE = "asset-links";
+const VULNERABILITY_SCANS_DATABASE = "vulnerability-scans";
 
 // @ROUTE: GET api/assets/hardware/view-all
 // @DESCRIPTION: Used for viewing all Software Assets.
@@ -58,6 +60,68 @@ router.get('/:id', async (req: Request, res: Response) => {
     })
 });
 
+// @ROUTE: GET api/assets/hardware/:id
+// @DESCRIPTION: Used for getting a Software Asset.
+router.get('/:id/scan', async (req: Request, res: Response) => {
+    await wrapper(async (db: any) => {
+        const software_collection = db.collection(DATABASE);
+        const vuln_collection = db.collection(VULNERABILITY_SCANS_DATABASE);
+        const id = req.params.id;
+
+        const softwareAssetRes = await software_collection.findOne({ _id: new mongo.ObjectId(id) });
+        if (!softwareAssetRes) return res.json({ status: false });
+        const softwareAsset = new SoftwareAsset(softwareAssetRes);
+
+        let manufacturer = softwareAsset.manufacturer.toLowerCase()
+        let name = softwareAsset.name.toLowerCase();
+        let version = softwareAsset.version.toLowerCase();
+
+        console.log('Fetching', `https://services.nvd.nist.gov/rest/json/cves/2.0?cpeName=cpe:2.3:o:${manufacturer.toLowerCase().replace(' ', '_')}:${name.replace(' ', '_')}:${version}&cvssV3Severity=CRITICAL&isVulnerable`)
+        const criticalResponse = await fetch(`https://services.nvd.nist.gov/rest/json/cves/2.0?cpeName=cpe:2.3:o:${manufacturer.toLowerCase().replace(' ', '_')}:${name.replace(' ', '_')}:${version}&cvssV3Severity=CRITICAL&isVulnerable`, {
+            headers: {
+                apiKey: '09e94129-a4f0-402f-8cb2-1e619fd51eb3'
+            }
+        })
+            .then((res) => res.json())
+
+        console.log('Fetching', `https://services.nvd.nist.gov/rest/json/cves/2.0?cpeName=cpe:2.3:o:${manufacturer.toLowerCase().replace(' ', '_')}:${name.replace(' ', '_')}:${version}&cvssV3Severity=HIGH&isVulnerable`)
+        const highResponse = await fetch(`https://services.nvd.nist.gov/rest/json/cves/2.0?cpeName=cpe:2.3:o:${manufacturer.toLowerCase().replace(' ', '_')}:${name.replace(' ', '_')}:${version}&cvssV3Severity=HIGH&isVulnerable`, {
+            headers: {
+                apiKey: '09e94129-a4f0-402f-8cb2-1e619fd51eb3'
+            }
+        })
+            .then((res) => res.json())
+
+        const criticalResults = criticalResponse.totalResults ?? 0;
+        const highResults = highResponse.totalResults ?? 0;
+
+        res.json({
+            totalResults: criticalResults + highResults,
+            allVulnerabilitites: [...criticalResponse.vulnerabilities.reverse(), ...highResponse.vulnerabilities.reverse()],
+            high: highResponse,
+            critical: criticalResponse
+        });
+
+        if (criticalResults > 0) return await software_collection.updateOne({ _id: new mongo.ObjectId(id) }, {
+            $set: {
+                risk_level: 'Critical'
+            }
+        });
+
+        if (highResults > 0) return await software_collection.updateOne({ _id: new mongo.ObjectId(id) }, {
+            $set: {
+                risk_level: 'High'
+            }
+        });
+
+        return await software_collection.updateOne({ _id: new mongo.ObjectId(id) }, {
+            $set: {
+                risk_level: 'N/A'
+            }
+        });
+    })
+});
+
 // @ROUTE: DELETE api/assets/hardware/:id
 // @DESCRIPTION: Used for deleting a Software Asset.
 router.delete('/:id', async (req: Request, res: Response) => {
@@ -82,7 +146,7 @@ router.post('/', async (req: Request, res: Response) => {
         const { name, manufacturer, version, risk_level } = req.body;
 
         const isFound = await collection.find({ name, manufacturer, version }).toArray();
-        if(isFound.length > 0) return res.send({ status: false });
+        if (isFound.length > 0) return res.send({ status: false });
 
         const resp = await collection.insertOne({
             name,
