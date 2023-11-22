@@ -121,6 +121,17 @@ class EditSoftwareAsset extends Component<{ setUser: Function, user: IEmployee, 
                         </div>
 
                         <div id="question">
+                            <label htmlFor="cve"><i className="fa fa-code-fork" /> Common Platform Enumeration</label><br />
+                            <input
+                                type="text"
+                                id="cve"
+                                name="cve"
+                                value={(this.state.form_data.name)}
+                                onChange={e => this.handleChange('cve', e.target.value)}
+                                required disabled></input>
+                        </div>
+
+                        <div id="question">
                             <label htmlFor="riskLevel"><i className="fa fa-exclamation-circle" /> Risk Level</label><br />
                             <p><strong>NOTE</strong>: It is recommended that you run a Vulnerability Scan instead of editing this field manually.</p>
                             <select value={this.state.form_data.riskLevel ?? undefined} onChange={e => this.handleChange('riskLevel', e.target.value)} name="riskLevel" id="riskLevel" required>
