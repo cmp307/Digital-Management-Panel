@@ -24,6 +24,7 @@ import EditEmployee from './pages/employee/EditEmployee';
 
 import Error404 from './pages/Error404';
 import Versions from './pages/Versions';
+import ScanSoftware from './pages/assets/software/ScanSoftware';
 
 function App() {
   const [user, setUser] = useState(undefined as any);
@@ -62,6 +63,7 @@ function App() {
           <Route path="/software/:id" element={<SoftwareAsset setUser={setUser} user={user} />} />
           <Route path="/software/create" element={<CreateSoftwareAsset setUser={setUser} user={user} />} />
           <Route path="/software/:id/edit" element={<EditSoftwareAsset setUser={setUser} user={user} />} />
+          <Route path="/software/:id/scan" element={<ScanSoftware setUser={setUser} user={user} />} />
 
           {/* Employee Routes */}
           <Route path="/employees" element={<Employees setUser={setUser} user={user} />} />
