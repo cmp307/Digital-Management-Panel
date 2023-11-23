@@ -39,12 +39,13 @@ class Login extends Component<{ setUser: Function, user: IEmployee }> {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
-        }).then((res) => {
+        })
+        .then((res) => res.json())
+        .then((res) => {
             console.log(`Form submitted & recieved ${res.status}`);
-            if (res.status == 200) {
-                this._setUser(_state);
-                console.log(_state);
-                localStorage.setItem('user', JSON.stringify(_state))
+            if (res.status == true) {
+                this._setUser(res.data);
+                localStorage.setItem('user', JSON.stringify(res.data))
             }
         });
     }

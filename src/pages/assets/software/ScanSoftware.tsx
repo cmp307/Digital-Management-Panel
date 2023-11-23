@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import { IEmployee } from "../../../interfaces/Employee";
 import Breadcrumbs from "../../../components/Breadcrumbs";
-import { Internal_NVD_API_Response, NVDResponse } from "../../../interfaces/NVD";
+import { Internal_NVD_API_Response } from "../../../interfaces/NVD";
 import { default as cvss } from 'cvss';
 import PillButton from "../../../components/PillButton";
 import ClipLoader from "react-spinners/ClipLoader";
@@ -88,7 +88,7 @@ class ScanSoftware extends Component<{ setUser: Function, user: IEmployee, id: s
                     { name: 'Software Assets', path: '/software' },
                     { name: this._id ?? '-', path: `/software/${this._id}` },
                     { name: 'Scan', path: `/software/${this._id}/scan` },
-                ]} setUser={this.props.setUser} username={this.props.user.email} />
+                ]} setUser={this.props.setUser} user={this.props.user} />
                 <div className="hero">
                     <div id="spacer"></div>
                     <h2 className="text-centre"><i className="fa fa-terminal" /> Action Buttons</h2>
@@ -134,7 +134,7 @@ class ScanSoftware extends Component<{ setUser: Function, user: IEmployee, id: s
                     {this.state.vuln_data?.allVulnerabilitites.map((x) => {
                         if (!x.cve.metrics.cvssMetricV30) return <></>;
                         const vec_string = x.cve.metrics.cvssMetricV30[0].cvssData.vectorString;
-                        const vec_score = cvss.getAll(vec_string)
+                        const vec_score = cvss.getAll(vec_string) as any;
                         const date = new Date(x.cve.published);
 
                         return <div className={"card mb-3 bg-light"} id={x.cve.id}>

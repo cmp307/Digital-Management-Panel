@@ -69,7 +69,7 @@ class EditHardwareAsset extends Component<{ setUser: Function, user: IEmployee, 
                     { name: 'Hardware Assets', path: '/hardware' },
                     { name: this.props.id, path: `/hardware/${this._id}` },
                     { name: 'Edit', path: `/hardware/${this._id}/edit` },
-                ]} setUser={this.state.setUser} username={this.state.user.email} />
+                ]} setUser={this.state.setUser} user={this.state.user} />
                 <div className="hero">
                 <div id="spacer"></div>
                 <h2 className="text-centre"><i className="fa fa-server" />Edit a Hardware Asset</h2>    

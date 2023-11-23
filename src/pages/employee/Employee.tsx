@@ -60,7 +60,7 @@ class Employee extends Component<{ setUser: Function, user: IEmployee, id: strin
                     { name: 'Home', path: '/' },
                     { name: 'Employees', path: '/employees' },
                     { name: this._id ?? '-', path: `/employees/${this._id}` },
-                ]} setUser={this.props.setUser} username={this.props.user.email} />
+                ]} setUser={this.props.setUser} user={this.props.user} />
                 <div className="hero">
                     <div id="spacer"></div>
                     <h2 className="text-centre"><i className="fa fa-terminal" /> Action Buttons</h2>

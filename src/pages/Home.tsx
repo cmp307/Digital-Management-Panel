@@ -19,6 +19,9 @@ class Home extends Component<{ setUser: Function, user: IEmployee, hasRan: boole
     }
 
     componentDidMount() {
+        console.log('======-----=======');
+        console.log(this.state);
+        console.log('======-----=======');
         if(this.props.hasRan == true) return;
         this.props.setRan(true);
         try {
@@ -27,12 +30,14 @@ class Home extends Component<{ setUser: Function, user: IEmployee, hasRan: boole
                 console.log('mountdata->', data);
                 this.setState({ data: data });
                 console.log('SWID FETCH');
+
+                const AssetName = /(Window)(s)*( )(\d+)/gi.exec(data.distro)![0];
                 const swid = await fetch(`http://127.0.0.1:3001/api/assets/software`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ name: data.distro, version: data.release, manufacturer: data.platform, risk_level: 'N/A' })
+                    body: JSON.stringify({ name: AssetName ?? 'AUTO: Distro Not Found', version: data.release, manufacturer: data.platform, risk_level: 'N/A' })
                 })
 
                 const hwid = await fetch(`http://127.0.0.1:3001/api/assets/hardware`, {
@@ -40,7 +45,7 @@ class Home extends Component<{ setUser: Function, user: IEmployee, hasRan: boole
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ name: data.hostname, manufacturer: data.manufacturer, model: data.model, type: (data.isLaptop) ? 'Laptop' : 'Workstation', ip: data.ip })
+                    body: JSON.stringify({ name: data.hostname, manufacturer: data.manufacturer, model: data.model, type: (data.isLaptop) ? 'Laptop' : 'Workstation', ip: data.ip, parent_employee: this.props.user._id })
                 })
 
                 const swid_json = await swid.json();
@@ -75,7 +80,7 @@ class Home extends Component<{ setUser: Function, user: IEmployee, hasRan: boole
         return (
             <>
                 <TopBar linkToHomepage={false} />
-                <Breadcrumbs history={[]} username={this.props.user.email} setUser={this.props.setUser} />
+                <Breadcrumbs history={[]} user={this.props.user} setUser={this.props.setUser} />
                 <div className='hero hero-index text-centre'>
                     <br />
                     <h2><i className='fa fa-home' /> Welcome to the <strong>ScottishGlen</strong> Administration Panel!</h2>

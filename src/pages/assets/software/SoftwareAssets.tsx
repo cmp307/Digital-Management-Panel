@@ -50,7 +50,7 @@ class SoftwareAssets extends Component<{ setUser: Function, user: IEmployee }, {
                 <Breadcrumbs history={[
                     { name: 'Home', path: '/' },
                     { name: 'Software Assets', path: '/software' },
-                ]} setUser={this.props.setUser} username={this.props.user.email} />
+                ]} setUser={this.props.setUser} user={this.props.user} />
 
                 <div className="hero">
                     <div id="spacer"></div>

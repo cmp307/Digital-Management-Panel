@@ -60,7 +60,7 @@ class HardwareAsset extends Component<{ setUser: Function, user: IEmployee, id: 
                     { name: 'Home', path: '/' },
                     { name: 'Hardware Assets', path: '/hardware' },
                     { name: this._id ?? '-', path: `/hardware/${this._id}` },
-                ]} setUser={this.props.setUser} username={this.props.user.email} />
+                ]} setUser={this.props.setUser} user={this.props.user} />
                 <div className="hero">
                     <div id="spacer"></div>
                     <h2 className="text-centre"><i className="fa fa-terminal" /> Action Buttons</h2>

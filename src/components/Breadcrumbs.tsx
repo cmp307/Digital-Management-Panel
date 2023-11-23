@@ -2,8 +2,9 @@ import { Link } from "react-router-dom";
 import '../styles/Breadcrumbs.scss';
 import { Component } from 'react';
 import { IBreadcrumbHistory } from "../interfaces/Breadcrumbs";
+import { IEmployee } from "../interfaces/Employee";
 
-class Breadcrumbs extends Component<{ username: string, history?: IBreadcrumbHistory[], setUser: Function }, { setUser: Function }> {
+class Breadcrumbs extends Component<{ user: IEmployee, history?: IBreadcrumbHistory[], setUser: Function }, { setUser: Function }> {
     constructor(props: any) {
         super(props);
         this.state = {
@@ -30,7 +31,7 @@ class Breadcrumbs extends Component<{ username: string, history?: IBreadcrumbHis
                 <div id="breadcrumbs">
                     <p className="left-aligned"><i className="fa fa-history" /> <strong>Breadcrumbs »</strong> {formattedData}</p>
                     <div className="right-aligned">
-                        <p><i className="fa fa-user" /> {this.props.username}</p>
+                        <p><i className="fa fa-user" /> {this.props.user.forename} {this.props.user.surname} ({this.props.user.email})</p>
                         <button className="btn btn-danger" onClick={this.logout}><i className="fa fa-sign-out" /> Logout</button>
                     </div>
                     <div className="clear"></div>
@@ -43,7 +44,7 @@ class Breadcrumbs extends Component<{ username: string, history?: IBreadcrumbHis
                     <p className="left-aligned"><i className="fa fa-history" /> <strong>Breadcrumbs »</strong> Home</p>
                 </p>
                 <p className="right-aligned">
-                    <p><i className="fa fa-user" /> {this.props.username}</p>
+                <p><i className="fa fa-user" /> {this.props.user.forename} {this.props.user.surname} ({this.props.user.email})</p>
                     <button className="btn btn-danger" onClick={this.logout}><i className="fa fa-sign-out" /> Logout</button>
                 </p>
                 <div className="clear"></div>
