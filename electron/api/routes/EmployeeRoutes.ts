@@ -148,6 +148,7 @@ router.post('/', async (req: Request, res: Response) => {
       email: `${forename[0]}.${surname}@scottishglen.co.uk`,
       password: passwordRequest.password
     })
+    return res.json({ status: true })
   })
 });
 
