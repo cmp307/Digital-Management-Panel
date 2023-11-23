@@ -67,7 +67,7 @@ class InstallSoftware extends Component<{ setUser: Function, user: IEmployee, na
                     { name: 'Hardware Assets', path: '/hardware' },
                     { name: this._id, path: `/hardware/${this._id}` },
                     { name: 'Link Software', path: `/hardware/${this._id}/install` },
-                ]} setUser={this.state.setUser} username={this.state.user.email} />
+                ]} setUser={this.state.setUser} user={this.state.user} />
                 <div className="hero">
                     <div id="spacer"></div>
                     <h2 className="text-centre"><i className="fa fa-cloud-download" /> Link a Software Asset</h2>

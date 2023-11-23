@@ -78,7 +78,7 @@ class EditSoftwareAsset extends Component<{ setUser: Function, user: IEmployee, 
                     { name: 'Software Assets', path: '/software' },
                     { name: this.props.id, path: `/software/${this._id}` },
                     { name: 'Edit', path: `/software/${this._id}/edit` },
-                ]} setUser={this.state.setUser} username={this.state.user.email} />
+                ]} setUser={this.state.setUser} user={this.state.user} />
                 <div className="hero">
                     <div id="spacer"></div>
                     <h2 className="text-centre"><i className="fa fa-cloud-download" /> Edit a Software Asset</h2>

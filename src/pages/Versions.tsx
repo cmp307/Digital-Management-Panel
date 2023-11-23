@@ -20,7 +20,7 @@ class Versions extends Component<{ user: IEmployee, setUser: Function, navigate:
                 { name: 'Home', path: '/' },
                 { name: 'Versions', path: '/versions' },
 
-            ]} setUser={this.props.setUser} username={this.props.user.email} />
+            ]} setUser={this.props.setUser} user={this.props.user} />
             <div className="text-centre software">
                 <div className="hero">
                     <div id="spacer"></div>

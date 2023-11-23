@@ -25,7 +25,7 @@ class Error404 extends Component<{ user: IEmployee, setUser: Function, navigate:
                 { name: 'Home', path: '/' },
                 { name: 'Error 404', path: '/' },
 
-            ]} setUser={this.props.setUser} username={this.props.user.email} />
+            ]} setUser={this.props.setUser} user={this.props.user} />
             <br />
             <div className="text-centre">
                 <h1>Error 404 😔</h1>
