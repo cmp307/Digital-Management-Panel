@@ -30,7 +30,7 @@ class Error404 extends Component<{ user: IEmployee, setUser: Function, navigate:
             <div className="text-centre">
                 <h1>Error 404 😔</h1>
                 <p>You have navigated to an unreachable link! This resource is not available.</p>
-                    <button className="btn btn-outline-primary" onClick={() => this.props.navigate(-1)}>Return to previous page!</button>
+                    <button className="btn btn-outline-primary" onClick={() => this.props.navigate(-1)}><i className="fa fa-undo" /> Return to previous page!</button>
             </div>
         </div>)
     }

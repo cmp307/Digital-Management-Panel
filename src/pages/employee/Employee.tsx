@@ -67,7 +67,7 @@ class Employee extends Component<{ setUser: Function, user: IEmployee, id: strin
                     <hr />
                 </div>
                 <div id="action-buttons">
-                    <Link to={`/employees/${this._id}/edit`} className={"btn btn-outline-primary " + (this._id == '655bf70f3ee93eb2c723dc9d' ? 'disabled' : '')}><i className="fa fa-edit" /> Edit Employee</Link>
+                    <Link to={`/employees/${this._id}/edit`} className={"btn btn-outline-primary " + (this._id == '655bf70f3ee93eb2c723dc9d' || this.state.employee_data?.email == this.props.user.email ? 'disabled' : '')}><i className="fa fa-edit" /> Edit Employee</Link>
                     <button onClick={this.refreshPage} className="btn btn-outline-primary"><i className="fa fa-refresh" /> Refresh Employee</button>
                     <button onClick={this.delete} className="btn btn-outline-danger"><i className="fa fa-trash" /> Delete <strong>All</strong> Employee Assets</button>
                 </div>
@@ -116,7 +116,7 @@ class Employee extends Component<{ setUser: Function, user: IEmployee, id: strin
                     </div> :
                     <></>}
                 <div id="centred-div">
-                    <button className="btn btn-outline-primary" onClick={() => this.props.navigate(-1)}>Return to previous page!</button>
+                    <button className="btn btn-outline-primary" onClick={() => this.props.navigate(-1)}><i className="fa fa-undo" /> Return to previous page!</button>
                 </div>
             </>
         )

@@ -7,6 +7,7 @@ import { NavigateFunction, useNavigate } from "react-router-dom";
 import { IEmployee } from "../../../interfaces/Employee";
 import Breadcrumbs from "../../../components/Breadcrumbs";
 import { HardwareAsset } from "../../../components/assets/hardware/HardwareAsset";
+import Combobox from "react-widgets/Combobox";
 
 class CreateSoftwareAsset extends Component<{ setUser: Function, user: IEmployee, navigate: NavigateFunction }, { data: HardwareAsset[], setUser: Function, user: IEmployee, form_data: any }> {
     constructor(props: any) {
@@ -68,18 +69,53 @@ class CreateSoftwareAsset extends Component<{ setUser: Function, user: IEmployee
                 <form id="asset-form" onSubmit={this.onSubmit}>
                     <div id="question">
                         <label htmlFor="name"><i className="fa fa-pencil-square-o" /> Asset Name<span className="red-star">*</span></label><br />
-                        <input type="text" id="name" name="name" onChange={e => this.handleChange('name', e.target.value)} placeholder="Please enter the name for your Asset." required></input>
+                        <Combobox
+                            id="name"
+                            name="name"
+                            defaultValue={this.state.form_data?.name}
+                            onChange={e => this.handleChange('name', e)}
+                            placeholder="Please enter the name for your Asset."
+                            hideCaret
+                            data={['Windows 10', 'Windows 11', 'Windows 8.1', 'Windows 7']} />
+                                                    {/* <input type="text" id="name" name="name" onChange={e => this.handleChange('name', e.target.value)} placeholder="Please enter the name for your Asset." required></input> */}
                     </div>
+                    <div id="spacer"></div>
 
                     <div id="question">
                         <label htmlFor="manufacturer"><i className="fa fa-cogs" /> Asset Manufacturer</label><br />
-                        <input type="text" id="manufacturer" name="manufacturer" onChange={e => this.handleChange('manufacturer', e.target.value)} placeholder="Please enter the Manufacturer of the Asset."></input>
+                        <Combobox
+                            id="name"
+                            name="name"
+                            defaultValue={this.state.form_data?.manufacturer}
+                            onChange={e => this.handleChange('manufacturer', e)}
+                            placeholder="Please enter the manufacturer for your Asset."
+                            hideCaret
+                            data={['Microsoft']} />
                     </div>
+                    <div id="spacer"></div>
 
                     <div id="question">
                         <label htmlFor="name"><i className="fa fa-code-fork" /> Asset Version<span className="red-star">*</span></label><br />
                         <input type="text" id="name" name="name" onChange={e => this.handleChange('version', e.target.value)} placeholder="Please enter the name for your Asset." required></input>
                     </div>
+
+                    {(this.state.form_data.manufacturer && this.state.form_data.name && this.state.form_data.version) ?
+                        <div id="question">
+                            <label htmlFor="cpe"><i className="fa fa-tasks" /> Common Platform Enumeration</label><br />
+                            <input
+                                type="text"
+                                id="cpe"
+                                name="cpe"
+                                value={(
+                                    "cpe:2.3:o:" +
+                                    this.state.form_data.manufacturer.toLowerCase() + ':' +
+                                    this.state.form_data.name.toLowerCase().replace(' ', '_') + ":" +
+                                    this.state.form_data.version
+                                )}
+                                onChange={e => this.handleChange('cpe', e.target.value)}
+                                required disabled></input>
+                        </div> : <></>
+                    }
 
                     <br />
 

@@ -64,7 +64,7 @@ router.post('/generate-password', async (req: Request, res: Response) => {
 
 // @ROUTE: GET api/employees/view-all
 // @DESCRIPTION: Used for viewing all Employees.
-router.get('/view-all', async (_: Request, res: Response) => {
+router.get('/', async (_: Request, res: Response) => {
   await wrapper(async (db: any) => {
     const collection = db.collection('employees');
 
@@ -99,7 +99,7 @@ router.delete('/:id', async (req: Request, res: Response) => {
 
 // @ROUTE: DELETE api/employees/delete-all
 // @DESCRIPTION: Used for deleting all Employees.
-router.delete('/delete-all', async (_: Request, res: Response) => {
+router.delete('/', async (_: Request, res: Response) => {
   await wrapper(async (db: any) => {
     const collection = db.collection(DATABASE);
 
@@ -148,6 +148,7 @@ router.post('/', async (req: Request, res: Response) => {
       email: `${forename[0]}.${surname}@scottishglen.co.uk`,
       password: passwordRequest.password
     })
+    return res.json({ status: true })
   })
 });
 

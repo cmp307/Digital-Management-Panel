@@ -1,4 +1,5 @@
 @import "~bootstrap/scss/bootstrap";
+@import "react-widgets/scss/styles.scss";
 
 * {
     font-family: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans","Liberation Sans",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
@@ -223,4 +224,16 @@ tbody tr {
         margin: 0px;
     }
     margin-bottom: 10px;
+}
+
+.rw-widget-picker {
+    border: none !important;
+}
+
+input[role="combobox"] {
+    margin: 0px !important;
+}
+
+#spacer {
+    margin-bottom: 20px;
 }

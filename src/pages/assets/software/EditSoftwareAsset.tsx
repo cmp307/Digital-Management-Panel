@@ -8,6 +8,7 @@ import { IEmployee } from "../../../interfaces/Employee";
 import Breadcrumbs from "../../../components/Breadcrumbs";
 import { SoftwareAsset } from "../../../components/assets/software/SoftwareAsset";
 import { HardwareAsset } from "../../../components/assets/hardware/HardwareAsset";
+import Combobox from "react-widgets/Combobox";
 
 class EditSoftwareAsset extends Component<{ setUser: Function, user: IEmployee, id: string, navigate: NavigateFunction }, { asset_data?: SoftwareAsset, employee_data?: IEmployee[], hardware_data?: HardwareAsset[], setUser: Function, user: IEmployee, form_data: any }> {
     private _id: string;
@@ -34,7 +35,7 @@ class EditSoftwareAsset extends Component<{ setUser: Function, user: IEmployee, 
             .then((res) => console.log(res))
             .catch((err) => console.error(err))
 
-        fetch('http://127.0.0.1:3001/api/employees/view-all')
+        fetch('http://127.0.0.1:3001/api/employees/')
             .then((res) => res.json())
             .then((res) => this.setState({ employee_data: res }))
             .then((res) => console.log(res))
@@ -79,35 +80,52 @@ class EditSoftwareAsset extends Component<{ setUser: Function, user: IEmployee, 
                     { name: 'Edit', path: `/software/${this._id}/edit` },
                 ]} setUser={this.state.setUser} username={this.state.user.email} />
                 <div className="hero">
-                <div id="spacer"></div>
-                <h2 className="text-centre"><i className="fa fa-cloud-download" /> Edit a Software Asset</h2>
-                <hr />
+                    <div id="spacer"></div>
+                    <h2 className="text-centre"><i className="fa fa-cloud-download" /> Edit a Software Asset</h2>
+                    <hr />
                 </div>
                 <p className="text-centre"><i className="fa fa-id-card-o" /> <strong>Asset ID</strong>: <code>{this._id}</code></p>
-                {this.state.asset_data || this.state.form_data ?
+                {this.state.asset_data && this.state.form_data ?
                     <form id="asset-form" onSubmit={this.onSubmit}>
                         <div id="question">
                             <label htmlFor="name"><i className="fa fa-pencil-square-o" /> Asset Name<span className="red-star">*</span></label><br />
-                            <input
+                            <Combobox
+                                id="name"
+                                name="name"
+                                defaultValue={this.state.form_data?.name}
+                                onChange={e => this.handleChange('name', e)}
+                                placeholder="Please enter the name for your Asset."
+                                hideCaret
+                                data={['Windows 10', 'Windows 11', 'Windows 8.1', 'Windows 7']} />
+                            {/* <input
                                 type="text"
                                 id="name"
                                 name="name"
                                 value={this.state.form_data?.name ?? undefined}
                                 onChange={e => this.handleChange('name', e.target.value)}
                                 placeholder="Please enter the name for your Asset."
-                                required></input>
+                                required></input> */}
                         </div>
-
+                        <div id="spacer"></div>
                         <div id="question">
                             <label htmlFor="manufacturer"><i className="fa fa-cogs" /> Asset Manufacturer</label><br />
-                            <input
+                            <Combobox
+                                id="name"
+                                name="name"
+                                defaultValue={this.state.form_data?.manufacturer}
+                                onChange={e => this.handleChange('manufacturer', e)}
+                                placeholder="Please enter the manufacturer for your Asset."
+                                hideCaret
+                                data={['Microsoft']} />
+                            {/* <input
                                 type="text"
                                 id="manufacturer"
                                 name="manufacturer"
                                 value={this.state.form_data?.manufacturer ?? undefined}
                                 onChange={e => this.handleChange('manufacturer', e.target.value)}
-                                placeholder="Please enter the Manufacturer of the Asset."></input>
+                                placeholder="Please enter the Manufacturer of the Asset."></input> */}
                         </div>
+                        <div id="spacer"></div>
 
                         <div id="question">
                             <label htmlFor="version"><i className="fa fa-code-fork" /> Asset Version<span className="red-star">*</span></label><br />
@@ -120,16 +138,23 @@ class EditSoftwareAsset extends Component<{ setUser: Function, user: IEmployee, 
                                 placeholder="Please enter the name for your Asset." required></input>
                         </div>
 
-                        <div id="question">
-                            <label htmlFor="cve"><i className="fa fa-code-fork" /> Common Platform Enumeration</label><br />
-                            <input
-                                type="text"
-                                id="cve"
-                                name="cve"
-                                value={(this.state.form_data.name)}
-                                onChange={e => this.handleChange('cve', e.target.value)}
-                                required disabled></input>
-                        </div>
+                        {(this.state.form_data.manufacturer && this.state.form_data.name && this.state.form_data.version) ?
+                            <div id="question">
+                                <label htmlFor="cpe"><i className="fa fa-tasks" /> Common Platform Enumeration</label><br />
+                                <input
+                                    type="text"
+                                    id="cpe"
+                                    name="cpe"
+                                    value={(
+                                        "cpe:2.3:o:" +
+                                        this.state.form_data.manufacturer.toLowerCase() + ':' +
+                                        this.state.form_data.name.toLowerCase().replace(' ', '_') + ":" +
+                                        this.state.form_data.version
+                                    )}
+                                    onChange={e => this.handleChange('cpe', e.target.value)}
+                                    required disabled></input>
+                            </div> : <></>
+                        }
 
                         <div id="question">
                             <label htmlFor="riskLevel"><i className="fa fa-exclamation-circle" /> Risk Level</label><br />

@@ -70,8 +70,6 @@ class SoftwareAsset extends Component<{ setUser: Function, user: IEmployee, id: 
                     <hr />
                 </div>
                 <div id="action-buttons">
-                    <Link to={`/software/${this._id}/scans`} role="button" id="blue-button" className="btn btn-outline-secondary"><i className="fa fa-dot-circle-o" /> View Scans</Link>
-                    {/* @TODO (NIST): Change below link to API request to start a scan. */}
                     <Link to={`/software/${this._id}/scan`} role="button" id="blue-button" className="btn btn-outline-secondary"><i className="fa fa-wrench" /> Scan Asset</Link>                    <Link to={`/software/${this._id}/edit`} className="btn btn-outline-primary"><i className="fa fa-edit" /> Edit Asset</Link>
                     <button onClick={this.refreshPage} className="btn btn-outline-primary"><i className="fa fa-refresh" /> Refresh Asset</button>
                     <button onClick={this.delete} className="btn btn-outline-danger"><i className="fa fa-trash" /> Delete Asset</button>
@@ -97,7 +95,7 @@ class SoftwareAsset extends Component<{ setUser: Function, user: IEmployee, id: 
                         </div>
                     </div> : <></>}
                 <div id="centred-div">
-                    <button className="btn btn-outline-primary" onClick={() => this.props.navigate(-1)}>Return to previous page!</button>
+                    <button className="btn btn-outline-primary" onClick={() => this.props.navigate(-1)}><i className="fa fa-undo" /> Return to previous page!</button>
                     <br />
                 </div>
             </>

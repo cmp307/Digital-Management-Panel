@@ -33,7 +33,7 @@ class HardwareAssets extends Component<{ setUser: Function, user: IEmployee }, {
     }
 
     deleteAllAssets() {
-        fetch('http://127.0.0.1:3001/api/assets/hardware/delete-all', { method: 'DELETE' }).then(() => {
+        fetch('http://127.0.0.1:3001/api/assets/hardware/', { method: 'DELETE' }).then(() => {
             this.refreshPage();
         })
     }

@@ -20,7 +20,7 @@ class Employees extends Component<{ setUser: Function, user: IEmployee }, { data
     componentDidMount() { this.updateEmployees() }
 
     updateEmployees() {
-        fetch('http://127.0.0.1:3001/api/employees/view-all')
+        fetch('http://127.0.0.1:3001/api/employees/')
             .then((res) => res.json())
             .then((res) => {
                 const _state = this.state as any;
@@ -31,7 +31,7 @@ class Employees extends Component<{ setUser: Function, user: IEmployee }, { data
     }
 
     deleteAllEmployees() {
-        fetch('http://127.0.0.1:3001/api/employees/delete-all', { method: 'DELETE' }).then(() => {
+        fetch('http://127.0.0.1:3001/api/employees/', { method: 'DELETE' }).then(() => {
             this.refreshPage();
         })
     }
@@ -64,7 +64,7 @@ class Employees extends Component<{ setUser: Function, user: IEmployee }, { data
                     <hr />
                 </div>
                 <p className="text-centre">There is currently <strong>{this.state.data.length}</strong> {(this.state.data.length > 1 || this.state.data.length == 0) ? 'employees' : 'employee'} stored within the Database.</p>
-                <EmployeeTable assets={this.state.data} />
+                <EmployeeTable assets={this.state.data} logged_in_email={this.props.user.email} />
             </>
         )
     }
