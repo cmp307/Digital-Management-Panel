@@ -8,7 +8,6 @@ const router = express.Router();
 
 const DATABASE = "software";
 const LINK_COLLECTION_DATABASE = "asset-links";
-const VULNERABILITY_SCANS_DATABASE = "vulnerability-scans";
 
 // @ROUTE: GET api/assets/hardware/view-all
 // @DESCRIPTION: Used for viewing all Software Assets.
@@ -35,7 +34,7 @@ router.get('/view-all/:id', async (req: Request, res: Response) => {
 
 // @ROUTE: DELETE api/assets/hardware/delete-all
 // @DESCRIPTION: Used for deleting a Software Asset.
-router.delete('/delete-all', async (_: Request, res: Response) => {
+router.delete('/', async (_: Request, res: Response) => {
     await wrapper(async (db: any) => {
         const collection = db.collection(DATABASE);
 
@@ -65,7 +64,6 @@ router.get('/:id', async (req: Request, res: Response) => {
 router.get('/:id/scan', async (req: Request, res: Response) => {
     await wrapper(async (db: any) => {
         const software_collection = db.collection(DATABASE);
-        const vuln_collection = db.collection(VULNERABILITY_SCANS_DATABASE);
         const id = req.params.id;
 
         const softwareAssetRes = await software_collection.findOne({ _id: new mongo.ObjectId(id) });
@@ -83,6 +81,7 @@ router.get('/:id/scan', async (req: Request, res: Response) => {
             }
         })
             .then((res) => res.json())
+            .catch((err) => console.error(err))
 
         console.log('Fetching', `https://services.nvd.nist.gov/rest/json/cves/2.0?cpeName=cpe:2.3:o:${manufacturer.toLowerCase().replace(' ', '_')}:${name.replace(' ', '_')}:${version}&cvssV3Severity=HIGH&isVulnerable`)
         const highResponse = await fetch(`https://services.nvd.nist.gov/rest/json/cves/2.0?cpeName=cpe:2.3:o:${manufacturer.toLowerCase().replace(' ', '_')}:${name.replace(' ', '_')}:${version}&cvssV3Severity=HIGH&isVulnerable`, {
@@ -91,6 +90,8 @@ router.get('/:id/scan', async (req: Request, res: Response) => {
             }
         })
             .then((res) => res.json())
+            .catch((err) => console.error(err))
+
 
         const criticalResults = criticalResponse.totalResults ?? 0;
         const highResults = highResponse.totalResults ?? 0;

@@ -93,7 +93,7 @@ class HardwareAsset extends Component<{ setUser: Function, user: IEmployee, id: 
                         </div>
                         <div>
                             <SoftwareLinkTable assets={this.state.software_data} id={this.props.id} />
-                            <button className="btn btn-outline-primary" onClick={() => this.props.navigate(-1)}>Return to previous page!</button>
+                            <button className="btn btn-outline-primary" onClick={() => this.props.navigate(-1)}><i className="fa fa-undo" /> Return to previous page!</button>
                         </div>
                         <br />
                     </div> : <></>}

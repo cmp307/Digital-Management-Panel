@@ -20,7 +20,7 @@ class CreateAssets extends Component<{ setUser: Function, user: IEmployee, navig
     }
 
     componentDidMount() {
-        fetch('http://127.0.0.1:3001/api/employees/view-all')
+        fetch('http://127.0.0.1:3001/api/employees/')
             .then((res) => res.json())
             .then((res) => this.setState({ data: res }))
             .then((res) => console.log(res))

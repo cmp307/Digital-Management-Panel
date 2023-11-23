@@ -26,8 +26,4 @@ export class HardwareAsset extends Asset implements IHardwareAsset {
         this.type = props.type;
 
     }
-
-    public set setName(name: string) {
-        this.name = name;
-    }
 }

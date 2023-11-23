@@ -31,7 +31,7 @@ router.get('/view-all/:id', async (req: Request, res: Response) => {
     })
 });
 
-// @ROUTE: DELETE api/assets/hardware/delete-all
+// @ROUTE: DELETE api/assets/hardware/
 // @DESCRIPTION: Used for deleting a Software Asset.
 router.delete('/delete-all', async (_: Request, res: Response) => {
     await wrapper(async (db: any) => {

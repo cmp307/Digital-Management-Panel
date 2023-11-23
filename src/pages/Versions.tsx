@@ -32,7 +32,7 @@ class Versions extends Component<{ user: IEmployee, setUser: Function, navigate:
                 <p><img src={'https://i.imgur.com/UDbWcZO.png'} /><strong>Node.js</strong><br />v{(window as any).api.node()}</p>
                 <p><img src={'https://i.imgur.com/FTsep9l.png'} /><strong>Electron</strong><br />v{(window as any).api.electron()}</p>
                 <p><img src={'https://i.imgur.com/ZZWDXbF.png'} /><strong>Google Chrome</strong><br />v{(window as any).api.chrome()}</p>
-                <button className="btn btn-outline-primary" onClick={() => this.props.navigate(-1)}>Return to previous page!</button>
+                <button className="btn btn-outline-primary" onClick={() => this.props.navigate(-1)}><i className="fa fa-undo" /> Return to previous page!</button>
             </div>
         </div>)
     }

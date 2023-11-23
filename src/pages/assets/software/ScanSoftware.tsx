@@ -224,7 +224,7 @@ class ScanSoftware extends Component<{ setUser: Function, user: IEmployee, id: s
 
 
                 <div id="centred-div">
-                    <button className="btn btn-outline-primary" onClick={() => this.props.navigate(-1)}>Return to previous page!</button>
+                    <button className="btn btn-outline-primary" onClick={() => this.props.navigate(-1)}><i className="fa fa-undo" /> Return to previous page!</button>
                     <br />
                 </div>
             </>
