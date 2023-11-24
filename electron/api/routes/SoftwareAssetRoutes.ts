@@ -74,24 +74,22 @@ router.get('/:id/scan', async (req: Request, res: Response) => {
         let name = softwareAsset.name.toLowerCase();
         let version = softwareAsset.version.toLowerCase();
 
-        console.log('Fetching', `https://services.nvd.nist.gov/rest/json/cves/2.0?cpeName=cpe:2.3:o:${manufacturer.toLowerCase().replace(' ', '_')}:${name.replace(' ', '_')}:${version}&cvssV3Severity=CRITICAL&isVulnerable`)
-        const criticalResponse = await fetch(`https://services.nvd.nist.gov/rest/json/cves/2.0?cpeName=cpe:2.3:o:${manufacturer.toLowerCase().replace(' ', '_')}:${name.replace(' ', '_')}:${version}&cvssV3Severity=CRITICAL&isVulnerable`, {
-            headers: {
-                apiKey: '09e94129-a4f0-402f-8cb2-1e619fd51eb3'
-            }
-        })
-            .then((res) => res.json())
-            .catch((err) => console.error(err))
+        const criticalURL = `https://services.nvd.nist.gov/rest/json/cves/2.0?cpeName=cpe:2.3:o:${manufacturer.toLowerCase().replace(' ', '_')}:${name.replace(' ', '_')}:${version}&cvssV3Severity=CRITICAL&isVulnerable`;
+        const highURL = `https://services.nvd.nist.gov/rest/json/cves/2.0?cpeName=cpe:2.3:o:${manufacturer.toLowerCase().replace(' ', '_')}:${name.replace(' ', '_')}:${version}&cvssV3Severity=HIGH&isVulnerable`;
 
-        console.log('Fetching', `https://services.nvd.nist.gov/rest/json/cves/2.0?cpeName=cpe:2.3:o:${manufacturer.toLowerCase().replace(' ', '_')}:${name.replace(' ', '_')}:${version}&cvssV3Severity=HIGH&isVulnerable`)
-        const highResponse = await fetch(`https://services.nvd.nist.gov/rest/json/cves/2.0?cpeName=cpe:2.3:o:${manufacturer.toLowerCase().replace(' ', '_')}:${name.replace(' ', '_')}:${version}&cvssV3Severity=HIGH&isVulnerable`, {
-            headers: {
-                apiKey: '09e94129-a4f0-402f-8cb2-1e619fd51eb3'
-            }
-        })
-            .then((res) => res.json())
-            .catch((err) => console.error(err))
-
+        console.log('Fetching NVD Response');
+        const [criticalResponse, highResponse] = await Promise.all<any>([
+            fetch(criticalURL, {
+                headers: {
+                    apiKey: '09e94129-a4f0-402f-8cb2-1e619fd51eb3'
+                }
+            }).then((res) => { console.log('Fetched', criticalURL); return res; }).then((res) => res.json()),
+            fetch(highURL, {
+                headers: {
+                    apiKey: '09e94129-a4f0-402f-8cb2-1e619fd51eb3'
+                }
+            }).then((res) => { console.log('Fetched', highURL); return res; }).then((res) => res.json()),
+        ]).catch(() => { }) as any[];
 
         const criticalResults = criticalResponse.totalResults ?? 0;
         const highResults = highResponse.totalResults ?? 0;
