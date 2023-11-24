@@ -63,61 +63,65 @@ router.get('/:id', async (req: Request, res: Response) => {
 // @DESCRIPTION: Used for getting a Software Asset.
 router.get('/:id/scan', async (req: Request, res: Response) => {
     await wrapper(async (db: any) => {
-        const software_collection = db.collection(DATABASE);
-        const id = req.params.id;
+        try {
+            const software_collection = db.collection(DATABASE);
+            const id = req.params.id;
 
-        const softwareAssetRes = await software_collection.findOne({ _id: new mongo.ObjectId(id) });
-        if (!softwareAssetRes) return res.json({ status: false });
-        const softwareAsset = new SoftwareAsset(softwareAssetRes);
+            const softwareAssetRes = await software_collection.findOne({ _id: new mongo.ObjectId(id) });
+            if (!softwareAssetRes) return res.json({ status: false });
+            const softwareAsset = new SoftwareAsset(softwareAssetRes);
 
-        let manufacturer = softwareAsset.manufacturer.toLowerCase()
-        let name = softwareAsset.name.toLowerCase();
-        let version = softwareAsset.version.toLowerCase();
+            let manufacturer = softwareAsset.manufacturer.toLowerCase()
+            let name = softwareAsset.name.toLowerCase();
+            let version = softwareAsset.version.toLowerCase();
 
-        const criticalURL = `https://services.nvd.nist.gov/rest/json/cves/2.0?cpeName=cpe:2.3:o:${manufacturer.toLowerCase().replace(' ', '_')}:${name.replace(' ', '_')}:${version}&cvssV3Severity=CRITICAL&isVulnerable`;
-        const highURL = `https://services.nvd.nist.gov/rest/json/cves/2.0?cpeName=cpe:2.3:o:${manufacturer.toLowerCase().replace(' ', '_')}:${name.replace(' ', '_')}:${version}&cvssV3Severity=HIGH&isVulnerable`;
+            const criticalURL = `https://services.nvd.nist.gov/rest/json/cves/2.0?cpeName=cpe:2.3:o:${manufacturer.toLowerCase().replace(' ', '_')}:${name.replace(' ', '_')}:${version}&cvssV3Severity=CRITICAL&isVulnerable`;
+            const highURL = `https://services.nvd.nist.gov/rest/json/cves/2.0?cpeName=cpe:2.3:o:${manufacturer.toLowerCase().replace(' ', '_')}:${name.replace(' ', '_')}:${version}&cvssV3Severity=HIGH&isVulnerable`;
 
-        console.log('Fetching NVD Response');
-        const [criticalResponse, highResponse] = await Promise.all<any>([
-            fetch(criticalURL, {
-                headers: {
-                    apiKey: '09e94129-a4f0-402f-8cb2-1e619fd51eb3'
+            console.log('Fetching NVD Response');
+            const [criticalResponse, highResponse] = await Promise.all<any>([
+                fetch(criticalURL, {
+                    headers: {
+                        apiKey: '09e94129-a4f0-402f-8cb2-1e619fd51eb3'
+                    }
+                }).then((res) => { console.log('Fetched', criticalURL); return res; }).then((res) => res.json()),
+                fetch(highURL, {
+                    headers: {
+                        apiKey: '09e94129-a4f0-402f-8cb2-1e619fd51eb3'
+                    }
+                }).then((res) => { console.log('Fetched', highURL); return res; }).then((res) => res.json()),
+            ]).catch(() => { }) as any[];
+
+            const criticalResults = criticalResponse.totalResults ?? 0;
+            const highResults = highResponse.totalResults ?? 0;
+
+            res.json({
+                totalResults: criticalResults + highResults,
+                allVulnerabilitites: [...criticalResponse.vulnerabilities.reverse(), ...highResponse.vulnerabilities.reverse()],
+                high: highResponse,
+                critical: criticalResponse
+            });
+
+            if (criticalResults > 0) return await software_collection.updateOne({ _id: new mongo.ObjectId(id) }, {
+                $set: {
+                    risk_level: 'Critical'
                 }
-            }).then((res) => { console.log('Fetched', criticalURL); return res; }).then((res) => res.json()),
-            fetch(highURL, {
-                headers: {
-                    apiKey: '09e94129-a4f0-402f-8cb2-1e619fd51eb3'
+            });
+
+            if (highResults > 0) return await software_collection.updateOne({ _id: new mongo.ObjectId(id) }, {
+                $set: {
+                    risk_level: 'High'
                 }
-            }).then((res) => { console.log('Fetched', highURL); return res; }).then((res) => res.json()),
-        ]).catch(() => { }) as any[];
+            });
 
-        const criticalResults = criticalResponse.totalResults ?? 0;
-        const highResults = highResponse.totalResults ?? 0;
-
-        res.json({
-            totalResults: criticalResults + highResults,
-            allVulnerabilitites: [...criticalResponse.vulnerabilities.reverse(), ...highResponse.vulnerabilities.reverse()],
-            high: highResponse,
-            critical: criticalResponse
-        });
-
-        if (criticalResults > 0) return await software_collection.updateOne({ _id: new mongo.ObjectId(id) }, {
-            $set: {
-                risk_level: 'Critical'
-            }
-        });
-
-        if (highResults > 0) return await software_collection.updateOne({ _id: new mongo.ObjectId(id) }, {
-            $set: {
-                risk_level: 'High'
-            }
-        });
-
-        return await software_collection.updateOne({ _id: new mongo.ObjectId(id) }, {
-            $set: {
-                risk_level: 'N/A'
-            }
-        });
+            return await software_collection.updateOne({ _id: new mongo.ObjectId(id) }, {
+                $set: {
+                    risk_level: 'N/A'
+                }
+            });
+        } catch (error) {
+            res.sendStatus(500);
+        }
     })
 });
 
