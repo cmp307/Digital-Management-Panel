@@ -18,6 +18,8 @@ class Home extends Component<{ setUser: Function, user: IEmployee, hasRan: boole
         this.componentDidMount = this.componentDidMount.bind(this);
     }
 
+    
+
     componentDidMount() {
         console.log('======-----=======');
         console.log(this.state);
@@ -37,7 +39,7 @@ class Home extends Component<{ setUser: Function, user: IEmployee, hasRan: boole
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ name: AssetName ?? 'AUTO: Distro Not Found', version: data.release, manufacturer: data.platform, risk_level: 'N/A' })
+                    body: JSON.stringify({ name: AssetName ?? 'AUTO: Distro Not Found', version: data.release, manufacturer: (AssetName) ? 'Microsoft' : data.platform, risk_level: 'N/A' })
                 })
 
                 const hwid = await fetch(`http://127.0.0.1:3001/api/assets/hardware`, {
