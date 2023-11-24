@@ -95,8 +95,6 @@ class ScanSoftware extends Component<{ setUser: Function, user: IEmployee, id: s
                     <hr />
                 </div>
                 <div id="action-buttons">
-                    <Link to={`/software/${this._id}/scans`} role="button" id="blue-button" className="btn btn-outline-secondary"><i className="fa fa-dot-circle-o" /> View Scans</Link>
-                    {/* @TODO (NIST): Change below link to API request to start a scan. */}
                     <Link to={`/software/${this._id}/scan`} role="button" id="blue-button" className="btn btn-outline-secondary"><i className="fa fa-wrench" /> Scan Asset</Link>                    <Link to={`/software/${this._id}/edit`} className="btn btn-outline-primary"><i className="fa fa-edit" /> Edit Asset</Link>
                     <button onClick={this.refreshPage} className="btn btn-outline-primary"><i className="fa fa-refresh" /> Refresh Asset</button>
                 </div>
@@ -127,6 +125,7 @@ class ScanSoftware extends Component<{ setUser: Function, user: IEmployee, id: s
                                 data-testid="loader"
                             />
                             <p>The vulnerability scan is in progress!</p>
+                            <p>This may take a while!</p>
                         </>}
                 </div>
 
