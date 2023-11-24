@@ -45,6 +45,21 @@ router.delete('/delete-all', async (_: Request, res: Response) => {
     })
 });
 
+// @ROUTE: DELETE api/assets/hardware/:id
+// @DESCRIPTION: Used for deleting a Software Asset by Employee.
+router.delete('/delete-all/:id', async (req: Request, res: Response) => {
+    await wrapper(async (db: any) => {
+        const collection = db.collection(DATABASE);
+        const id = req.params.id;
+        if(!id) return res.sendStatus(400);
+        await collection.deleteMany({ parent_employee: new mongo.ObjectId(id) });
+
+        const _linkCollection = db.collection(LINK_COLLECTION_DATABASE);
+        await _linkCollection.deleteMany({});
+        res.send({ "status": true });
+    })
+});
+
 // @ROUTE: GET api/assets/hardware/:id
 // @DESCRIPTION: Used for getting a Software Asset.
 router.get('/:id', async (req: Request, res: Response) => {

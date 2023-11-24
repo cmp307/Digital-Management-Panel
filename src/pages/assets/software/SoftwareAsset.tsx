@@ -24,6 +24,8 @@ class SoftwareAsset extends Component<{ setUser: Function, user: IEmployee, id: 
             software_data: undefined
         }
         this._id = props.id
+
+        this.delete = this.delete.bind(this);
     }
 
     componentDidMount() {
@@ -45,7 +47,7 @@ class SoftwareAsset extends Component<{ setUser: Function, user: IEmployee, id: 
 
     delete() {
         fetch(`http://127.0.0.1:3001/api/assets/software/${this._id}`, { method: 'DELETE' }).then(() => {
-            this.refreshPage();
+            this.props.navigate('/software')
         })
     }
 
