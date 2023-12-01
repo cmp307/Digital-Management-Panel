@@ -22,11 +22,11 @@
   },
   
   "include": ["src", "src/**/*", "src/**/**/*", "electron", "electron/**/*", "electron/**/**/*"],
-  "exclude": ["./testing/**.spec.ts"],
+  "exclude": ["__tests__/**.spec.ts"],
   "references": [{ "path": "./tsconfig.node.json" }],
   "ts-node": {
     "compilerOptions": {
-      "module": "ESNext",
+      "module": "CommonJS",
       "moduleResolution": "Node"
     }
   }
