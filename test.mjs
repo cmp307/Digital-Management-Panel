@@ -22,11 +22,22 @@ const delay = ms =>
         const [page] = pages;
         await page.setViewport({ height: 1000, width: 1800 })
 
-        console.log('\n\n');
-        figlet('Automatic Testing').then((data) => console.log(chalk.redBright(data)));
-        console.log('\n\n');
+        figlet('Automatic Testing').then((data) => {
+            console.log('\n\n');
+            console.log(chalk.redBright(data))
+            console.log(chalk.redBright(`                           Created by: Liam Townsley (2301060)`))
+            console.log('\n\n');
+        });
 
         const categoryFiles = await glob('tests/**/index.mjs');
+
+        // Ensure init tests run FIRST. This stages the environment and ensures all tests can run. (Currently just logs in.)
+        const index = categoryFiles.findIndex(x => x.includes("init"));
+        if (index !== -1) {
+            const obj = categoryFiles.splice(index, 1)[0];
+            categoryFiles.unshift(obj);
+        }
+
         const testFiles = await glob('tests/**/*.test.mjs');
 
         for (const categoryFile of categoryFiles) {
@@ -46,7 +57,7 @@ const delay = ms =>
             console.log('\n');
         }
 
-        await app.close();
+        // await app.close();
     } catch (error) {
         console.error(error);
     }
