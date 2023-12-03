@@ -8,7 +8,8 @@
     "build": "tsc && vite build && electron-builder",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "test": "node test.mjs"
+    "test": "tsc && vite build && npm run hot-test",
+    "hot-test": "node test.mjs"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
