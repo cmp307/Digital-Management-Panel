@@ -57,9 +57,9 @@ To run tests, run the following command
 **Server:** Node, Express, Electron, MongoDB
 
 
-## Demo
+## Download Latest
 If you would like to test the program out for yourself now, you can do so by downloading the [latest stable version](https://github.com/cmp307/project-LiamTownsley2/releases/latest)! All you need is the EXE file and you're one click away from launching the application.
-## Screenshots
+## Demonstration
 
 ![App Screenshot](https://i.imgur.com/djSpm80.gif)
 
