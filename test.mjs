@@ -20,6 +20,7 @@ const delay = ms =>
         });
         const pages = await app.pages();
         const [page] = pages;
+        page.setDefaultTimeout(10000);
         await page.setViewport({ height: 1000, width: 1800 })
 
         figlet('Automatic Testing').then((data) => {
@@ -51,7 +52,7 @@ const delay = ms =>
                 if (isNaN(pathA)) return 1;
                 if (isNaN(pathB)) return -1;
                 else {
-                    return pathB - pathA;
+                    return pathA - pathB;
                 }
             });
 
@@ -63,12 +64,18 @@ const delay = ms =>
                     console.log(`   `, chalk.green(`✅ ${_test.NAME}`))
                 } catch (error) {
                     console.log(`   `, chalk.red(`❌ ${_test.NAME}: ${chalk.redBright(error)}`))
+                } finally {
+                    page.waitForSelector('[data-test-id="return-home"]')
+                    .then((return_home) => {
+                        return_home.click()
+                    })
+                    .catch(() => {});
                 }
             }
             console.log('\n');
         }
 
-        // await app.close();
+        await app.close();
     } catch (error) {
         console.error(error);
     }
