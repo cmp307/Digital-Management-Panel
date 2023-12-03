@@ -1,5 +1,5 @@
-export const NAME = "Login System Test";
-export const PARENT_NAME = "main";
+export const NAME = "Login To Demo Account";
+export const PARENT_NAME = "init";
 
 export default async (page) => new Promise(async (resolve, reject) => {
     try {
@@ -17,7 +17,7 @@ export default async (page) => new Promise(async (resolve, reject) => {
         const logged_in_user = await page.waitForSelector('span::-p-text(demo@example.com)');
         const text = await logged_in_user.evaluate(el => el.textContent);
         if(text == 'demo@example.com') return resolve(true);
-        throw new Error("Invalid E-Mail Address on index page.") 
+        throw new Error("Login System not allowing for logging in as demo@example.com") 
     } catch (error) {
         reject(error)        
     }
