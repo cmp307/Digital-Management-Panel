@@ -46,9 +46,9 @@ class SoftwareAssetTable extends Component<{ assets: SoftwareAsset[] }> {
                                         fetch(`http://127.0.0.1:3001/api/assets/software/${item._id}`, { method: 'DELETE' }).then(() => {
                                             this.refreshPage();
                                         })
-                                    }} className="btn btn-outline-danger"><i className="fa fa-trash" /> Delete Asset</button>
+                                    }} className="btn btn-outline-danger" data-test-id={`delete-${item._id}`}><i className="fa fa-trash" /> Delete Asset</button>
                                     {/* <Link to={`/software/${item._id}/scans`} role="button" id="blue-button" className="btn btn-outline-secondary"><i className="fa fa-dot-circle-o" /> View Scans</Link> */}
-                                    <Link to={`/software/${item._id}/scan`} role="button" id="blue-button" className="btn btn-outline-secondary"><i className="fa fa-wrench" /> Scan Asset</Link>
+                                    <Link to={`/software/${item._id}/scan`} role="button" id="blue-button" className="btn btn-outline-secondary" data-test-id={`scan-${item._id}`}><i className="fa fa-wrench" /> Scan Asset</Link>
                                 </td>
                             </tr>
                         ))}

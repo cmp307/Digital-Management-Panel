@@ -84,8 +84,8 @@ class CreateSoftwareAsset extends Component<{ setUser: Function, user: IEmployee
                     <div id="question">
                         <label htmlFor="manufacturer"><i className="fa fa-cogs" /> Asset Manufacturer</label><br />
                         <Combobox
-                            id="name"
-                            name="name"
+                            id="manufacturer"
+                            name="manufacturer"
                             defaultValue={this.state.form_data?.manufacturer}
                             onChange={e => this.handleChange('manufacturer', e)}
                             placeholder="Please enter the manufacturer for your Asset."
@@ -95,8 +95,8 @@ class CreateSoftwareAsset extends Component<{ setUser: Function, user: IEmployee
                     <div id="spacer"></div>
 
                     <div id="question">
-                        <label htmlFor="name"><i className="fa fa-code-fork" /> Asset Version<span className="red-star">*</span></label><br />
-                        <input type="text" id="name" name="name" onChange={e => this.handleChange('version', e.target.value)} placeholder="Please enter the name for your Asset." required></input>
+                        <label htmlFor="version"><i className="fa fa-code-fork" /> Asset Version<span className="red-star">*</span></label><br />
+                        <input type="text" id="version" name="version" onChange={e => this.handleChange('version', e.target.value)} placeholder="Please enter the version for your Asset." required></input>
                     </div>
 
                     {(this.state.form_data.manufacturer && this.state.form_data.name && this.state.form_data.version) ?

@@ -10,7 +10,7 @@ class EmployeeTable extends Component<{ assets: IEmployee[], logged_in_email: st
     }
 
     render() {
-        if(!this.props.assets || this.props.assets.length == 0) {
+        if (!this.props.assets || this.props.assets.length == 0) {
             return <TextBlock rows={3} color='#CDCDCD' />
         }
 
@@ -40,7 +40,7 @@ class EmployeeTable extends Component<{ assets: IEmployee[], logged_in_email: st
                                         fetch(`http://127.0.0.1:3001/api/employees/${item._id}`, { method: 'DELETE' }).then(() => {
                                             refreshPage();
                                         })
-                                    }} className={"btn btn-outline-danger " + ((item._id == '655bf70f3ee93eb2c723dc9d' || item.email == this.props.logged_in_email) ? 'disabled' : '')}><i className="fa fa-trash" /> Delete Employee</button>
+                                    }} className={"btn btn-outline-danger " + ((item._id == '655bf70f3ee93eb2c723dc9d' || item.email == this.props.logged_in_email) ? 'disabled' : '')} data-test-id={`delete-${item._id}`}><i className="fa fa-trash" /> Delete Employee</button>
                                 </td>
                             </tr>
                         ))}
