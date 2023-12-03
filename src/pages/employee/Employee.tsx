@@ -21,7 +21,7 @@ class Employee extends Component<{ setUser: Function, user: IEmployee, id: strin
             user: props.user
         }
         this._id = props.id
-        
+
         this.delete = this.delete.bind(this);
         this.deleteAssets = this.deleteAssets.bind(this);
     }
@@ -79,7 +79,7 @@ class Employee extends Component<{ setUser: Function, user: IEmployee, id: strin
                     <Link to={`/employees/${this._id}/edit`} className={"btn btn-outline-primary " + (this._id == '655bf70f3ee93eb2c723dc9d' || this.state.employee_data?.email == this.props.user.email ? 'disabled' : '')}><i className="fa fa-edit" /> Edit Employee</Link>
                     <button onClick={this.refreshPage} className="btn btn-outline-primary"><i className="fa fa-refresh" /> Refresh Employee</button>
                     <button onClick={this.deleteAssets} className="btn btn-outline-danger"><i className="fa fa-trash" /> Delete <strong>All</strong> Employee Assets</button>
-                    <button onClick={this.delete} className="btn btn-outline-danger"><i className="fa fa-trash" /> Delete Employee</button>
+                    <button onClick={this.delete} className={"btn btn-outline-danger " + (this._id == '655bf70f3ee93eb2c723dc9d' || this.state.employee_data?.email == this.props.user.email ? 'disabled' : '')}><i className="fa fa-trash" /> Delete Employee</button>
                 </div>
                 <div className="text-centre">
                     {this.state.employee_data == undefined ? 'Loading...' : <>
