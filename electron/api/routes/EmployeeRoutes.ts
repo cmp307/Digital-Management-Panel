@@ -77,7 +77,7 @@ router.get('/', async (_: Request, res: Response) => {
 // @DESCRIPTION: Used for viewing an Employee.
 router.get('/:id', async (req: Request, res: Response) => {
   await wrapper(async (db: any) => {
-    const collection = db.collection('employees');
+    const collection = db.collection(DATABASE);
     const id = req.params.id;
 
     const data = await collection.findOne({ _id: new mongo.ObjectId(id) });
@@ -97,13 +97,14 @@ router.delete('/:id', async (req: Request, res: Response) => {
   })
 });
 
-// @ROUTE: DELETE api/employees/delete-all
+// @ROUTE: DELETE api/employees/
 // @DESCRIPTION: Used for deleting all Employees.
 router.delete('/', async (_: Request, res: Response) => {
   await wrapper(async (db: any) => {
     const collection = db.collection(DATABASE);
 
-    await collection.deleteMany({});
+    await collection.deleteMany({ _id: { $ne: new mongo.ObjectId('655bf70f3ee93eb2c723dc9d') } });
+    
     res.json({ "status": true });
   })
 });
@@ -113,7 +114,7 @@ router.delete('/', async (_: Request, res: Response) => {
 router.post('/', async (req: Request, res: Response) => {
   await wrapper(async (db: any) => {
 
-    const collection = db.collection('employees');
+    const collection = db.collection(DATABASE);
     const { forename, surname, department, password, confirmPassword }: APIResponse.CreateEmployee = req.body as any as APIResponse.CreateEmployee;
 
     const isPasswordValid = (password == confirmPassword);
@@ -141,14 +142,14 @@ router.post('/', async (req: Request, res: Response) => {
       res.json({ status: false });
     }
 
-    collection.insertOne({
+    const resp = await collection.insertOne({
       forename,
       surname,
       department,
       email: `${forename[0]}.${surname}@scottishglen.co.uk`,
       password: passwordRequest.password
     })
-    return res.json({ status: true })
+    return res.json({ status: true, id: resp.insertedId })
   })
 });
 

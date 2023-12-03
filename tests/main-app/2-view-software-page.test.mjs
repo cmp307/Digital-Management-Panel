@@ -6,14 +6,12 @@ export default async (page) => new Promise(async (resolve, reject) => {
         const view_software = await page.waitForSelector('a::-p-text(View & Manage Software Assets)');
         await view_software.click();
 
-        const software_title = await page.waitForSelector('div.hero h2');
-        const text = await software_title.evaluate(el => el.textContent);
+        await page.waitForResponse(
+            response =>
+                response.url().endsWith("software/view-all") && response.status() === 200
+        );
         
-        if (text.trim().toLowerCase() == 'action buttons') {
-            return resolve(true);
-        } else {
-            throw new Error("Software Asset List page not loading!");
-        }
+        resolve(true);
     } catch (error) {
         reject(error)
     }

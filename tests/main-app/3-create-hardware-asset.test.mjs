@@ -1,14 +1,7 @@
 export const NAME = "Create Hardware Asset";
 export const PARENT_NAME = "main-app";
 
-const delay = ms =>
-    new Promise(resolve => {
-        setTimeout(() => {
-            resolve();
-        }, ms);
-    });
-
-export let INSERTED_ASSET_ID = undefined;
+export let INSERTED_HARDWARE_ASSET_ID = undefined;
 
 export default async (page) => new Promise(async (resolve, reject) => {
     try {
@@ -56,7 +49,7 @@ export default async (page) => new Promise(async (resolve, reject) => {
         );
         
         const res_json = await response.json();
-        if(res_json.status == true) { INSERTED_ASSET_ID = res_json.id }
+        if(res_json.status == true) { INSERTED_HARDWARE_ASSET_ID = res_json.id }
         else { reject("Asset not inserted into database!") } 
         resolve(true);
     } catch (error) {

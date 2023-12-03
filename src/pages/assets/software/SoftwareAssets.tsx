@@ -34,7 +34,7 @@ class SoftwareAssets extends Component<{ setUser: Function, user: IEmployee }, {
     }
 
     deleteAllAssets() {
-        fetch('http://127.0.0.1:3001/api/assets/software/delete-all', { method: 'DELETE' }).then(() => {
+        fetch('http://127.0.0.1:3001/api/assets/software/', { method: 'DELETE' }).then(() => {
             this.refreshPage();
         })
     }

@@ -12,12 +12,13 @@ const delay = ms =>
     });
 
 (async () => {
+    const app = await puppeteer.launch({
+        executablePath: electron,
+        args: ["."],
+        headless: false,
+    });
+
     try {
-        const app = await puppeteer.launch({
-            executablePath: electron,
-            args: ["."],
-            headless: false,
-        });
         const pages = await app.pages();
         const [page] = pages;
         page.setDefaultTimeout(10000);
@@ -64,19 +65,18 @@ const delay = ms =>
                     console.log(`   `, chalk.green(`✅ ${_test.NAME}`))
                 } catch (error) {
                     console.log(`   `, chalk.red(`❌ ${_test.NAME}: ${chalk.redBright(error)}`))
-                } finally {
-                    page.waitForSelector('[data-test-id="return-home"]')
-                    .then((return_home) => {
-                        return_home.click()
-                    })
-                    .catch(() => {});
                 }
+
+                try {
+                    const return_home = await page.waitForSelector('[data-test-id="return-home"]', { timeout: 500 })
+                        .then(async (x) => await x.click())
+                } catch (error) { }
             }
             console.log('\n');
         }
-
-        await app.close();
     } catch (error) {
         console.error(error);
+    } finally {
+        await app.close();
     }
 })();
