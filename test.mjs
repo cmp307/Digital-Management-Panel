@@ -42,16 +42,27 @@ const delay = ms =>
 
         for (const categoryFile of categoryFiles) {
             const _category = await import('./' + categoryFile);
+
+            // sort function created by chatgpt adapted by myself: https://chat.openai.com/share/103fa9ba-be5a-4f35-ba0d-55c25666d3b0
+            const categoryTests = testFiles.filter(x => x.split('\\')[1] == _category.CODE_NAME).sort((a, b) => {
+                const pathA = a.split('\\')[2].split('-')[0] || NaN;
+                const pathB = b.split('\\')[2].split('-')[0] || NaN;
+                if (isNaN(pathA) && isNaN(pathB)) return 0;
+                if (isNaN(pathA)) return 1;
+                if (isNaN(pathB)) return -1;
+                else {
+                    return pathB - pathA;
+                }
+            });
+
             console.log(`${chalk.blueBright('►')} ${chalk.bold.blueBright('Executing Testing Category')}${chalk.cyan(`: ${_category.NAME}`)}`)
-            for (const testFile of testFiles) {
+            for (const testFile of categoryTests) {
                 const _test = await import('./' + testFile);
-                if (_test.PARENT_NAME == _category.CODE_NAME) {
-                    try {
-                        await _test.default(page)
-                        console.log(`   `, chalk.green(`✅ ${_test.NAME}`))
-                    } catch (error) {
-                        console.log(`   `, chalk.red(`❌ ${_test.NAME}: ${chalk.redBright(error)}`))
-                    }
+                try {
+                    await _test.default(page)
+                    console.log(`   `, chalk.green(`✅ ${_test.NAME}`))
+                } catch (error) {
+                    console.log(`   `, chalk.red(`❌ ${_test.NAME}: ${chalk.redBright(error)}`))
                 }
             }
             console.log('\n');
