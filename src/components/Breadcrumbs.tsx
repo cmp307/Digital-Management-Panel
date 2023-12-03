@@ -31,7 +31,7 @@ class Breadcrumbs extends Component<{ user: IEmployee, history?: IBreadcrumbHist
                 <div id="breadcrumbs">
                     <p className="left-aligned"><i className="fa fa-history" /> <strong>Breadcrumbs »</strong> {formattedData}</p>
                     <div className="right-aligned">
-                        <p><i className="fa fa-user" /> {this.props.user.forename} {this.props.user.surname} ({this.props.user.email})</p>
+                        <p><i className="fa fa-user" /> {this.props.user.forename} {this.props.user.surname} (<span id="email">{this.props.user.email}</span>)</p>
                         <button className="btn btn-danger" onClick={this.logout}><i className="fa fa-sign-out" /> Logout</button>
                     </div>
                     <div className="clear"></div>
@@ -44,7 +44,7 @@ class Breadcrumbs extends Component<{ user: IEmployee, history?: IBreadcrumbHist
                     <p className="left-aligned"><i className="fa fa-history" /> <strong>Breadcrumbs »</strong> Home</p>
                 </p>
                 <p className="right-aligned">
-                <p><i className="fa fa-user" /> {this.props.user.forename} {this.props.user.surname} ({this.props.user.email})</p>
+                <p><i className="fa fa-user" /> {this.props.user.forename} {this.props.user.surname} (<span id="email">{this.props.user.email}</span>)</p>
                     <button className="btn btn-danger" onClick={this.logout}><i className="fa fa-sign-out" /> Logout</button>
                 </p>
                 <div className="clear"></div>

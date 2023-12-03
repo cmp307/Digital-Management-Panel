@@ -13,7 +13,7 @@ class TopBar extends Component<{ linkToHomepage?: boolean }> {
         )
         
         if(this.props.linkToHomepage == false) return <div id="header">{component}</div>;
-        return <div id="header"><Link role='link' to={'/'}>{component}</Link></div>
+        return <div id="header"><Link role='link' to={'/'} data-test-id="return-home">{component}</Link></div>
     }
 }
 
