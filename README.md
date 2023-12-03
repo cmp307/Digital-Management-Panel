@@ -48,6 +48,7 @@ To run tests, run the following command
   npm run test
 ```
 
+![Automatic Tests](https://i.imgur.com/Hb0u09m.png)
 
 ## Tech Stack
 
