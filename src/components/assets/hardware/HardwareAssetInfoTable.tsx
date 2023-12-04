@@ -27,7 +27,7 @@ class HardwareAssetInfoTable extends Component<{ asset: HardwareAsset }, { isLoa
     }
 
     render() {
-        const name = (this.state.data?.forename + ' ' + this.state.data?.surname) ?? '-';
+        const name = (this.state.data?.forename + ' ' + this.state.data?.surname) || '-';
 
         return (
             <table id="single-asset-table" className="table">

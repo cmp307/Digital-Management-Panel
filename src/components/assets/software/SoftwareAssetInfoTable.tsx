@@ -47,11 +47,11 @@ class SoftwareAssetInfoTable extends Component<{ asset: SoftwareAsset }, { isLoa
                 </tr>
                 <tr>
                     <th><i className="fa fa-calendar" /> Created At</th>
-                    <td>{(new Date(this.props.asset?.created_at).toLocaleDateString() + ` (${new Date(this.props.asset.created_at).toLocaleTimeString()})`) ?? 'Loading...'}</td>
+                    <td>{(new Date(this.props.asset?.created_at).toLocaleDateString() + ` (${new Date(this.props.asset.created_at).toLocaleTimeString()})`) || 'Loading...'}</td>
                 </tr>
                 <tr>
                     <th><i className="fa fa-calendar" /> Last Edited At</th>
-                    <td>{(new Date(this.props.asset?.last_edit_at).toLocaleDateString() + ` (${new Date(this.props.asset.last_edit_at).toLocaleTimeString()})`) ?? 'Loading...'}</td>
+                    <td>{(new Date(this.props.asset?.last_edit_at).toLocaleDateString() + ` (${new Date(this.props.asset.last_edit_at).toLocaleTimeString()})`) || 'Loading...'}</td>
                 </tr>
             </table>
         )
