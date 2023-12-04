@@ -22,19 +22,16 @@ class CreateAssets extends Component<{ setUser: Function, user: IEmployee, navig
         fetch('http://127.0.0.1:3001/api/employees/')
             .then((res) => res.json())
             .then((res) => this.setState({ data: res }))
-            .then((res) => console.log(res))
             .catch((err) => console.error(err))
     }
 
     handleChange(key: string, value: any) {
         const curr = this.state.form_data;
         this.setState({ form_data: { ...curr, [key]: value } });
-        console.log(this.state.form_data);
     }
 
     onSubmit = (e: any) => {
         e.preventDefault();
-        console.log('FORM DATA = ', this.state.form_data);
         fetch(`http://127.0.0.1:3001/api/assets/hardware`, {
             method: 'POST',
             headers: {

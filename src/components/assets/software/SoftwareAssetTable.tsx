@@ -15,7 +15,6 @@ class SoftwareAssetTable extends Component<{ assets: SoftwareAsset[] }> {
     }
 
     render() {
-        console.log(this.props.assets);
         if (!this.props.assets || this.props.assets.length == 0) {
             return <TextBlock rows={3} color='#CDCDCD' />
         }

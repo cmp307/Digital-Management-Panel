@@ -15,7 +15,6 @@ class HardwareLinkTable extends Component<{ assets: { hardware: HardwareAsset, l
     }
 
     render() {
-        console.log('props=====', this.props.assets);
         if (!this.props.assets || this.props.assets.length == 0) {
             return <TextBlock rows={3} color='#CDCDCD' />
         }

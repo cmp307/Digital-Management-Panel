@@ -92,7 +92,6 @@ app.whenReady().then(async () => {
       hostname: osInfo.hostname,
       isLaptop: batteryInfo.hasBattery,
     };
-    console.log('ipc data ->', data)
     return data;
   });
 

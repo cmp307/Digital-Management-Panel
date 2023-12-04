@@ -18,7 +18,6 @@ export async function connectToMongoDB() {
       console.error('Error connecting to MongoDB:', err);
     }
   } else {
-    console.log('Connected to running MongoDB conn')
     return database;
   }
 }

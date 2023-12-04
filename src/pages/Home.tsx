@@ -26,9 +26,7 @@ class Home extends Component<{ setUser: Function, user: IEmployee, hasRan: boole
         try {
             // @ts-ignore: Unreachable code error
             window.electron.getData().then(async (data: IIPCSystemData) => {
-                console.log('mountdata->', data);
                 this.setState({ data: data });
-                console.log('SWID FETCH');
 
                 const AssetName = /(Window)(s)*( )(\d+)/gi.exec(data.distro)![0];
                 const swid = await fetch(`http://127.0.0.1:3001/api/assets/software`, {

@@ -31,13 +31,11 @@ class EditSoftwareAsset extends Component<{ setUser: Function, user: IEmployee, 
             .then((res) => res.json())
             .then((res) => new SoftwareAsset(res))
             .then((res) => this.setState({ asset_data: res, form_data: res }))
-            .then((res) => console.log(res))
             .catch((err) => console.error(err))
 
         fetch('http://127.0.0.1:3001/api/employees/')
             .then((res) => res.json())
             .then((res) => this.setState({ employee_data: res }))
-            .then((res) => console.log(res))
             .catch((err) => console.error(err))
 
         fetch('http://127.0.0.1:3001/api/assets/hardware/view-all')

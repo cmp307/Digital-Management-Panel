@@ -80,7 +80,6 @@ router.delete('/:id', async (req: Request, res: Response) => {
 
 router.post('/', async (req: Request, res: Response) => {
     await wrapper(async (db: any) => {
-        console.log(req.body);
         const collection = db.collection(DATABASE);
         const { name, type, model, manufacturer, ip, date, note, parent_employee } = req.body;
         const _employee = (parent_employee) ? new mongo.ObjectId(parent_employee) : undefined;

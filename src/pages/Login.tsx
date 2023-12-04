@@ -42,7 +42,6 @@ class Login extends Component<{ setUser: Function, user: IEmployee }> {
         })
         .then((res) => res.json())
         .then((res) => {
-            console.log(`Form submitted & recieved ${res.status}`);
             if (res.status == true) {
                 this._setUser(res.data);
                 localStorage.setItem('user', JSON.stringify(res.data))

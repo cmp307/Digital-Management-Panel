@@ -56,18 +56,17 @@ router.get('/:id/scan', async (req: Request, res: Response) => {
             const criticalURL = `https://services.nvd.nist.gov/rest/json/cves/2.0?cpeName=cpe:2.3:o:${manufacturer.toLowerCase().replace(' ', '_')}:${name.replace(' ', '_')}:${version}&cvssV3Severity=CRITICAL&isVulnerable`;
             const highURL = `https://services.nvd.nist.gov/rest/json/cves/2.0?cpeName=cpe:2.3:o:${manufacturer.toLowerCase().replace(' ', '_')}:${name.replace(' ', '_')}:${version}&cvssV3Severity=HIGH&isVulnerable`;
 
-            console.log('Fetching NVD Response');
             const [criticalResponse, highResponse] = await Promise.all<any>([
                 fetch(criticalURL, {
                     headers: {
                         apiKey: '09e94129-a4f0-402f-8cb2-1e619fd51eb3'
                     }
-                }).then((res) => { console.log('Fetched', criticalURL); return res; }).then((res) => res.json()),
+                }).then((res) => res.json()),
                 fetch(highURL, {
                     headers: {
                         apiKey: '09e94129-a4f0-402f-8cb2-1e619fd51eb3'
                     }
-                }).then((res) => { console.log('Fetched', highURL); return res; }).then((res) => res.json()),
+                }).then((res) => res.json()),
             ]).catch(() => { }) as any[];
 
             const criticalResults = criticalResponse.totalResults ?? 0;
@@ -130,7 +129,6 @@ router.delete('/:id', async (req: Request, res: Response) => {
 
 router.post('/', async (req: Request, res: Response) => {
     await wrapper(async (db: any) => {
-        console.log(req.body);
         const collection = db.collection(DATABASE);
         const { name, manufacturer, version, risk_level } = req.body;
 
@@ -152,7 +150,6 @@ router.post('/', async (req: Request, res: Response) => {
 
 router.patch('/:id', async (req: Request, res: Response) => {
     await wrapper(async (db: any) => {
-        console.log(req.body);
         const collection = db.collection(DATABASE);
         const id = req.params.id;
         const { name, manufacturer, version, riskLevel, created_at } = req.body;

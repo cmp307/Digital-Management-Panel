@@ -14,7 +14,6 @@ class SoftwareAssetInfoTable extends Component<{ asset: SoftwareAsset }, { isLoa
     }
 
     componentDidMount() {
-        console.log(this.props.asset);
         fetch(`http://127.0.0.1:3001/api/asset-link/software/${this.props.asset._id.toString()}`)
             .then((res) => res.json())
             .then((res: any) => {

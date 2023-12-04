@@ -15,7 +15,6 @@ class SoftwareLinkTable extends Component<{ assets: { software: SoftwareAsset, l
     }
 
     render() {
-        console.log(this.props.assets);
         if (!this.props.assets || this.props.assets.length == 0) {
             return <TextBlock rows={3} color='#CDCDCD' />
         }

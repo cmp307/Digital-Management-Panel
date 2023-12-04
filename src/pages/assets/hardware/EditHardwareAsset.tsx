@@ -28,25 +28,21 @@ class EditHardwareAsset extends Component<{ setUser: Function, user: IEmployee, 
             .then((res) => res.json())
             .then((res) => new HardwareAsset(res))
             .then((res) => this.setState({ asset_data: res, form_data: res }))
-            .then((res) => console.log(res))
             .catch((err) => console.error(err))
 
         fetch('http://127.0.0.1:3001/api/employees/')
             .then((res) => res.json())
             .then((res) => this.setState({ employee_data: res }))
-            .then((res) => console.log(res))
             .catch((err) => console.error(err))
     }
 
     handleChange(key: string, value: any) {
         const curr = this.state.form_data;
         this.setState({ form_data: { ...curr, [key]: value } });
-        console.log(this.state.form_data);
     }
 
     onSubmit = (e: any) => {
         e.preventDefault();
-        console.log('FORM DATA = ', this.state.form_data);
         fetch(`http://127.0.0.1:3001/api/assets/hardware/${this._id}`, {
             method: 'PATCH',
             headers: {

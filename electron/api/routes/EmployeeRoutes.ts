@@ -81,7 +81,6 @@ router.post('/login', async (req: Request, res: Response) => {
 router.post('/generate-password', async (req: Request, res: Response) => {
   try {
     const { password } = req.body;
-    console.log(req.body);
     if (!password) throw new Error("Required fields not provided.");
 
     const crypt = await bcrypt.hashSync(password, 10);

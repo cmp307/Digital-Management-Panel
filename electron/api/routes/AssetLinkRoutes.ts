@@ -67,7 +67,6 @@ router.get('/software/:id', async (req: Request, res: Response) => {
 
 router.delete('/hardware/:hwid/:swid', async (req: Request, res: Response) => {
     await wrapper(async (db: any) => {
-        console.log('api response recieved!!!!', req.params.link_id)
         const collection: Collection = db.collection(DATABASE);
         const hwid = req.params.hwid;
         const swid = req.params.swid;
@@ -76,17 +75,15 @@ router.delete('/hardware/:hwid/:swid', async (req: Request, res: Response) => {
             hardware_id: new mongo.ObjectId(hwid),
             software_id: new mongo.ObjectId(swid)
         });
-        console.log(resp);
         return res.json(resp);
     });
 });
 
 router.post('/', async (req: Request, res: Response) => {
     await wrapper(async (db: any) => {
-        console.log('request got at PSOT asset-links/')
         const { hardware_id, software_id, date, created_by }: APIResponse.CreateAssetLink = req.body as APIResponse.CreateAssetLink;
         const collection: Collection = db.collection(DATABASE);
-        console.log('post asset links', req.body);
+
         const HardwareID = new mongo.ObjectId(hardware_id);
         const SoftwareID = new mongo.ObjectId(software_id)
 

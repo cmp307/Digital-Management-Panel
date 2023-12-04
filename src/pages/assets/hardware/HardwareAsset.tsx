@@ -51,7 +51,6 @@ class HardwareAsset extends Component<{ setUser: Function, user: IEmployee, id: 
     }
 
     render() {
-        console.log(this.state.software_data);
         return (
             <>
                 <TopBar />
