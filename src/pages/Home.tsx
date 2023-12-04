@@ -13,7 +13,7 @@ class Home extends Component<{ setUser: Function, user: IEmployee, hasRan: boole
             setUser: props.setUser,
             data: undefined
         }
-        console.log(this.props.user);
+
         this.logout = this.logout.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this);
     }
@@ -21,9 +21,6 @@ class Home extends Component<{ setUser: Function, user: IEmployee, hasRan: boole
     
 
     componentDidMount() {
-        console.log('======-----=======');
-        console.log(this.state);
-        console.log('======-----=======');
         if(this.props.hasRan == true) return;
         this.props.setRan(true);
         try {
@@ -52,9 +49,6 @@ class Home extends Component<{ setUser: Function, user: IEmployee, hasRan: boole
 
                 const swid_json = await swid.json();
                 const hwid_json = await hwid.json();
-                console.log(swid_json);
-                console.log(hwid_json);
-                console.log('HWID FETCH');
 
                 const _data = {
                     software_id: swid_json.id,
@@ -63,17 +57,13 @@ class Home extends Component<{ setUser: Function, user: IEmployee, hasRan: boole
                     created_by: this.props.user.email
                 }
 
-                console.log(_data);
-                console.log('ASSET LINKFETCH');
-                const resp = await fetch('http://127.0.0.1:3001/api/asset-link', {
+                await fetch('http://127.0.0.1:3001/api/asset-link', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify(_data)
                 }).then(res => res.json()).catch(() => { })
-
-                console.log(resp);
             })
         } catch (error) { }
     }

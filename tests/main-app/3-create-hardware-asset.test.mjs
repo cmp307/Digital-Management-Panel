@@ -47,10 +47,10 @@ export default async (page) => new Promise(async (resolve, reject) => {
             response =>
                 response.url().endsWith("/assets/hardware") && response.status() === 200
         );
-        
+
         const res_json = await response.json();
-        if(res_json.status == true) { INSERTED_HARDWARE_ASSET_ID = res_json.id }
-        else { reject("Asset not inserted into database!") } 
+        if (res_json.status == true) { INSERTED_HARDWARE_ASSET_ID = res_json.id }
+        else { reject("Asset not inserted into database!") }
         resolve(true);
     } catch (error) {
         reject(error)

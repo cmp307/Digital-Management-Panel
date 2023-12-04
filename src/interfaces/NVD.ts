@@ -1,4 +1,4 @@
-// Source: https://chat.openai.com/share/155386ed-fbf7-44eb-814d-852e6ec31e32
+// OpenAI. (2023) 'Typescript Typings for Input', Available at: https://chat.openai.com/share/155386ed-fbf7-44eb-814d-852e6ec31e32 (Accessed: Nov 21, 2023).
 type Description = {
     lang: string;
     value: string;

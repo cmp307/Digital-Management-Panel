@@ -1,4 +1,3 @@
-// import Breadcrumbs from "../components/Breadcrumbs";
 import TopBar from "../../../components/TopBar";
 import '../../../styles/AssetsCreate.scss';
 import "react-placeholder/lib/reactPlaceholder.css";
@@ -71,9 +70,9 @@ class EditHardwareAsset extends Component<{ setUser: Function, user: IEmployee, 
                     { name: 'Edit', path: `/hardware/${this._id}/edit` },
                 ]} setUser={this.state.setUser} user={this.state.user} />
                 <div className="hero">
-                <div id="spacer"></div>
-                <h2 className="text-centre"><i className="fa fa-server" />Edit a Hardware Asset</h2>    
-                <hr />            
+                    <div id="spacer"></div>
+                    <h2 className="text-centre"><i className="fa fa-server" />Edit a Hardware Asset</h2>
+                    <hr />
                 </div>
 
                 <p className="text-centre"><i className="fa fa-id-card-o" /> <strong>Asset ID</strong>: <code>{this._id}</code></p>
@@ -144,7 +143,7 @@ class EditHardwareAsset extends Component<{ setUser: Function, user: IEmployee, 
                                 placeholder="Please enter the IP Address of the Asset."
                                 onChange={e => this.handleChange('ip', e.target.value)}
                                 value={this.state.form_data.ip ?? undefined}
-                                // regex source: https://www.regextester.com/104038
+                                // RegEx Tester (2023) 'Validate IPv4 and IPv6 Address', Available at: https://www.regextester.com/104038 (Accessed: Dec 03, 2023).
                                 pattern="\b(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b|\b(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}\b"
                                 required></input>
                         </div>

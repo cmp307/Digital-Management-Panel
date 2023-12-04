@@ -1,4 +1,3 @@
-// import Breadcrumbs from "../components/Breadcrumbs";
 import TopBar from "../../../components/TopBar";
 import '../../../styles/AssetsCreate.scss';
 import "react-placeholder/lib/reactPlaceholder.css";
@@ -51,12 +50,10 @@ class EditSoftwareAsset extends Component<{ setUser: Function, user: IEmployee, 
     handleChange(key: string, value: any) {
         const curr = this.state.form_data;
         this.setState({ form_data: { ...curr, [key]: value } });
-        console.log(this.state.form_data);
     }
 
     onSubmit = (e: any) => {
         e.preventDefault();
-        console.log('FORM DATA = ', this.state.form_data);
         fetch(`http://127.0.0.1:3001/api/assets/software/${this._id}`, {
             method: 'PATCH',
             headers: {
@@ -97,14 +94,6 @@ class EditSoftwareAsset extends Component<{ setUser: Function, user: IEmployee, 
                                 placeholder="Please enter the name for your Asset."
                                 hideCaret
                                 data={['Windows 10', 'Windows 11', 'Windows 8.1', 'Windows 7']} />
-                            {/* <input
-                                type="text"
-                                id="name"
-                                name="name"
-                                value={this.state.form_data?.name ?? undefined}
-                                onChange={e => this.handleChange('name', e.target.value)}
-                                placeholder="Please enter the name for your Asset."
-                                required></input> */}
                         </div>
                         <div id="spacer"></div>
                         <div id="question">
@@ -117,13 +106,6 @@ class EditSoftwareAsset extends Component<{ setUser: Function, user: IEmployee, 
                                 placeholder="Please enter the manufacturer for your Asset."
                                 hideCaret
                                 data={['Microsoft']} />
-                            {/* <input
-                                type="text"
-                                id="manufacturer"
-                                name="manufacturer"
-                                value={this.state.form_data?.manufacturer ?? undefined}
-                                onChange={e => this.handleChange('manufacturer', e.target.value)}
-                                placeholder="Please enter the Manufacturer of the Asset."></input> */}
                         </div>
                         <div id="spacer"></div>
 

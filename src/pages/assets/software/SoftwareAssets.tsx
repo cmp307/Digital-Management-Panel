@@ -20,7 +20,6 @@ class SoftwareAssets extends Component<{ setUser: Function, user: IEmployee }, {
     }
 
     componentDidMount() { this.updateAssets() }
-    // componentDidUpdate() { this.updateAssets() }
 
     updateAssets() {
         fetch('http://127.0.0.1:3001/api/assets/software/view-all')

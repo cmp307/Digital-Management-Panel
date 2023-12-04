@@ -10,7 +10,7 @@ export default async (page) => new Promise(async (resolve, reject) => {
             response =>
                 response.url().endsWith("software/view-all") && response.status() === 200
         );
-        
+
         resolve(true);
     } catch (error) {
         reject(error)

@@ -25,7 +25,7 @@ export default async (page) => new Promise(async (resolve, reject) => {
 
         const delete_software_asset = await page.waitForSelector(`button[data-test-id="delete-${ASSET_ID}"]`);
         await delete_software_asset.click();
-        
+
         try {
             await delay(2000);
             await page.waitForXPath(`//*[contains(text(), "${ASSET_ID}")]`, { timeout: 3000 });

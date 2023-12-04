@@ -1,4 +1,3 @@
-// import Breadcrumbs from "../components/Breadcrumbs";
 import TopBar from "../../../components/TopBar";
 import '../../../styles/Assets.scss';
 import "react-placeholder/lib/reactPlaceholder.css";
@@ -32,7 +31,6 @@ class ScanSoftware extends Component<{ setUser: Function, user: IEmployee, id: s
     }
 
     componentDidMount() {
-        console.log(`fetching /assets/software/${this._id}/scan`);
         const _interval = setInterval(() => {
 
             this.setState({ seconds_elapsed: (this.state.seconds_elapsed ?? 0) + 1 });
@@ -51,7 +49,7 @@ class ScanSoftware extends Component<{ setUser: Function, user: IEmployee, id: s
                 clearInterval(_interval);
             })
             .catch((err) => {
-                console.error('logg err', err);
+                console.error(err);
                 clearInterval(_interval);
             })
     }
@@ -89,8 +87,6 @@ class ScanSoftware extends Component<{ setUser: Function, user: IEmployee, id: s
     }
 
     render() {
-        console.log(this._id);
-        console.log(this.state);
         return (
             <>
                 <TopBar />
@@ -206,7 +202,6 @@ class ScanSoftware extends Component<{ setUser: Function, user: IEmployee, id: s
 
                                     </div>
                                     <div className="card-footer">
-                                        {/* <a href="#" target="_blank">Mark as Completed</a> */}
                                         <Link role="button" to={'https://nvd.nist.gov/vuln/detail/' + x.cve.id} target="_blank" className="btn btn-outline-primary"><i className="fa fa-external-link" /> View on National Vulnerability Database</Link>
                                         <button className="btn btn-outline-danger" onClick={() => {
                                             const totalVulns = this.state.total_vulnerabilities;

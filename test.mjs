@@ -4,13 +4,6 @@ import puppeteer from 'puppeteer-core';
 import figlet from 'figlet';
 import { glob } from 'glob';
 
-const delay = ms =>
-    new Promise(resolve => {
-        setTimeout(() => {
-            resolve();
-        }, ms);
-    });
-
 (async () => {
     const app = await puppeteer.launch({
         executablePath: electron,
@@ -33,7 +26,6 @@ const delay = ms =>
 
         const categoryFiles = await glob('tests/**/index.mjs');
 
-        // Ensure init tests run FIRST. This stages the environment and ensures all tests can run. (Currently just logs in.)
         const index = categoryFiles.findIndex(x => x.includes("init"));
         if (index !== -1) {
             const obj = categoryFiles.splice(index, 1)[0];
@@ -45,7 +37,8 @@ const delay = ms =>
         for (const categoryFile of categoryFiles) {
             const _category = await import('./' + categoryFile);
 
-            // sort function created by chatgpt adapted by myself: https://chat.openai.com/share/103fa9ba-be5a-4f35-ba0d-55c25666d3b0
+            // OpenAI (2023) 'Sort Function Created by ChatGPT', Available at: https://chat.openai.com/share/103fa9ba-be5a-4f35-ba0d-55c25666d3b0 (Accessed: Dec 03, 2023).
+            // Adapted by Myself
             const categoryTests = testFiles.filter(x => x.split('\\')[1] == _category.CODE_NAME).sort((a, b) => {
                 const pathA = a.split('\\')[2].split('-')[0] || NaN;
                 const pathB = b.split('\\')[2].split('-')[0] || NaN;
@@ -68,9 +61,9 @@ const delay = ms =>
                 }
 
                 try {
-                    const return_home = await page.waitForSelector('[data-test-id="return-home"]', { timeout: 500 })
+                    await page.waitForSelector('[data-test-id="return-home"]', { timeout: 500 })
                         .then(async (x) => await x.click())
-                } catch (error) { }
+                } catch (error) {}
             }
             console.log('\n');
         }

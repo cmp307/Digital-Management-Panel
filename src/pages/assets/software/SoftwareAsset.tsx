@@ -1,4 +1,3 @@
-// import Breadcrumbs from "../components/Breadcrumbs";
 import TopBar from "../../../components/TopBar";
 import '../../../styles/Assets.scss';
 import "react-placeholder/lib/reactPlaceholder.css";
@@ -29,7 +28,6 @@ class SoftwareAsset extends Component<{ setUser: Function, user: IEmployee, id: 
     }
 
     componentDidMount() {
-        console.log(`fetching /assets/software/${this._id}`);
         fetch(`http://127.0.0.1:3001/api/assets/software/${this._id}`)
             .then((res) => res.json())
             .then((res) => new CSoftwareAsset(res))
@@ -38,7 +36,6 @@ class SoftwareAsset extends Component<{ setUser: Function, user: IEmployee, id: 
             })
             .catch((err) => console.error(err))
 
-        console.log(`fetching /asset-link/software/${this._id}/get-all`);
         fetch(`http://127.0.0.1:3001/api/asset-link/software/${this._id}/get-all`)
             .then((res) => res.json())
             .then((res) => this.setState({ hardware_data: res }))
@@ -56,8 +53,6 @@ class SoftwareAsset extends Component<{ setUser: Function, user: IEmployee, id: 
     }
 
     render() {
-        console.log(this._id);
-        console.log(this.state);
         return (
             <>
                 <TopBar />

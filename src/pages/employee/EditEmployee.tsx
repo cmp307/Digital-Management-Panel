@@ -1,4 +1,3 @@
-// import Breadcrumbs from "../components/Breadcrumbs";
 import '../../styles/AssetsCreate.scss';
 import "react-placeholder/lib/reactPlaceholder.css";
 import { Component } from "react";
@@ -27,14 +26,12 @@ class EditEmployee extends Component<{ setUser: Function, user: IEmployee, id: s
         fetch(`http://127.0.0.1:3001/api/employees/${this._id}`)
             .then((res) => res.json())
             .then((res) => this.setState({ employee_data: res, form_data: res }))
-            .then((res) => console.log(res))
             .catch((err) => console.error(err))
     }
 
     handleChange(key: string, value: any) {
         const curr = this.state.form_data;
         this.setState({ form_data: { ...curr, [key]: value } });
-        console.log(this.state.form_data);
     }
 
     onSubmit = (e: any) => {

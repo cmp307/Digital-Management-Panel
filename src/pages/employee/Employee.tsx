@@ -37,7 +37,6 @@ class Employee extends Component<{ setUser: Function, user: IEmployee, id: strin
         fetch(`http://127.0.0.1:3001/api/assets/hardware/view-all/${this._id}`)
             .then((res) => res.json())
             .then((res) => res.map((x: any) => { return new HardwareAsset(x) }))
-            .then((res) => { console.log(res); return res })
             .then((res) => this.setState({ asset_data: res }))
             .catch((err) => {
                 console.error(err)
@@ -61,7 +60,6 @@ class Employee extends Component<{ setUser: Function, user: IEmployee, id: strin
     }
 
     render() {
-        console.log('employee state->', this.state)
         return (
             <>
                 <TopBar />

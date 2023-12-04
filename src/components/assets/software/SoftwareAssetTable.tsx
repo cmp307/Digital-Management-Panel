@@ -47,7 +47,6 @@ class SoftwareAssetTable extends Component<{ assets: SoftwareAsset[] }> {
                                             this.refreshPage();
                                         })
                                     }} className="btn btn-outline-danger" data-test-id={`delete-${item._id}`}><i className="fa fa-trash" /> Delete Asset</button>
-                                    {/* <Link to={`/software/${item._id}/scans`} role="button" id="blue-button" className="btn btn-outline-secondary"><i className="fa fa-dot-circle-o" /> View Scans</Link> */}
                                     <Link to={`/software/${item._id}/scan`} role="button" id="blue-button" className="btn btn-outline-secondary" data-test-id={`scan-${item._id}`}><i className="fa fa-wrench" /> Scan Asset</Link>
                                 </td>
                             </tr>

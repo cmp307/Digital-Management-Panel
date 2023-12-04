@@ -1,4 +1,3 @@
-// import Breadcrumbs from "../components/Breadcrumbs";
 import TopBar from "../../../components/TopBar";
 import '../../../styles/AssetsCreate.scss';
 import "react-placeholder/lib/reactPlaceholder.css";
@@ -77,7 +76,6 @@ class CreateSoftwareAsset extends Component<{ setUser: Function, user: IEmployee
                             placeholder="Please enter the name for your Asset."
                             hideCaret
                             data={['Windows 10', 'Windows 11', 'Windows 8.1', 'Windows 7']} />
-                                                    {/* <input type="text" id="name" name="name" onChange={e => this.handleChange('name', e.target.value)} placeholder="Please enter the name for your Asset." required></input> */}
                     </div>
                     <div id="spacer"></div>
 

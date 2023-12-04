@@ -5,10 +5,10 @@
   "scripts": {
     "start": "vite",
     "dev": "vite",
-    "build": "tsc && vite build && electron-builder",
-    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "build": "tsc && vite build",
+    "test": "npm run build && npm run hot-test",
+    "compile": "electron-builder",
     "preview": "vite preview",
-    "test": "tsc && vite build && npm run hot-test",
     "hot-test": "node test.mjs"
   },
   "dependencies": {

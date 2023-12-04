@@ -1,4 +1,3 @@
-// import Breadcrumbs from "../components/Breadcrumbs";
 import TopBar from "../../../components/TopBar";
 import '../../../styles/AssetsCreate.scss';
 import "react-placeholder/lib/reactPlaceholder.css";
@@ -31,8 +30,6 @@ class InstallSoftware extends Component<{ setUser: Function, user: IEmployee, na
 
     onSubmit = (e: any) => {
         e.preventDefault();
-        console.log(this.state);
-        //method="post" action="http://127.0.0.1:3001/api/asset-link/" onSubmit={async () => { await delay(1000); this.props.navigate('/assets')
         const { softwareAsset } = this.state.form_data;
 
         const data = {

@@ -9,8 +9,45 @@ const bcrypt = require('bcrypt');
 
 const DATABASE = "employees";
 
-// @ROUTE: PSOT api/employees/login
-// @DESCRIPTION: Used for viewing logging a user into the system.
+router.get('/', async (_: Request, res: Response) => {
+  await wrapper(async (db: any) => {
+    const collection = db.collection('employees');
+
+    const data = await collection.find().toArray();
+    res.json(data);
+  })
+});
+
+router.get('/:id', async (req: Request, res: Response) => {
+  await wrapper(async (db: any) => {
+    const collection = db.collection(DATABASE);
+    const id = req.params.id;
+
+    const data = await collection.findOne({ _id: new mongo.ObjectId(id) });
+    res.json(data);
+  })
+});
+
+router.delete('/:id', async (req: Request, res: Response) => {
+  await wrapper(async (db: any) => {
+    const collection = db.collection(DATABASE);
+    const id = req.params.id;
+
+    await collection.deleteOne({ _id: new mongo.ObjectId(id) });
+    res.json({ "status": true });
+  })
+});
+
+router.delete('/', async (_: Request, res: Response) => {
+  await wrapper(async (db: any) => {
+    const collection = db.collection(DATABASE);
+
+    await collection.deleteMany({ _id: { $ne: new mongo.ObjectId('655bf70f3ee93eb2c723dc9d') } });
+
+    res.json({ "status": true });
+  })
+});
+
 router.post('/login', async (req: Request, res: Response) => {
   try {
     await wrapper(async (db: any) => {
@@ -41,8 +78,6 @@ router.post('/login', async (req: Request, res: Response) => {
   }
 });
 
-// @ROUTE: PSOT api/employees/generate-password
-// @DESCRIPTION: Used for generating a password.
 router.post('/generate-password', async (req: Request, res: Response) => {
   try {
     const { password } = req.body;
@@ -62,55 +97,6 @@ router.post('/generate-password', async (req: Request, res: Response) => {
   }
 });
 
-// @ROUTE: GET api/employees/view-all
-// @DESCRIPTION: Used for viewing all Employees.
-router.get('/', async (_: Request, res: Response) => {
-  await wrapper(async (db: any) => {
-    const collection = db.collection('employees');
-
-    const data = await collection.find().toArray();
-    res.json(data);
-  })
-});
-
-// @ROUTE: GET api/employees/:id
-// @DESCRIPTION: Used for viewing an Employee.
-router.get('/:id', async (req: Request, res: Response) => {
-  await wrapper(async (db: any) => {
-    const collection = db.collection(DATABASE);
-    const id = req.params.id;
-
-    const data = await collection.findOne({ _id: new mongo.ObjectId(id) });
-    res.json(data);
-  })
-});
-
-// @ROUTE: DELETE api/employees/:id
-// @DESCRIPTION: Used for deleting an Employee.
-router.delete('/:id', async (req: Request, res: Response) => {
-  await wrapper(async (db: any) => {
-    const collection = db.collection(DATABASE);
-    const id = req.params.id;
-
-    await collection.deleteOne({ _id: new mongo.ObjectId(id) });
-    res.json({ "status": true });
-  })
-});
-
-// @ROUTE: DELETE api/employees/
-// @DESCRIPTION: Used for deleting all Employees.
-router.delete('/', async (_: Request, res: Response) => {
-  await wrapper(async (db: any) => {
-    const collection = db.collection(DATABASE);
-
-    await collection.deleteMany({ _id: { $ne: new mongo.ObjectId('655bf70f3ee93eb2c723dc9d') } });
-    
-    res.json({ "status": true });
-  })
-});
-
-// @ROUTE: POST api/employees/
-// @DESCRIPTION: Used for creating an Employee.
 router.post('/', async (req: Request, res: Response) => {
   await wrapper(async (db: any) => {
 
@@ -153,8 +139,6 @@ router.post('/', async (req: Request, res: Response) => {
   })
 });
 
-// @ROUTE: PATCH api/employees/:id
-// @DESCRIPTION: Used for editing an Employee.
 router.patch('/:id', async (req: Request, res: Response) => {
   await wrapper(async (db: any) => {
     const collection = db.collection(DATABASE);
@@ -173,6 +157,5 @@ router.patch('/:id', async (req: Request, res: Response) => {
     res.send({ status: true })
   })
 })
-
 
 export default router;

@@ -9,8 +9,6 @@ const router = express.Router();
 const DATABASE = "software";
 const LINK_COLLECTION_DATABASE = "asset-links";
 
-// @ROUTE: GET api/assets/hardware/view-all
-// @DESCRIPTION: Used for viewing all Software Assets.
 router.get('/view-all', async (_: Request, res: Response) => {
     await wrapper(async (db: any) => {
         const collection = db.collection(DATABASE);
@@ -20,8 +18,6 @@ router.get('/view-all', async (_: Request, res: Response) => {
     })
 });
 
-// @ROUTE: GET api/assets/hardware/view-all
-// @DESCRIPTION: Used for viewing all Software Assets.
 router.get('/view-all/:id', async (req: Request, res: Response) => {
     await wrapper(async (db: any) => {
         const collection = db.collection(DATABASE);
@@ -32,22 +28,6 @@ router.get('/view-all/:id', async (req: Request, res: Response) => {
     })
 });
 
-// @ROUTE: DELETE api/assets/hardware/
-// @DESCRIPTION: Used for deleting a Software Asset.
-router.delete('/', async (_: Request, res: Response) => {
-    await wrapper(async (db: any) => {
-        const collection = db.collection(DATABASE);
-
-        await collection.deleteMany({});
-
-        const _linkCollection = db.collection(LINK_COLLECTION_DATABASE);
-        await _linkCollection.deleteMany({});
-        res.send({ "status": true });
-    })
-});
-
-// @ROUTE: GET api/assets/hardware/:id
-// @DESCRIPTION: Used for getting a Software Asset.
 router.get('/:id', async (req: Request, res: Response) => {
     await wrapper(async (db: any) => {
         const collection = db.collection(DATABASE);
@@ -59,8 +39,6 @@ router.get('/:id', async (req: Request, res: Response) => {
     })
 });
 
-// @ROUTE: GET api/assets/hardware/:id
-// @DESCRIPTION: Used for getting a Software Asset.
 router.get('/:id/scan', async (req: Request, res: Response) => {
     await wrapper(async (db: any) => {
         try {
@@ -125,8 +103,18 @@ router.get('/:id/scan', async (req: Request, res: Response) => {
     })
 });
 
-// @ROUTE: DELETE api/assets/hardware/:id
-// @DESCRIPTION: Used for deleting a Software Asset.
+router.delete('/', async (_: Request, res: Response) => {
+    await wrapper(async (db: any) => {
+        const collection = db.collection(DATABASE);
+
+        await collection.deleteMany({});
+
+        const _linkCollection = db.collection(LINK_COLLECTION_DATABASE);
+        await _linkCollection.deleteMany({});
+        res.send({ "status": true });
+    })
+});
+
 router.delete('/:id', async (req: Request, res: Response) => {
     await wrapper(async (db: any) => {
         const collection = db.collection(DATABASE);
@@ -140,8 +128,6 @@ router.delete('/:id', async (req: Request, res: Response) => {
     })
 });
 
-// @ROUTE: POST api/assets/hardware
-// @DESCRIPTION: Used for creating a Software Asset.
 router.post('/', async (req: Request, res: Response) => {
     await wrapper(async (db: any) => {
         console.log(req.body);
@@ -164,8 +150,6 @@ router.post('/', async (req: Request, res: Response) => {
     })
 })
 
-// @ROUTE: PATCH api/assets/hardware/:id
-// @DESCRIPTION: Used for editing a Software Asset.
 router.patch('/:id', async (req: Request, res: Response) => {
     await wrapper(async (db: any) => {
         console.log(req.body);
@@ -185,6 +169,5 @@ router.patch('/:id', async (req: Request, res: Response) => {
         res.send({ status: true })
     })
 })
-
 
 export default router;

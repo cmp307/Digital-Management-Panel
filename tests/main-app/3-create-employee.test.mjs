@@ -15,7 +15,7 @@ export default async (page) => new Promise(async (resolve, reject) => {
         await forename.click();
         await forename.type('Automatic');
 
-        
+
         const surname = await page.waitForSelector('input#surname');
         await surname.click();
         await surname.type('Employee');
@@ -40,8 +40,8 @@ export default async (page) => new Promise(async (resolve, reject) => {
         );
 
         const res_json = await response.json();
-        if(res_json.status == true) { INSERTED_EMPLOYEE_ASSET_ID = res_json.id }
-        else { reject("Employee not inserted into database!") } 
+        if (res_json.status == true) { INSERTED_EMPLOYEE_ASSET_ID = res_json.id }
+        else { reject("Employee not inserted into database!") }
         resolve(true);
     } catch (error) {
         reject(error)

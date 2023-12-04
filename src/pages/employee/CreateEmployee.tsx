@@ -1,4 +1,3 @@
-// import Breadcrumbs from "../components/Breadcrumbs";
 import TopBar from "../../components/TopBar";
 import '../../styles/AssetsCreate.scss';
 import "react-placeholder/lib/reactPlaceholder.css";
@@ -18,12 +17,11 @@ class CreateEmployee extends Component<{ setUser: Function, user: IEmployee, nav
     }
 
     onSubmit = async (e: any) => {
-        console.log('submitted')
         e.preventDefault();
 
         const data = this.state.form_data;
         const { password, confirmPassword } = data;
-        console.log(data);
+
         if (password == confirmPassword) {
 
             await fetch('http://127.0.0.1:3001/api/employees/', {
@@ -38,7 +36,6 @@ class CreateEmployee extends Component<{ setUser: Function, user: IEmployee, nav
         }
 
         return false;
-        // method="post" action="" onSubmit={async () => { await delay(1000); this.props.navigate('/employees') }
     }
 
     handleChange(key: string, value: any) {

@@ -23,6 +23,7 @@ export default async (page) => new Promise(async (resolve, reject) => {
         if (!ASSET_ID) return reject('Unable to execute. Previous asset not inserted within Test 3.')
         const edit_employee = await page.waitForSelector(`a[href="#/employees/${ASSET_ID}/edit"]`);
         await edit_employee.click();
+        
         await delay(100);
         const forename = await page.waitForSelector('input#forename');
         await forename.click({ clickCount: 3 });
@@ -32,10 +33,10 @@ export default async (page) => new Promise(async (resolve, reject) => {
         const surname = await page.waitForSelector('input#surname');
         await surname.click({ clickCount: 3 });
         await surname.type('User');
-        
+
         const department = await page.waitForSelector('select#department');
         await department.select('Operations');
-        
+
         const submit = await page.waitForSelector('input[type="submit"]');
         await submit.click();
 
