@@ -9,7 +9,7 @@
     "compile": "npm run build && electron-builder",
     "test": "npm run build && npm run hot-test",
     "preview": "vite preview",
-    "hot-test": "node tests/test.mjs"
+    "hot-test": "node test.mjs"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
