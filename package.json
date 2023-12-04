@@ -6,8 +6,8 @@
     "start": "vite",
     "dev": "vite",
     "build": "tsc && vite build",
+    "compile": "npm run build && electron-builder",
     "test": "npm run build && npm run hot-test",
-    "compile": "electron-builder",
     "preview": "vite preview",
     "hot-test": "node test.mjs"
   },
