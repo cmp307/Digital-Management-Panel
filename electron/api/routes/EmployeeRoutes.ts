@@ -110,7 +110,7 @@ router.post('/', async (req: Request, res: Response) => {
       !department
     ) {
       res.status(400)
-      return res.json({ status: false, message: ['isvalid', isPasswordValid, 'forename', forename, 'surname', surname, 'department', department].join(' - ') })
+      return res.json({ status: false, message: 'Invalid body' })
     }
 
     const passwordRequest = await fetch('http://127.0.0.1:3001/api/employees/generate-password', {
