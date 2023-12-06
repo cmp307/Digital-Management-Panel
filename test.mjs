@@ -24,7 +24,7 @@ import { glob } from 'glob';
             console.log('\n\n');
         });
 
-        const categoryFiles = await glob('tests/**/index.mjs');
+        const categoryFiles = await glob('tests/[^_]**/index.mjs');
 
         const index = categoryFiles.findIndex(x => x.includes("init"));
         if (index !== -1) {
@@ -49,7 +49,7 @@ import { glob } from 'glob';
                     return pathA - pathB;
                 }
             });
-
+            
             console.log(`${chalk.blueBright('►')} ${chalk.bold.blueBright('Executing Testing Category')}${chalk.cyan(`: ${_category.NAME}`)}`)
             for (const testFile of categoryTests) {
                 const _test = await import('./' + testFile);
