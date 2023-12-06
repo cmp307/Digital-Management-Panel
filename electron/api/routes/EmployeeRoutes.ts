@@ -103,7 +103,6 @@ router.post('/', async (req: Request, res: Response) => {
     const { forename, surname, department, password, confirmPassword }: APIResponse.CreateEmployee = req.body as any as APIResponse.CreateEmployee;
 
     const isPasswordValid = (password == confirmPassword);
-
     if (
       !isPasswordValid ||
       !forename ||
@@ -111,7 +110,7 @@ router.post('/', async (req: Request, res: Response) => {
       !department
     ) {
       res.status(400)
-      return res.json({ status: false })
+      return res.json({ status: false, message: ['isvalid', isPasswordValid, 'forename', forename, 'surname', surname, 'department', department].join(' - ') })
     }
 
     const passwordRequest = await fetch('http://127.0.0.1:3001/api/employees/generate-password', {
@@ -124,7 +123,7 @@ router.post('/', async (req: Request, res: Response) => {
       .then((res) => res.json())
     if (!passwordRequest) {
       res.status(500)
-      res.json({ status: false });
+      res.json({ status: false, message: "Internal Error: Password generation request not successful" });
     }
 
     const resp = await collection.insertOne({
