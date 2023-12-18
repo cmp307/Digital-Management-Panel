@@ -48,7 +48,7 @@
     "eslint-plugin-react-refresh": "^0.4.5",
     "figlet": "^1.7.0",
     "puppeteer": "^21.5.2",
-    "puppeteer-core": "^21.5.2",
+    "puppeteer-core": "^21.6.1",
     "sass": "^1.69.5",
     "ts-node": "^10.9.1",
     "typescript": "^5.3.2",
